@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ### 考试管理web
 
 ## 启动项目 
@@ -34,3 +35,4 @@ npm install --save-dev antd
 ```js
 npm install --sace-dev react=loadable
 ```
+
