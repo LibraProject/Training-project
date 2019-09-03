@@ -1,19 +1,34 @@
 import { Button, Checkbox, Form, Icon, Input } from 'antd';
 import { FormComponentProps } from 'antd/lib/form'
 import * as React from 'react';
+import { inject, observer } from 'mobx-react'
 import '../../scss/login.css'
 
 interface UserFormProps extends FormComponentProps {
-  age: number
-  name: string
+  age: number,
+  name: string,
+  history: any,
+  user: any,
 }
+
+@inject('user')
+@observer
 
 class UserForm extends React.Component<UserFormProps, any>{
   public handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields(async (err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        const result = await this.props.user.login(values);
+        console.log('result...', result);
+        if (result === 1) {
+          // 跳转路由
+          this.props.history.push('/home')
+        } else {
+          // 提示错误
+          alert('Login is feild!')
+        }
       }
     });
   }
@@ -24,9 +39,19 @@ class UserForm extends React.Component<UserFormProps, any>{
       <div className="box">
         <div className="content">
           <Form onSubmit={this.handleSubmit} className="login-form">
+            <span>{this.props.user.isLogin ? 'true' : 'false'}</span>
             <Form.Item>
-              {getFieldDecorator('username', {
-                rules: [{ message: 'Please input your username!', required: true }],
+              {getFieldDecorator('user_name', {
+                validateTrigger: 'onBlur',
+                rules: [{
+                  validator: (ruler, value, callback) => {
+                    if (/[a-z]{5,20}/.test(value)) {
+                      callback()
+                    } else {
+                      callback('Please input your username!')
+                    }
+                  }
+                }],
               })(
                 <Input
                   prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -35,8 +60,17 @@ class UserForm extends React.Component<UserFormProps, any>{
               )}
             </Form.Item>
             <Form.Item>
-              {getFieldDecorator('password', {
-                rules: [{ message: 'Please input your Password!', required: true }],
+              {getFieldDecorator('user_pwd', {
+                validateTrigger: 'onBlur',
+                rules: [{
+                  validator: (ruler, value, callback) => {
+                    if (/^(?![a-z]+$)(?![A-Z]+$)(?!([^(a-zA-Z\!\*\.\#)])+$)^.{8,16}$/.test(value)) {
+                      callback()
+                    } else {
+                      callback('Please input your Password!')
+                    }
+                  }
+                }],
               })(
                 <Input
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}

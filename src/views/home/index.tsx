@@ -1,6 +1,7 @@
 import { Breadcrumb, Dropdown, Icon, Layout, Menu } from 'antd';
 import * as React from 'react';
-import "../../scss/home.css"
+import "../../scss/home.css";
+import { NavLink } from 'react-router-dom'
 
 
 const { SubMenu } = Menu;
@@ -25,7 +26,6 @@ const menu = (
     </Menu.Item>
   </Menu>
 );
-
 
 class Home extends React.Component {
   public render() {
@@ -70,9 +70,12 @@ class Home extends React.Component {
                 }
               >
                 <Menu.Item key="1">
-                  <a href="/home/rank"> 添加试题</a>
+                添加试题
+                  {/* <a href="/home/rank"> 添加试题</a> */}
                 </Menu.Item>
-                <Menu.Item key="2"> 试题分类</Menu.Item>
+                <Menu.Item key="2">
+                  <NavLink to="/home/classify">试题分类</NavLink>
+                </Menu.Item>
                 <Menu.Item key="3">查看试题</Menu.Item>
               </SubMenu>
               <SubMenu
