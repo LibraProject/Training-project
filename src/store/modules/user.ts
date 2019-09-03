@@ -13,7 +13,7 @@ class User{
         user_name:string,
         user_pwd:string
     }): Promise<any>{
-        console.log(form)
+        console.log(form,'---------');
         let result: any = await login(form);
         console.log(result)
         return result.code
