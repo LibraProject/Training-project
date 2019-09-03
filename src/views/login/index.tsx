@@ -1,19 +1,25 @@
 import { Button, Checkbox, Form, Icon, Input } from 'antd';
 import { FormComponentProps } from 'antd/lib/form'
 import * as React from 'react';
+import {inject, observer} from 'mobx-react'
 import '../../scss/login.css'
 
 interface UserFormProps extends FormComponentProps {
   age: number
   name: string
+  user: any
 }
-
+//挂载props user 方法
+ @inject('user')
+ @observer
 class UserForm extends React.Component<UserFormProps, any>{
   public handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields( async (err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+          console.log(values)
+          const result = await this.props.user.login(values)
+          console.log(result)
       }
     });
   }
