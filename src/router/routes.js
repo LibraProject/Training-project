@@ -6,7 +6,7 @@ function Loading(){
 }
 
 let Home=Loadable({
-    loader:()=>import('../views/home/index.tsx'),
+    loader:()=>import('../views/home/home.tsx'),
     loading:Loading
     
 })
@@ -25,8 +25,8 @@ const routes=[{
     path:'/home'
     
 },{
-    from:'/',
-    to:'/home'
+    path:'/',
+    redirect:'/home'
 }]
 
 export default routes
