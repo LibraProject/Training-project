@@ -26,7 +26,7 @@ const routes=[{
     
 },{
     from:'/',
-    to:'/login'
+    to:'/home'
 }]
 
 export default routes
