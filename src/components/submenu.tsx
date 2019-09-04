@@ -85,12 +85,14 @@ class Item extends React.Component {
             }
           >
             <Menu.Item key="1">
-              添加试题
-                </Menu.Item>
+              <NavLink to="/home/rank">添加试题</NavLink>
+            </Menu.Item>
             <Menu.Item key="2">
               <NavLink to="/home/classify">试题分类</NavLink>
             </Menu.Item>
-            <Menu.Item key="3">查看试题</Menu.Item>
+            <Menu.Item key="3">
+              <NavLink to="/home/look">查看试题</NavLink>
+            </Menu.Item>
           </SubMenu>
           <SubMenu
             key="sub2"
@@ -101,8 +103,12 @@ class Item extends React.Component {
                 </span>
             }
           >
-            <Menu.Item key="5">添加用户</Menu.Item>
-            <Menu.Item key="6">用户展示</Menu.Item>
+            <Menu.Item key="5">
+                <NavLink to="/home/add">添加用户</NavLink>
+            </Menu.Item>
+            <Menu.Item key="6">
+                <NavLink to="/home/exh">用户展示</NavLink>
+            </Menu.Item>
           </SubMenu>
           <SubMenu
             key="sub3"
@@ -113,9 +119,12 @@ class Item extends React.Component {
                   </span>
             }
           >
-
-            <Menu.Item key="7">添加考试</Menu.Item>
-            <Menu.Item key="8">试卷列表</Menu.Item>
+            <Menu.Item key="7">
+                <NavLink to="/home/addTest">添加考试</NavLink>
+            </Menu.Item>
+            <Menu.Item key="8">
+                <NavLink to="/home/list">试卷列表</NavLink>
+            </Menu.Item>
           </SubMenu>
           <SubMenu
             key="sub4"
@@ -126,9 +135,15 @@ class Item extends React.Component {
                   </span>
             }
           >
-            <Menu.Item key="9">班级管理</Menu.Item>
-            <Menu.Item key="10">教室管理</Menu.Item>
-            <Menu.Item key="11">学生管理</Menu.Item>
+            <Menu.Item key="9">
+                <NavLink to="/home/classRoom">班级管理</NavLink>
+            </Menu.Item>
+            <Menu.Item key="10">
+                <NavLink to="/home/grade">教室管理</NavLink>
+            </Menu.Item>
+            <Menu.Item key="11">
+                <NavLink to="/home/student">学生管理</NavLink>
+            </Menu.Item>
           </SubMenu>
           <SubMenu
             key="sub5"
@@ -139,7 +154,9 @@ class Item extends React.Component {
                   </span>
             }
           >
-            <Menu.Item key="12">特批班级</Menu.Item>
+            <Menu.Item key="12">
+                <NavLink to="/home/special">特批班级</NavLink>
+            </Menu.Item>
           </SubMenu>
         </Menu>
       </Sider>
