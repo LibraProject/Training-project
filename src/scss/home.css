@@ -1,3 +1,7 @@
+html,body,#root{
+  width: 100%;
+  height: 100%;
+}
 #components-layout-demo-top-side .logo {
     width: 120px;
     height: 31px;
@@ -7,4 +11,9 @@
 }
 .imgage{
   height: 60px;
+}
+.ant-layout{
+  width: 100%;
+  height: 100%;
+  background: #f0f2f5;
 }
