@@ -1,4 +1,4 @@
-import { Button, Checkbox, Form, Icon, Input } from 'antd';
+import { Button, Checkbox, Form, Icon, Input, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form'
 import * as React from 'react';
 import { inject, observer } from 'mobx-react'
@@ -20,14 +20,14 @@ class UserForm extends React.Component<UserFormProps, any>{
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        const result = await this.props.user.login(values);
-        console.log('result...', result);
-        if (result === 1) {
+        const { code, msg } = await this.props.user.login(values);
+        
+        if (code === 1) {
           // 跳转路由
           this.props.history.push('/home')
         } else {
           // 提示错误
-          alert('Login is feild!')
+          message.error(msg || '用户名或密码错误');
         }
       }
     });
@@ -35,6 +35,8 @@ class UserForm extends React.Component<UserFormProps, any>{
 
   public render() {
     const { getFieldDecorator } = this.props.form;
+    const { user_name, user_pwd } = this.props.user.account;
+
     return (
       <div className="box">
         <div className="content">
@@ -42,6 +44,7 @@ class UserForm extends React.Component<UserFormProps, any>{
             <Form.Item>
               {getFieldDecorator('user_name', {
                 validateTrigger: 'onBlur',
+                initialValue: user_name,
                 rules: [{
                   validator: (ruler, value, callback) => {
                     if (/[a-z]{5,20}/.test(value)) {
@@ -61,6 +64,7 @@ class UserForm extends React.Component<UserFormProps, any>{
             <Form.Item>
               {getFieldDecorator('user_pwd', {
                 validateTrigger: 'onBlur',
+                initialValue: user_pwd,
                 rules: [{
                   validator: (ruler, value, callback) => {
                     if (/^(?![a-z]+$)(?![A-Z]+$)(?!([^(a-zA-Z\!\*\.\#)])+$)^.{8,16}$/.test(value)) {
@@ -83,6 +87,12 @@ class UserForm extends React.Component<UserFormProps, any>{
                 initialValue: true,
                 valuePropName: 'checked',
               })(<Checkbox>Remember me</Checkbox>)}
+            </Form.Item>
+            <Form.Item>
+              {getFieldDecorator('autoLogin', {
+                valuePropName: 'checked',
+                initialValue: true,
+              })(<Checkbox>Auto login in 7 days</Checkbox>)}
               <a className="login-form-forgot" href="">
                 Forgot password
               </a>
