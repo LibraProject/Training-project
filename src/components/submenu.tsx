@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Icon, Layout, Menu } from 'antd';
 import { NavLink } from 'react-router-dom'
+
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 
@@ -10,13 +11,16 @@ const list = [{
   title: '试题管理',
   children: [{
     id: 1,
-    title: '添加试题'
+    title: '添加试题',
+    path: '/home/rank'
   }, {
     id: 2,
-    title: '试题分类'
+    title: '试题分类',
+    path: '/home/classify'
   }, {
     id: 3,
-    title: '查看试题'
+    title: '查看试题',
+    path: '/home/look'
   }]
 }, {
   id: 'sub2',
@@ -24,10 +28,12 @@ const list = [{
   title: '用户管理',
   children: [{
     id: 4,
-    title: '添加用户'
+    title: '添加用户',
+    path: '/home/add'
   }, {
     id: 5,
-    title: '用户展示'
+    title: '用户展示',
+    path: '/home/exh'
   }]
 }, {
   id: 'sub3',
@@ -35,10 +41,12 @@ const list = [{
   title: '考试管理',
   children: [{
     id: 6,
-    title: '添加考试'
+    title: '添加考试',
+    path: '/home/addTest'
   }, {
     id: 7,
-    title: '试卷列表'
+    title: '试卷列表',
+    path: '/home/list'
   }]
 }, {
   id: 'sub4',
@@ -46,13 +54,16 @@ const list = [{
   title: '班级管理',
   children: [{
     id: 8,
-    title: '班级管理'
+    title: '班级管理',
+    path: '/home/classRoom'
   }, {
     id: 9,
-    title: '教室管理'
+    title: '教室管理',
+    path: '/home/grade'
   }, {
     id: 10,
-    title: '学生管理'
+    title: '学生管理',
+    path: '/home/student'
   }]
 }, {
   id: 'sub5',
@@ -60,7 +71,8 @@ const list = [{
   title: '阅卷管理',
   children: [{
     id: 11,
-    title: '特批班级'
+    title: '特批班级',
+    path: '/home/special'
   }]
 }]
 
@@ -75,72 +87,30 @@ class Item extends React.Component {
           defaultOpenKeys={['sub1']}
           style={{ height: '100%', borderRight: 0 }}
         >
-          <SubMenu
-            key="sub1"
-            title={
-              <span>
-                <Icon type="sliders" />
-                试题管理
-                </span>
-            }
-          >
-            <Menu.Item key="1">
-              添加试题
-                </Menu.Item>
-            <Menu.Item key="2">
-              <NavLink to="/home/classify">试题分类</NavLink>
-            </Menu.Item>
-            <Menu.Item key="3">查看试题</Menu.Item>
-          </SubMenu>
-          <SubMenu
-            key="sub2"
-            title={
-              <span>
-                <Icon type="user" />
-                用户管理
-                </span>
-            }
-          >
-            <Menu.Item key="5">添加用户</Menu.Item>
-            <Menu.Item key="6">用户展示</Menu.Item>
-          </SubMenu>
-          <SubMenu
-            key="sub3"
-            title={
-              <span>
-                <Icon type="schedule" />
-                考试管理
-                  </span>
-            }
-          >
 
-            <Menu.Item key="7">添加考试</Menu.Item>
-            <Menu.Item key="8">试卷列表</Menu.Item>
-          </SubMenu>
-          <SubMenu
-            key="sub4"
-            title={
-              <span>
-                <Icon type="project" />
-                班级管理
+          {
+            list.map((item, i) => {
+              return <SubMenu
+                key={item.id}
+                title={
+                  <span>
+                    <Icon type={item.icon} />
+                    {item.title}
                   </span>
-            }
-          >
-            <Menu.Item key="9">班级管理</Menu.Item>
-            <Menu.Item key="10">教室管理</Menu.Item>
-            <Menu.Item key="11">学生管理</Menu.Item>
-          </SubMenu>
-          <SubMenu
-            key="sub5"
-            title={
-              <span>
-                <Icon type="project" />
-                阅卷管理
-                  </span>
-            }
-          >
-            <Menu.Item key="12">特批班级</Menu.Item>
-          </SubMenu>
+                }
+              >
+                {
+                  item.children.map(item => {
+                    return <Menu.Item key={item.id}>
+                      <NavLink to={item.path}>{item.title}</NavLink>
+                    </Menu.Item>
+                  })
+                }
+                
+              </SubMenu>
+            })
+          }
+
         </Menu>
       </Sider>
     );
