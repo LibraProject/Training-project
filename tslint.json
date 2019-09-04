@@ -6,7 +6,6 @@
     "tslint-config-prettier"
   ],
   "rules": {
-    "defaultSeverity":"none",
     "jsx-self-close":false,
     "jsx-no-lambda":false,
     "interface-name" : [true, "never-prefix"],

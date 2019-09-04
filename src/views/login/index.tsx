@@ -39,7 +39,6 @@ class UserForm extends React.Component<UserFormProps, any>{
       <div className="box">
         <div className="content">
           <Form onSubmit={this.handleSubmit} className="login-form">
-            <span>{this.props.user.isLogin ? 'true' : 'false'}</span>
             <Form.Item>
               {getFieldDecorator('user_name', {
                 validateTrigger: 'onBlur',
