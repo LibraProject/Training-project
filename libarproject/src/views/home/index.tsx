@@ -1,10 +1,8 @@
 import { Breadcrumb, Dropdown, Icon, Layout, Menu } from 'antd';
 import * as React from 'react';
 import "../../scss/home.css";
-import { NavLink,Link } from 'react-router-dom'
-interface Props {
-  history: any
-}
+import { NavLink } from 'react-router-dom'
+
 
 const { SubMenu } = Menu;
 const { Content, Header, Sider } = Layout;
@@ -72,9 +70,8 @@ class Home extends React.Component {
                 }
               >
                 <Menu.Item key="1">
-                  <Link to="/home/classify">添加试题</Link>
-                
-                 
+                添加试题
+                  {/* <a href="/home/rank"> 添加试题</a> */}
                 </Menu.Item>
                 <Menu.Item key="2">
                   <NavLink to="/home/classify">试题分类</NavLink>

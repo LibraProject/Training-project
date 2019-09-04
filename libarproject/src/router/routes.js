@@ -5,70 +5,70 @@ function Loading(){
     return <div>Loading...</div>
 }
 
-let Add=Loadable({
+const Add=Loadable({
     loader:()=>import('../views/home/user/add.tsx'),
     loading:Loading
 })
 
-let AddTest=Loadable({
+const AddTest=Loadable({
     loader:()=>import('../views/home/exam/addTest.tsx'),
     loading:Loading
     
 })
 
-let ClassRoom=Loadable({
+const ClassRoom=Loadable({
     loader:()=>import('../views/home/classManage/classroom.tsx'),
     loading:Loading
 })
 
-let Classify=Loadable({
+const Classify=Loadable({
     loader:()=>import('../views/home/test/classify.tsx'),
     loading:Loading
 })
 
-let Exhibition=Loadable({
+const Exhibition=Loadable({
     loader:()=>import('../views/home/user/exhibition.tsx'),
     loading:Loading
 })
 
-let Grade=Loadable({
+const Grade=Loadable({
     loader:()=>import('../views/home/classManage/grade.tsx'),
     loading:Loading
 })
 
-let Home=Loadable({
+const Home=Loadable({
     loader:()=>import('../views/home/index.tsx'),
     loading:Loading    
 })
 
-let List=Loadable({
+const List=Loadable({
     loader:()=>import('../views/home/exam/list.tsx'),
     loading:Loading
     
 })
 
-let Login=Loadable({
+const Login=Loadable({
     loader:()=>import('../views/login/index.tsx'),
     loading:Loading
 })
 
-let Look=Loadable({
+const Look=Loadable({
     loader:()=>import('../views/home/test/look.tsx'),
     loading:Loading
     
 })
 
-let Rank=Loadable({
+const Rank=Loadable({
     loader:()=>import('../views/home/test/rank.tsx'),
     loading:Loading
 })
 
-let Student=Loadable({
+const Student=Loadable({
     loader:()=>import('../views/home/classManage/student.tsx'),
     loading:Loading
 })
 
-let Special=Loadable({
+const Special=Loadable({
     loader:()=>import('../views/home/parpes/special.tsx'),
     loading:Loading
 })
@@ -116,8 +116,8 @@ const routes=[{
     path:'/home'
     
 },{
-    path:'/',
-    redirect:'/login'
+    from:'/',
+    to:'/login'
 }]
 
 export default routes

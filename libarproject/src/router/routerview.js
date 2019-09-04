@@ -1,9 +1,7 @@
-
-import * as React from 'react';
+import React  from 'react'
 import {Switch,Redirect,Route} from 'react-router-dom'
-class RouterMap extends React.component {
-    render(){
-        let {routes} = this.props;
+function RouterMap (props){
+        let {routes} = props;
         let routerArr = routes && routes.filter(el=> !el.redirect);
         let redirectArr = routes && routes.filter(el=> el.redirect).map(el=><Redirect key={el} from={el.path} to={el.redirect}/>);
         return <Switch>
@@ -17,7 +15,5 @@ class RouterMap extends React.component {
                     }}/>).concat(redirectArr)
                 }
         </Switch>
-    }
-   
 }
 export default RouterMap
