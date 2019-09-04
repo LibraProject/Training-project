@@ -1,8 +1,7 @@
 import React from 'react';
 import Routerview from './router'
 import 'antd/dist/antd.css'
-import './App.css';
-
+import './scss/home.css';
 function App() {
   return (
     <div className="App">
@@ -10,5 +9,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
