@@ -31,7 +31,6 @@ class UserForm extends React.Component<UserFormProps, any>{
           // 提示错误
           alert('Login is feild!')
         }
-
       }
     });
   }
@@ -62,7 +61,6 @@ class UserForm extends React.Component<UserFormProps, any>{
               )}
             </Form.Item>
             <Form.Item>
-
               {getFieldDecorator('user_pwd', {
                 validateTrigger: 'onBlur',
                 rules: [{
