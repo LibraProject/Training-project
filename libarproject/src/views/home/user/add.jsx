@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 class Add extends React.Component {
-  public render() {
+   render() {
     return (
       <div>
         Add

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 class Classify extends React.Component {
-  public render() {
+   render() {
     return (
       <div>
         Classify

@@ -28,7 +28,7 @@ const menu = (
 );
 
 class Home extends React.Component {
-  public render() {
+   render() {
     return (
       <Layout>
         <Header className="header">
@@ -57,7 +57,6 @@ class Home extends React.Component {
               theme="dark"
               mode="inline"
               defaultSelectedKeys={['1']}
-              defaultOpenKeys={['sub1']}
               style={{ height: '100%', borderRight: 0 }}
             >
               <SubMenu

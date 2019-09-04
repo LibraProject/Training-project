@@ -6,70 +6,70 @@ function Loading(){
 }
 
 const Add=Loadable({
-    loader:()=>import('../views/home/user/add.tsx'),
+    loader:()=>import('../views/home/user/add.jsx'),
     loading:Loading
 })
 
 const AddTest=Loadable({
-    loader:()=>import('../views/home/exam/addTest.tsx'),
+    loader:()=>import('../views/home/exam/addTest.jsx'),
     loading:Loading
     
 })
 
 const ClassRoom=Loadable({
-    loader:()=>import('../views/home/classManage/classroom.tsx'),
+    loader:()=>import('../views/home/classManage/classroom.jsx'),
     loading:Loading
 })
 
 const Classify=Loadable({
-    loader:()=>import('../views/home/test/classify.tsx'),
+    loader:()=>import('../views/home/test/classify.jsx'),
     loading:Loading
 })
 
 const Exhibition=Loadable({
-    loader:()=>import('../views/home/user/exhibition.tsx'),
+    loader:()=>import('../views/home/user/exhibition.jsx'),
     loading:Loading
 })
 
 const Grade=Loadable({
-    loader:()=>import('../views/home/classManage/grade.tsx'),
+    loader:()=>import('../views/home/classManage/grade.jsx'),
     loading:Loading
 })
 
 const Home=Loadable({
-    loader:()=>import('../views/home/index.tsx'),
+    loader:()=>import('../views/home/index.jsx'),
     loading:Loading    
 })
 
 const List=Loadable({
-    loader:()=>import('../views/home/exam/list.tsx'),
+    loader:()=>import('../views/home/exam/list.jsx'),
     loading:Loading
     
 })
 
 const Login=Loadable({
-    loader:()=>import('../views/login/index.tsx'),
+    loader:()=>import('../views/login/index.jsx'),
     loading:Loading
 })
 
 const Look=Loadable({
-    loader:()=>import('../views/home/test/look.tsx'),
+    loader:()=>import('../views/home/test/look.jsx'),
     loading:Loading
     
 })
 
 const Rank=Loadable({
-    loader:()=>import('../views/home/test/rank.tsx'),
+    loader:()=>import('../views/home/test/rank.jsx'),
     loading:Loading
 })
 
 const Student=Loadable({
-    loader:()=>import('../views/home/classManage/student.tsx'),
+    loader:()=>import('../views/home/classManage/student.jsx'),
     loading:Loading
 })
 
 const Special=Loadable({
-    loader:()=>import('../views/home/parpes/special.tsx'),
+    loader:()=>import('../views/home/parpes/special.jsx'),
     loading:Loading
 })
 
@@ -116,8 +116,8 @@ const routes=[{
     path:'/home'
     
 },{
-    from:'/',
-    to:'/login'
+    path:'/',
+    redirect:'/login'
 }]
 
 export default routes

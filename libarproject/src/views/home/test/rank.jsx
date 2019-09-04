@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 class Rank extends React.Component {
-  public render() {
+   render() {
     return (
       <div>
         Rank
