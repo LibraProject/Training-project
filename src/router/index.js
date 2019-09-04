@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import * as React from 'react';
 import RouteMap from './map'
+import {BrowserRouter} from 'react-router-dom'
 import routes from './routes'
 
-class RouteView extends Component{
-    render(){
-        return <RouteMap routes={routes}/>
-    }
+function Routers(){
+    return <BrowserRouter>
+        <RouteMap routes={routes}/>
+    </BrowserRouter>
 }
-
-export default RouteView
+export default Routers

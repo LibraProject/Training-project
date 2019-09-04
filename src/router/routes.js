@@ -116,8 +116,8 @@ const routes=[{
     path:'/home'
     
 },{
-    from:'/',
-    to:'/login'
+    path:'/',
+    redirect:'/login'
 }]
 
 export default routes
