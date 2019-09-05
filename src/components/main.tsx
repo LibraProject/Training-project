@@ -8,7 +8,7 @@ class Main extends React.Component {
         return (
             <Layout style={{ padding: '0 24px 24px' }}>
                 <Breadcrumb style={{ margin: '16px 0' }}>
-                <Breadcrumb.Item>查看试题</Breadcrumb.Item>
+                    <Breadcrumb.Item>查看试题</Breadcrumb.Item>
                 </Breadcrumb>
                 <Content
                     style={{
