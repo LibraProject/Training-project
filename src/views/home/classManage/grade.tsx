@@ -1,10 +1,12 @@
 import * as React from 'react';
-
-class Grade extends React.Component {
+interface Props{
+  location: any
+}
+class Grade extends React.Component <Props>{
   public render() {
     return (
       <div>
-        Grade
+        <h2>{this.props.location.state.title}</h2>
       </div>
     );
   }

@@ -1,10 +1,12 @@
 import * as React from 'react';
-
-class AddTest extends React.Component {
+interface Props{
+  location: any
+}
+class AddTest extends React.Component <Props>{
   public render() {
     return (
       <div>
-        AddTest
+        <h2>{this.props.location.state.title}</h2>
       </div>
     );
   }

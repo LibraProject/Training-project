@@ -1,10 +1,12 @@
 import * as React from 'react';
-
-class Special extends React.Component {
+interface Props{
+  location: any
+}
+class Special extends React.Component <Props>{
   public render() {
     return (
       <div>
-        Special
+        <h2>{this.props.location.state.title}</h2>
       </div>
     );
   }

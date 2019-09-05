@@ -8,15 +8,10 @@ class Home extends React.Component {
   public render() {
     return (
       <Layout>
-
         <Head/>
-
         <Layout>
-
           <Submenu/>
-
           <Main {...this.props}/>
-
         </Layout>
       </Layout>
     )

@@ -1,31 +1,13 @@
-<<<<<<< HEAD
-import * as React from "react";
-import { Form, Select, Button ,Icon} from "antd";
-import {observer,inject } from 'mobx-react'
-import "./css/look.css";
-
-const { Option } = Select;
-@inject('question')
-@observer
-
-class Look extends React.Component{
-  constructor(props:any){
-    super(props);
-    const {getQuestion} = props.question;
-    getQuestion()
-  }
-  
-  public render() {
-=======
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
-import { Form, Popover, Select, Button ,Icon} from "antd";
+import { Form, Breadcrumb, Select, Button ,Icon} from "antd";
 import '../../../scss/look.css'
 
 const { Option } = Select;
 
 interface Props {
-  question: any
+  question: any,
+  location: any
 }
 
 @inject('question')
@@ -39,6 +21,7 @@ class Look extends React.Component<Props> {
   }
   componentDidMount() {
     this.getList()
+    console.log(this.props)
   }
 
   getList = async () => {
@@ -49,11 +32,9 @@ class Look extends React.Component<Props> {
   }
 
   render() {
-    console.log(this.state.list)
->>>>>>> f871f66f0b9f76cd3993fea4ae014877e91b973d
     return (
       <div className="lookquersition">
-
+         <h2>{this.props.location.state.title}</h2>
       <div className="lookseachs">
         <div className="lookSechTop">
           <div className="lookAll">全部类型</div>

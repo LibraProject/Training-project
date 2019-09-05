@@ -23,7 +23,6 @@ instance.interceptors.request.use( (config) =>{
 // 响应拦截器
 instance.interceptors.response.use( (response: AxiosResponse<any>) =>{
     // Do something with response data
-    console.log('seccess...',response);
     if(response.status !== 200){
       message.error(response.statusText)
     }

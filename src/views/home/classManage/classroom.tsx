@@ -1,10 +1,12 @@
 import * as React from 'react';
-
-class ClassRoom extends React.Component {
+interface Props{
+  location: any
+}
+class ClassRoom extends React.Component <Props>{
   public render() {
     return (
       <div>
-        ClassRoom
+        <h2>{this.props.location.state.title}</h2>
       </div>
     );
   }
