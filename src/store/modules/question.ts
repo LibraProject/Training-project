@@ -10,11 +10,7 @@ class Question {
         return result.data
     }
     // 考试类型获取
-<<<<<<< HEAD
      @action async examType(): Promise<any> {
-=======
-    @action async examType(type: any): Promise<any> {
->>>>>>> cyz
         const result: any = await examType();
         console.log('question...', result);
         return result.data
