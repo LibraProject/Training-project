@@ -81,7 +81,7 @@ interface Props{
 class Item extends React.Component<Props> {
 
   toclass = (title:string)=>{
-
+    console.log(this.props)
       console.log(title)
   }
   public render() {
@@ -108,8 +108,8 @@ class Item extends React.Component<Props> {
                 {
                   item.children.map(item => {
                     return <Menu.Item key={item.id}>
-                      <span onClick={()=>{this.toclass(item.title)}}>{item.title}</span>
-                      {/* <NavLink to={item.path}>{item.title}</NavLink> */}
+                      {/* <span onClick={()=>{this.toclass(item.title)}}>{item.title}</span> */}
+                      <NavLink to={{pathname:item.path}}>{item.title}</NavLink>
                     </Menu.Item>
                   })
                 }
