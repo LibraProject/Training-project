@@ -18,10 +18,10 @@ class classify extends React.Component<Props> {
   componentDidMount() {
     this.getQuestiontypes();
   }
-  addQuestionResult = async (text:String,sort:string) =>{
+  addQuestionResult = async (text:String,sort:Number) =>{
     const questionResult = await this.props.question.addQuestions({text,sort});
     if(questionResult.code){
-      this.setState({ visible: false,loading:false});
+      this.setState({ visible: false,loading:false,val:''});
       this.getQuestiontypes();
     }
 
@@ -37,7 +37,7 @@ class classify extends React.Component<Props> {
   handleOk = () => {
     let {val,len} = this.state;
     len+=1;
-    this.addQuestionResult(val,len+'')
+    this.addQuestionResult(val,len)
     this.setState({ loading: true });
   };
   showModal = () => {
