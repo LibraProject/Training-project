@@ -1,8 +1,6 @@
 import { Button, Checkbox, Form, Icon, Input, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form'
 import * as React from 'react';
-
-
 import { inject, observer } from 'mobx-react'
 import '../../scss/login.css'
 

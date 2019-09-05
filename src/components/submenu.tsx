@@ -102,7 +102,7 @@ class Item extends React.Component {
                 {
                   item.children.map(item => {
                     return <Menu.Item key={item.id}>
-                      <NavLink to={item.path}>{item.title}</NavLink>
+                      <NavLink to={{pathname:item.path,state:{'title':item.title}}}>{item.title}</NavLink>
                     </Menu.Item>
                   })
                 }

@@ -191,13 +191,8 @@
 
 "@types/history@*":
   version "4.7.3"
-<<<<<<< HEAD
-  resolved "http://r.cnpmjs.org/@types/history/download/@types/history-4.7.3.tgz#856c99cdc1551d22c22b18b5402719affec9839a"
-  integrity sha1-hWyZzcFVHSLCKxi1QCcZr/7Jg5o=
-=======
   resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.3.tgz#856c99cdc1551d22c22b18b5402719affec9839a"
   integrity sha512-cS5owqtwzLN5kY+l+KgKdRJ/Cee8tlmQoGQuIE9tWnSmS3JMKzmxo2HIAk2wODMifGwO20d62xZQLYz+RLfXmw==
->>>>>>> 0dd4e6f903aa7f89c243aebb690df3ef78d24cc7
 
 "@types/jest-diff@*":
   version "20.0.1"
@@ -235,13 +230,8 @@
 
 "@types/react-router-dom@^4.3.5":
   version "4.3.5"
-<<<<<<< HEAD
-  resolved "http://r.cnpmjs.org/@types/react-router-dom/download/@types/react-router-dom-4.3.5.tgz#72f229967690c890d00f96e6b85e9ee5780db31f"
-  integrity sha1-cvIplnaQyJDQD5bmuF6e5XgNsx8=
-=======
   resolved "https://registry.yarnpkg.com/@types/react-router-dom/-/react-router-dom-4.3.5.tgz#72f229967690c890d00f96e6b85e9ee5780db31f"
   integrity sha512-eFajSUASYbPHg2BDM1G8Btx+YqGgvROPIg6sBhl3O4kbDdYXdFdfrgQFf/pcBuQVObjfT9AL/dd15jilR5DIEA==
->>>>>>> 0dd4e6f903aa7f89c243aebb690df3ef78d24cc7
   dependencies:
     "@types/history" "*"
     "@types/react" "*"
@@ -249,13 +239,8 @@
 
 "@types/react-router@*":
   version "5.0.3"
-<<<<<<< HEAD
-  resolved "http://r.cnpmjs.org/@types/react-router/download/@types/react-router-5.0.3.tgz#855a1606e62de3f4d69ea34fb3c0e50e98e964d5"
-  integrity sha1-hVoWBuYt4/TWnqNPs8DlDpjpZNU=
-=======
   resolved "https://registry.yarnpkg.com/@types/react-router/-/react-router-5.0.3.tgz#855a1606e62de3f4d69ea34fb3c0e50e98e964d5"
   integrity sha512-j2Gge5cvxca+5lK9wxovmGPgpVJMwjyu5lTA/Cd6fLGoPq7FXcUE1jFkEdxeyqGGz8VfHYSHCn5Lcn24BzaNKA==
->>>>>>> 0dd4e6f903aa7f89c243aebb690df3ef78d24cc7
   dependencies:
     "@types/history" "*"
     "@types/react" "*"

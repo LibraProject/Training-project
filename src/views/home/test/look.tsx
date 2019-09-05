@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
 import { Form, Popover, Select, Button ,Icon} from "antd";
-import '../../../scss/look.css'
+import './css/look.css'
 
 const { Option } = Select;
 
 interface Props {
-  question: any
+  question: any,
+  location:any
 }
 
 @inject('question')
@@ -16,7 +17,9 @@ class Look extends React.Component<Props> {
     super(props)
   }
   state = {
-    list: []
+    list: [],
+    type:[],
+    question:[]
   }
   componentDidMount() {
     this.getList()
@@ -24,19 +27,23 @@ class Look extends React.Component<Props> {
 
   getList = async () => {
     const data = await this.props.question.getQuestion();
+    const examtype=await this.props.question.examType()
+    const questionType=await this.props.question.getQuestionsType()
+
     this.setState({
-      list:data
+      list:data,
+      type:examtype,
+      question:questionType
     })
   }
 
   render() {
-    console.log(this.state.list)
     return (
       <div className="lookquersition">
-
+        <h2>{this.props.location.state.title}</h2>
       <div className="lookseachs">
         <div className="lookSechTop">
-          <div className="lookAll">全部类型</div>
+          <div className="lookAll">课程类型</div>
           <div className="sechList">
             <div>All</div>
             <div>javaScript上</div>
@@ -55,19 +62,20 @@ class Look extends React.Component<Props> {
           <Form layout="inline" className="formContent">
             <Form.Item label="考试类型" className="formIten">
               <Select defaultValue="" style={{ width: 130 }}>
-                <Option value="周考1">周考1</Option>
-                <Option value="周考2">周考2</Option>
-                <Option value="周考3">周考3</Option>
-                <Option value="月考">月考</Option>
+                {
+                  this.state.type.map((item:any)=>{
+                    return <Option key={item.exam_id} value={item.exam_name}>{item.exam_name}</Option>
+                  })
+                }
               </Select>
             </Form.Item>
             <Form.Item label="题目类型" className="formIten"> 
               <Select defaultValue="" style={{ width: 130 }}>
-                <Option value="简答题">简答题</Option>
-                <Option value="代码阅读题">代码阅读题</Option>
-                <Option value="代码补全">代码补全</Option>
-                <Option value="修改Bug">修改Bug</Option>
-                <Option value="手写代码">手写代码</Option>
+                {
+                  this.state.question.map((item:any)=>{
+                    return <Option key={item.questions_type_id} value={item.questions_type_text}>{item.questions_type_text}</Option>
+                  })
+                }
               </Select>
             </Form.Item>
             <Form.Item className="formIten">
@@ -87,6 +95,7 @@ class Look extends React.Component<Props> {
                      <Button>{item.questions_type_text}</Button>
                      <Button>{item.subject_text}</Button>
                      <Button>{item.exam_name}</Button>
+                     <a>编辑</a>
                      <div className="announce">{item.user_name}发布</div>
                      <hr/>
                   </div>

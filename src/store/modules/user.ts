@@ -16,7 +16,7 @@ class User {
 
     @action async login(form:any): Promise<any> {
         const result: any = await login(form)
-        console.log('result...', result)
+        // console.log('result...', result)
         if(result.code === 1){
 
             // 判断用户名和密码
