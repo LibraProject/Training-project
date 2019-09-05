@@ -11,7 +11,7 @@ class Main extends React.Component {
   public render() {
     return (
       <Layout style={{ padding: "0 24px 24px" }}>
-         <Breadcrumb style={{ margin: '16px 0' }}>
+         <Breadcrumb style={{ margin: '16px 0' }}/>
         <Content
           style={{
             margin: 0,
@@ -26,4 +26,4 @@ class Main extends React.Component {
 
 }
 
-export default Main;
+export default Main

@@ -33,7 +33,7 @@ instance.interceptors.response.use( (response: AxiosResponse<any>) =>{
     if(error.response.status && error.response.status !== 200){
       message.error(error.response.statusText)
     }
-
+    
     return Promise.reject(error);
   }
 );
