@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
-import { Form, Popover, Select, Button ,Icon} from "antd";
-import './css/look.css'
+import { Form, Breadcrumb, Select, Button ,Icon} from "antd";
+import '../../../scss/look.css'
 
 const { Option } = Select;
 
 interface Props {
   question: any,
-  location:any
+  location: any
 }
 
 @inject('question')
@@ -23,6 +23,7 @@ class Look extends React.Component<Props> {
   }
   componentDidMount() {
     this.getList()
+    console.log(this.props)
   }
 
   getList = async () => {
@@ -40,7 +41,7 @@ class Look extends React.Component<Props> {
   render() {
     return (
       <div className="lookquersition">
-        <h2>{this.props.location.state.title}</h2>
+         <h2>{this.props.location.state.title}</h2>
       <div className="lookseachs">
         <div className="lookSechTop">
           <div className="lookAll">课程类型</div>

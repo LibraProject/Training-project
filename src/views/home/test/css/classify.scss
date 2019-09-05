@@ -1,0 +1,132 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 20px;
+  .titType {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    font-size: 20px;
+  }
+
+  .typesContent {
+    width: 100%;
+    height: 90%;
+    border-radius: 10px;
+    background: white;
+  }
+
+  .btn {
+    margin: 24px;
+  }
+
+  .btns {
+    margin-left: -2px;
+    margin-top: -10px !important;
+    width: 160px;
+    height: 40px;
+    font-size: 16px;
+    border-radius: 6px;
+  }
+}
+
+.tableType{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 30px;
+    .tabletr{
+        text-align: center;
+        background: #f0f2f5;
+
+    }
+    tr{
+        text-align: center;
+        height: 55px;
+    }
+    tr:hover{
+        background: #f0f2f5;
+    }
+    
+}
+
+#m-test {
+  width: 100%;
+  height: 700px;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.tk {
+  width: 500px;
+  height: 300px;
+  background: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  p {
+    width: 400px;
+    border-bottom: 1px solid #ccc;
+    margin: 0 auto;
+  }
+
+  input {
+    height: 30px;
+    width: 400px;
+    border: 0;
+    margin: 0 auto;
+    outline: none;
+  }
+
+  .bt {
+    margin-top: 50px;
+    margin-left: 150px;
+
+    button {
+      margin-right: 35px;
+    }
+  }
+}
+
+.m-none {
+  display: none;
+}
+
+thead tr {
+  border-bottom: 1px solid #ccc;
+  height: 40px;
+  line-height: 40px;
+
+  th {
+    width: 500px;
+  }
+}
+
+tbody tr {
+  border-bottom: 1px solid #ccc;
+  height: 40px;
+  line-height: 40px;
+}

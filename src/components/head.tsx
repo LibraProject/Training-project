@@ -26,12 +26,14 @@ class Head extends React.Component {
   public render() {
     return (
         <Header className="header">
-        <div className="logo" />
+        <div className="logo">
+            <img src="http://172.16.10.111/exam/resources/images/logoPicture.png" className="imgage" alt=""/>
+        </div>
         <Menu
           theme="light"
           mode="horizontal"
           defaultSelectedKeys={['2']}
-          style={{ lineHeight: '64px',background: '#001529' }}
+          style={{ lineHeight: '64px'}}
         >
           <Menu.Item key="1">
               <img src="http://172.16.10.111/exam/resources/images/logoPicture.png" className="image" alt=""/>
