@@ -1,23 +1,39 @@
 import * as React from 'react';
-import {observer, inject} from 'mobx-react';
+import { observer, inject } from 'mobx-react';
+
+interface Props {
+  question: any
+}
 
 @inject('question')
 @observer
-class Look extends React.Component {
-  constructor(props:any){
+class Look extends React.Component<Props> {
+  constructor(props: Props) {
     super(props)
-
-    const {getQuestion}=props.question
-    getQuestion()
+  }
+  state = {
+    list: []
+  }
+  componentDidMount() {
+    this.getList()
   }
 
-  public render() {
+  getList = async () => {
+    const data = await this.props.question.getQuestion();
+    this.setState({
+      list:data
+    })
+  }
+
+  render() {
+    console.log(this.state.list)
     return (
       <div>
         Look
       </div>
     );
   }
+
 }
 
 export default Look;
