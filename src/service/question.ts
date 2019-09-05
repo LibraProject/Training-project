@@ -14,3 +14,8 @@ export let examType = ()=>{
 export let getQuestionsType = ()=>{
     return request.get('/exam/getQuestionsType')
 }
+
+// 所有的课程获取成功
+export let subject = ()=>{
+    return request.get('/exam/subject')
+}

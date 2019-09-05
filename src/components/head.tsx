@@ -34,7 +34,7 @@ class Head extends React.Component {
           style={{ lineHeight: '64px',background: '#001529' }}
         >
           <Menu.Item key="1">
-              <img src="http://172.16.10.111/exam/resources/images/logoPicture.png" className="imgage" alt=""/>
+              <img src="http://172.16.10.111/exam/resources/images/logoPicture.png" className="image" alt=""/>
           </Menu.Item>
 
           <Dropdown overlay={menu} trigger={['click']}>
