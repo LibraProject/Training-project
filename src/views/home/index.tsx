@@ -4,8 +4,6 @@ import "../../scss/home.css";
 import Submenu from '../../components/submenu'
 import Head from '../../components/head'
 import Main from '../../components/main'
-
-
 class Home extends React.Component {
   public render() {
     return (

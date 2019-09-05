@@ -31,7 +31,6 @@ class UserForm extends React.Component<UserFormProps, any>{
           // 提示错误
           message.error(msg || '用户名或密码错误');
         }
-
       }
     });
   }
@@ -65,7 +64,6 @@ class UserForm extends React.Component<UserFormProps, any>{
               )}
             </Form.Item>
             <Form.Item>
-
               {getFieldDecorator('user_pwd', {
                 validateTrigger: 'onBlur',
                 initialValue: user_pwd,

@@ -1,5 +1,4 @@
 {
-
     "presets": [
         "react-app"
     ],
@@ -10,6 +9,5 @@
                 "legacy": true
             }
         ]
-
     ]
 }
