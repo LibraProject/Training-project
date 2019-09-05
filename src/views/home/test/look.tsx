@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
 import { Form, Breadcrumb, Select, Button ,Icon} from "antd";
-import '../../../scss/look.css'
+import './css/look.css'
 
 const { Option } = Select;
 
@@ -24,7 +24,6 @@ class Look extends React.Component<Props> {
   }
   componentDidMount() {
     this.getList()
-    console.log(this.props)
   }
 
   getList = async () => {
@@ -38,7 +37,7 @@ class Look extends React.Component<Props> {
       question:questionType
     })
   }
-  //考试类型借口 获取数据
+  // 考试类型借口 获取数据
   tSelected = async (e: any)=> {
     const data = await this.props.question.getQuestion({exam_id:e});
     console.log(e)

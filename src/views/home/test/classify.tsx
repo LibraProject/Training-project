@@ -12,21 +12,33 @@ class classify extends React.Component<Props> {
     questiontypes: [],
     loading: false,
     visible: false,
+    val:'',
+    len:0
   };
   componentDidMount() {
     this.getQuestiontypes();
   }
+  addQuestionResult = async (text:String,sort:Number) =>{
+    const questionResult = await this.props.question.addQuestions({text,sort});
+    if(questionResult.code){
+      this.setState({ visible: false,loading:false,val:''});
+      this.getQuestiontypes();
+    }
+
+  }
+
   getQuestiontypes = async () => {
     const questionType = await this.props.question.getQuestionsType();
     this.setState({
-      questiontypes: questionType
+      questiontypes: questionType,
+      len:questionType.length
     });
   };
   handleOk = () => {
+    let {val,len} = this.state;
+    len+=1;
+    this.addQuestionResult(val,len)
     this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({ loading: false, visible: false });
-    }, 3000);
   };
   showModal = () => {
     this.setState({
@@ -36,8 +48,17 @@ class classify extends React.Component<Props> {
   handleCancel = () => {
     this.setState({ visible: false });
   };
+  //设置val
+  setVal = (e:any)=>{
+    this.setState({
+      val:e.target.value
+    })
+  }
+  addQuestion = ()=>{
+    console.log(1)
+  }
   render() {
-    const { visible, loading } = this.state;
+    const { visible, loading,val } = this.state;
     return (
       <div className="main">
 
@@ -48,23 +69,6 @@ class classify extends React.Component<Props> {
               <Button type="primary" className="btns" onClick={this.showModal}>
                 +添加类型
               </Button>
-              <div className="m-none" id="m-test">
-                <div className="tk">
-                  <h3>创建新类型</h3>
-                  <input type="text" placeholder="输入类型" name="type" />
-                  <p></p>
-                  <input
-                    type="text"
-                    placeholder="输入类型名称"
-                    name="text_type"
-                  />
-                  <p></p>
-                  <div className="bt">
-                    <Button type="primary">确定</Button>
-                    <Button>取消</Button>
-                  </div>
-                </div>
-              </div>
             </div>
             <table className="tablelist">
               <thead>
@@ -94,6 +98,7 @@ class classify extends React.Component<Props> {
           onCancel={this.handleCancel}
           centered={true}
           bodyStyle ={{height:200}}
+          keyboard
           footer={[
             <Button key="back" onClick={this.handleCancel}>
               关闭
@@ -103,7 +108,7 @@ class classify extends React.Component<Props> {
             </Button>,
           ]}
         >
-         <Input type="text"/>
+         <Input type="text"  value={val} onChange={this.setVal}/>
         </Modal>
       </div>
       </div>
