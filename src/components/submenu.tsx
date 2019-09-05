@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Icon, Layout, Menu } from 'antd';
-import { NavLink } from 'react-router-dom'
-
+import { NavLink ,withRouter} from 'react-router-dom'
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 
@@ -75,8 +74,16 @@ const list = [{
     path: '/home/special'
   }]
 }]
+interface Props{
 
-class Item extends React.Component {
+}
+
+class Item extends React.Component<Props> {
+
+  toclass = (title:string)=>{
+
+      console.log(title)
+  }
   public render() {
     return (
       <Sider width={200}>
@@ -87,7 +94,6 @@ class Item extends React.Component {
           defaultOpenKeys={['sub1']}
           style={{ height: '100%', borderRight: 0 }}
         >
-
           {
             list.map((item, i) => {
               return <SubMenu
@@ -102,7 +108,8 @@ class Item extends React.Component {
                 {
                   item.children.map(item => {
                     return <Menu.Item key={item.id}>
-                      <NavLink to={item.path}>{item.title}</NavLink>
+                      <span onClick={()=>{this.toclass(item.title)}}>{item.title}</span>
+                      {/* <NavLink to={item.path}>{item.title}</NavLink> */}
                     </Menu.Item>
                   })
                 }

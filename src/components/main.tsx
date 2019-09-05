@@ -4,6 +4,13 @@ import { Breadcrumb, Layout } from 'antd';
 const { Content } = Layout;
 
 class Main extends React.Component {
+    constructor(props: any){
+        super(props)
+        console.log(props)
+    }
+    componentDidMount(){
+        
+    }
     public render() {
         return (
             <Layout style={{ padding: '0 24px 24px' }}>

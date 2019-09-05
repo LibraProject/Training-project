@@ -1,9 +1,19 @@
 import * as React from "react";
-import { Form, Popover, Select, Button ,Icon} from "antd";
-const { Option } = Select;
+import { Form, Select, Button ,Icon} from "antd";
+import {observer,inject } from 'mobx-react'
 import "./css/look.css";
-class Look extends React.Component {
-  componentDidMount() {}
+
+const { Option } = Select;
+@inject('question')
+@observer
+
+class Look extends React.Component{
+  constructor(props:any){
+    super(props);
+    const {getQuestion} = props.question;
+    getQuestion()
+  }
+  
   public render() {
     return (
       <div className="lookquersition">

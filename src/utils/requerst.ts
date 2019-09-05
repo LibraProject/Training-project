@@ -5,7 +5,7 @@ import { getToken } from './index'
 
 const instance = axios.create({
     // 后台主路径
-    baseURL:'http://169.254.136.66:7001',
+    baseURL:'http://169.254.198.188:7001',
     timeout:1000,
     headers: { 'authorization': getToken() }
 })
