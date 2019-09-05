@@ -38,6 +38,7 @@ class Look extends React.Component<Props> {
       question:questionType
     })
   }
+  //考试类型借口 获取数据
   tSelected = async (e: any)=> {
     const data = await this.props.question.getQuestion({exam_id:e});
     console.log(e)
