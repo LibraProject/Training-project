@@ -9,20 +9,6 @@ class Question {
         // console.log('question...', result);
         return result.data
     }
-
-    // 考试类型获取
-     @action async examType(): Promise<any> {
-        let result: any = await examType();
-        // console.log('question...', result);
-        return result.data
-    }
-
-    // 考试类型获取
-    @action async getQuestionsType(): Promise<any> {
-        let result: any = await getQuestionsType();
-        // console.log('question...', result);
-        return result.data
-    }
 }
 
 export default Question;

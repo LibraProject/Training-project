@@ -6,12 +6,6 @@ import Question from './modules/question'
 const user = new User();
 const question=new Question()
 
-
-// setInterval(()=>{
-//     user.isLogin = !user.isLogin;
-//     // console.log('user...', user);
-// }, 1000);
-
 export default {
     user,
     question

@@ -1,10 +1,12 @@
 import * as React from 'react';
-
-class List extends React.Component {
+interface Props{
+  location: any
+}
+class List extends React.Component <Props>{
   public render() {
     return (
       <div>
-        List
+        <h2>{this.props.location.state.title}</h2>
       </div>
     );
   }
