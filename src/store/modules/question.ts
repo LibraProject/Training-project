@@ -10,9 +10,9 @@ class Question {
         return result.data
     }
     // 考试类型获取
-    @action async examType(): Promise<any> {
+    @action async examType(type: any): Promise<any> {
         const result: any = await examType();
-        // console.log('question...', result);
+        console.log('question...', result);
         return result.data
     }
 
