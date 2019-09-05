@@ -7,7 +7,8 @@ const { Option } = Select;
 
 interface Props {
   question: any,
-  location: any
+  location: any,
+  exam_id:any
 }
 
 @inject('question')
@@ -37,6 +38,12 @@ class Look extends React.Component<Props> {
       question:questionType
     })
   }
+  //考试类型借口 获取数据
+  tSelected = async (e: any)=> {
+    const data = await this.props.question.getQuestion({exam_id:e});
+    console.log(e)
+    console.log(data)
+  }
 
   render() {
     return (
@@ -62,19 +69,19 @@ class Look extends React.Component<Props> {
         <div className="lookSechBottom">
           <Form layout="inline" className="formContent">
             <Form.Item label="考试类型" className="formIten">
-              <Select defaultValue="" style={{ width: 130 }}>
+              <Select defaultValue="" style={{ width: 130 }} onChange={this.tSelected}>
                 {
                   this.state.type.map((item:any)=>{
-                    return <Option key={item.exam_id} value={item.exam_name}>{item.exam_name}</Option>
+                    return <Option key={item.exam_id} value={item.exam_id}>{item.exam_name}</Option>
                   })
                 }
               </Select>
             </Form.Item>
             <Form.Item label="题目类型" className="formIten"> 
-              <Select defaultValue="" style={{ width: 130 }}>
+              <Select defaultValue="" style={{ width: 130 }} onChange={this.tSelected}>
                 {
                   this.state.question.map((item:any)=>{
-                    return <Option key={item.questions_type_id} value={item.questions_type_text}>{item.questions_type_text}</Option>
+                    return <Option key={item.questions_type_id} value={item.questions_type_id}>{item.questions_type_text}</Option>
                   })
                 }
               </Select>

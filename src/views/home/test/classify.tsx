@@ -1,16 +1,51 @@
 import * as React from "react";
 import "./css/classify.css";
-import { Button } from "antd";
-
-class classify extends React.Component {
+import { Button ,Modal,Input} from "antd";
+import { observer, inject } from "mobx-react";
+interface Props {
+  question: any;
+}
+@inject("question")
+@observer
+class classify extends React.Component<Props> {
+  state = {
+    questiontypes: [],
+    loading: false,
+    visible: false,
+  };
+  componentDidMount() {
+    this.getQuestiontypes();
+  }
+  getQuestiontypes = async () => {
+    const questionType = await this.props.question.getQuestionsType();
+    this.setState({
+      questiontypes: questionType
+    });
+  };
+  handleOk = () => {
+    this.setState({ loading: true });
+    setTimeout(() => {
+      this.setState({ loading: false, visible: false });
+    }, 3000);
+  };
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+  handleCancel = () => {
+    this.setState({ visible: false });
+  };
   render() {
+    const { visible, loading } = this.state;
     return (
       <div className="main">
+
         <h2 className="titType">试题分类</h2>
         <div className="typesContent">
           <div className="tableType">
             <div className="btn">
-              <Button type="primary" className="btns">
+              <Button type="primary" className="btns" onClick={this.showModal}>
                 +添加类型
               </Button>
               <div className="m-none" id="m-test">
@@ -40,45 +75,37 @@ class classify extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>{123}</td>
-                  <td>{123}</td>
-                  <td>编辑</td>
-                </tr>
-                <tr>
-                  <td>{123}</td>
-                  <td>{123}</td>
-                  <td>编辑</td>
-                </tr>
-                <tr>
-                  <td>{123}</td>
-                  <td>{123}</td>
-                  <td>编辑</td>
-                </tr>
-                <tr>
-                  <td>{123}</td>
-                  <td>{123}</td>
-                  <td>编辑</td>
-                </tr>
-                <tr>
-                  <td>{123}</td>
-                  <td>{123}</td>
-                  <td>编辑</td>
-                </tr>
-                <tr>
-                  <td>{123}</td>
-                  <td>{123}</td>
-                  <td>编辑</td>
-                </tr>
-                <tr>
-                  <td>{123}</td>
-                  <td>{123}</td>
-                  <td>编辑</td>
-                </tr>
+                {this.state.questiontypes.map((el: any) => (
+                  <tr key={el.questions_type_id}>
+                    <td>{el.questions_type_id}</td>
+                    <td>{el.questions_type_text}</td>
+                    <td></td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
         </div>
+        <div>
+        <Modal
+          visible={visible}
+          title="添加试题类型"
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+          centered={true}
+          bodyStyle ={{height:200}}
+          footer={[
+            <Button key="back" onClick={this.handleCancel}>
+              关闭
+            </Button>,
+            <Button key="submit" type="primary" loading={loading} onClick={this.handleOk}>
+              提交
+            </Button>,
+          ]}
+        >
+         <Input type="text"/>
+        </Modal>
+      </div>
       </div>
     );
   }
