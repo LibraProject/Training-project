@@ -208,13 +208,8 @@
 
 "@types/js-cookie@^2.2.2":
   version "2.2.2"
-<<<<<<< HEAD
-  resolved "http://r.cnpmjs.org/@types/js-cookie/download/@types/js-cookie-2.2.2.tgz#84e8848e14d44418726ceb52dd887c7bfe45d678"
-  integrity sha1-hOiEjhTURBhybOtS3Yh8e/5F1ng=
-=======
   resolved "https://registry.yarnpkg.com/@types/js-cookie/-/js-cookie-2.2.2.tgz#84e8848e14d44418726ceb52dd887c7bfe45d678"
   integrity sha512-vkuGzldF9mNsWS9cmmMFfW1rufa7IdPUorS150gKoU/2fzLJ/0LXiMMtRqIBWz0sZ/VF2VxwB25WXEOo6akU6w==
->>>>>>> dcd3847a21309ec2dbef380ef06b4f5c2031bf0a
 
 "@types/json5@^0.0.29":
   version "0.0.29"

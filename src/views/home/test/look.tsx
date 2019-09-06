@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
-import { Form, Select, Button, Icon, Layout, Row, Col } from "antd";
+import { Form, Select, Button, Icon, Layout} from "antd";
 import './css/look.css'
 
 const { Option } = Select;
@@ -31,7 +31,6 @@ class Look extends React.Component<Props> {
   }
   componentDidMount() {
     this.getList()
-    // console.log(this.props)
   }
 
   getList = async () => {
@@ -39,12 +38,13 @@ class Look extends React.Component<Props> {
     const examtype = await this.props.question.examType()
     const questionType = await this.props.question.getQuestionsType()
     const subject = await this.props.question.subject()
-
+    
     this.setState({
       list: data,
       type: examtype,
       question: questionType,
       subject
+     
     })
   }
   //考试类型接口 获取数据
@@ -80,13 +80,19 @@ class Look extends React.Component<Props> {
     this.props.history.push(`/home/detail/${id}`)
   }
 
+  setall = ()=>{
+    const {show} = this.state
+    this.setState({
+      show:!show
+    })
+  }
+
   render() {
-    const { num } = this.state
+    const { num ,show} = this.state
     return (
       <div className="lookquersition">
         <h2>{this.props.location.state.title}</h2>
         <div className="lookseachs">
-
           <Layout className="lookSechTop">
             <div className="seeExam-top-top">
               <p>课程类型：</p>
@@ -94,7 +100,7 @@ class Look extends React.Component<Props> {
                 <li>All</li>
                 {
                   this.state.subject.map((item: any, i) => {
-                    return <li key={item.subject_id} className={num === i ? 'subactive' : ''} onClick={() => { this.subClick(item.subject_id, i) }}>{item.subject_text}</li>
+                    return <li key={item.subject_id} className={ show ? 'subactive' :( num === i ? 'subactive' : '')} onClick={() => { this.subClick(item.subject_id, i) }}>{item.subject_text}</li>
                   })
                 }
               </ul>
