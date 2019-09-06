@@ -30,6 +30,12 @@
   margin-bottom: 24px;
 }
 
+.addBox .span {
+  display: inline-block;
+  width: 24px;
+  text-align: center;
+}
+
 .opItem {
   color: rgba(0, 0, 0, 0.85);
 }

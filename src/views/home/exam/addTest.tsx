@@ -15,6 +15,7 @@ interface Props {
 
 @inject('question')
 @observer
+
 class AddTest extends React.Component<Props> {
   constructor(props: Props) {
     super(props)
@@ -43,8 +44,19 @@ class AddTest extends React.Component<Props> {
   onChange=(value: any)=> {
     console.log('changed', value);
   }
-  timeChange=(date: any, dateString: any)=>{
-    console.log(date, dateString);
+  startChange=(value: any, dateString: any)=> {
+    console.log('Selected Time: ', value);
+    console.log('Formatted Selected Time: ', dateString);
+  }
+  startOk=(value: any)=> {
+    console.log('onOk: ', value);
+  }
+  endChange=(value: any, dateString: any)=> {
+    console.log('Selected Time: ', value);
+    console.log('Formatted Selected Time: ', dateString);
+  }
+  endOk=(value: any)=> {
+    console.log('onOk: ', value);
   }
 
   render() {
@@ -86,7 +98,9 @@ class AddTest extends React.Component<Props> {
           </li>
           <li>
               <p className="opItem"><b>＊</b>考试时间</p>
-              <RangePicker onChange={this.timeChange} />
+              <DatePicker showTime placeholder="开始时间" onChange={this.startChange} onOk={this.startOk} />
+              <span className="span">-</span>
+              <DatePicker showTime placeholder="结束时间" onChange={this.endChange} onOk={this.endOk} />
           </li>
           <li>
               <Button type="primary" className="addBtn">创建试卷</Button>
