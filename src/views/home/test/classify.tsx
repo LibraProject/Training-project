@@ -36,6 +36,7 @@ class classify extends React.Component<Props> {
   };
   handleOk = () => {
     let {val,len} = this.state;
+    if(!val){return}
     len+=1;
     this.addQuestionResult(val,len)
     this.setState({ loading: true });
@@ -65,7 +66,7 @@ class classify extends React.Component<Props> {
         <h2 className="titType">试题分类</h2>
         <div className="typesContent">
           <div className="tableType">
-            <div className="btn">
+            <div className="addtype">
               <Button type="primary" className="btns" onClick={this.showModal}>
                 +添加类型
               </Button>
