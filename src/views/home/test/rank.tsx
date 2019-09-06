@@ -2,6 +2,7 @@ import * as React from 'react';
 import { observer, inject } from 'mobx-react';
 import { Form, Input, Select,DatePicker , Button, InputNumber, Layout } from "antd";
 import { WrappedFormUtils } from 'antd/lib/form/Form'
+import ForEditor from 'for-editor'
 import './css/rank.css'
 
 const { RangePicker } = DatePicker;
@@ -59,9 +60,7 @@ class Rank extends React.Component<Props> {
           </li>
           <li>
               <p>题目主题</p>
-              <p>
-                  <TextArea rows={4} />
-              </p>
+              <ForEditor />
           </li>
           <li className="li">
               <p className="opItem">请选择考试类型</p>
@@ -95,9 +94,7 @@ class Rank extends React.Component<Props> {
           </li>
           <li>
               <p>答案信息</p>
-              <p>
-                  <TextArea rows={4} />
-              </p>
+              <ForEditor />
           </li>
           <li className="li">
               <Button type="primary" className="addBtn">提交</Button>

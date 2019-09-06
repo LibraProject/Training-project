@@ -26,6 +26,11 @@ let Classify=Loadable({
     loading:Loading
 })
 
+let Detail=Loadable({
+    loader:()=>import('../views/home/test/detial.tsx'),
+    loading:Loading
+})
+
 let Exhibition=Loadable({
     loader:()=>import('../views/home/user/exhibition.tsx'),
     loading:Loading
@@ -90,6 +95,9 @@ const routes=[{
     },{
         component:Classify,
         path:'/home/classify'
+    },{
+        component:Detail,
+        path:'/home/detail/:id'
     },{
         component:Exhibition,
         path:'/home/exh'
