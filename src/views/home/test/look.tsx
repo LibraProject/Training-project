@@ -101,7 +101,7 @@ class Look extends React.Component<Props> {
             </div>
           </Layout>
 
-          <div className="lookSechBottom">
+          <div className="lookSechBottom seeBottom">
             <Form layout="inline" className="formContent">
               <Form.Item label="考试类型" className="formIten">
                 <Select defaultValue="" style={{ width: 130 }} onChange={this.cSelected}>
@@ -129,7 +129,9 @@ class Look extends React.Component<Props> {
               </Form.Item>
             </Form>
           </div>
+
         </div>
+
         <div className="lkList">
           {
             this.state.list.map((item: any, i) => {
@@ -138,7 +140,7 @@ class Look extends React.Component<Props> {
                 <Button>{item.questions_type_text}</Button>
                 <Button>{item.subject_text}</Button>
                 <Button>{item.exam_name}</Button>
-                <a>编辑</a>
+                <a href="/home/rank">编辑</a>
                 <div className="announce">{item.user_name}发布</div>
                 <hr />
               </div>

@@ -40,11 +40,8 @@
   margin-left: 20px;
 }
 
-.seeExam-top-top ul {
-  display: flex;
-}
-
 .seeExam-top-top ul li {
+  float: left;
   padding-left: 10px;
   padding-right: 10px;
   cursor: pointer;
@@ -63,12 +60,16 @@
   width: 100%;
 }
 
-.formContent {
-  display: flex;
+.seeBottom:after {
+  content: '';
+  height: 0;
+  display: block;
+  clear: both;
+  visibility: hidden;
 }
 
 .formIten {
-  flex: 3;
+  float: left;
 }
 
 .ant-form-inline .ant-form-item {
