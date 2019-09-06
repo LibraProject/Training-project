@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
-import { Form, Breadcrumb, Select, Button, Icon } from "antd";
 import './css/detail.css'
 
 interface Props {
@@ -32,23 +31,31 @@ class Detail extends React.Component<Props>{
   }
 
   public render() {
-    const {list}=this.state
-    console.log(this.state.list)
+    const { list } :any=this.state
     return (
       <div>
           <h2>试题详情</h2>
           <div className="detailBox">
               <div className="left">
-                  <p>出题人：</p>
+                  <p>出题人：{list[0]&&list[0].user_name}</p>
                   <h3>题目信息</h3>
                   <div className="message">
-                      <Button></Button>
-                      <Button></Button>
-                      <Button></Button>
+                      <div>{list[0]&&list[0].questions_type_text}</div>
+                      <div>{list[0]&&list[0].subject_text}</div>
+                      <div>{list[0]&&list[0].exam_name}</div>
+                  </div>
+                  <h4>{list[0]&&list[0].title}</h4>
+                  <div>
+                    <div>
+                      <p>{list[0]&&list[0].questions_stem}</p>
+                    </div>
                   </div>
               </div>
               <div className="right">
-                <p>sdfs</p>
+                <h3>答案信息</h3>
+                <div>
+                  <p>{list[0]&&list[0].questions_answer}</p>
+                </div>
               </div>
           </div>
       </div>

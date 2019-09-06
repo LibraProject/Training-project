@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
-import { Form, Breadcrumb, Select, Button, Icon } from "antd";
+import { Form, Select, Button, Icon, Layout, Row, Col } from "antd";
 import './css/look.css'
 
 const { Option } = Select;
@@ -9,7 +9,7 @@ interface Props {
   question: any,
   location: any,
   exam_id: any,
-  history:any
+  history: any
 }
 
 @inject('question')
@@ -26,7 +26,8 @@ class Look extends React.Component<Props> {
     exam_id: '',
     questions_type_id: '',
     subject_id: '',
-    num: null
+    num: null,
+    show:false
   }
   componentDidMount() {
     this.getList()
@@ -59,10 +60,10 @@ class Look extends React.Component<Props> {
     })
   }
   // 课程类型接口，获取数据
-  subClick = (id: any,i:number) => {
+  subClick = (id: any, i: number) => {
     this.setState({
       subject_id: id,
-      num:i
+      num: i
     })
   }
   // 点击查询
@@ -75,7 +76,7 @@ class Look extends React.Component<Props> {
     })
   }
   // 点击每一项跳转详情
-  clickJump=(id: any)=>{
+  clickJump = (id: any) => {
     this.props.history.push(`/home/detail/${id}`)
   }
 
@@ -85,20 +86,22 @@ class Look extends React.Component<Props> {
       <div className="lookquersition">
         <h2>{this.props.location.state.title}</h2>
         <div className="lookseachs">
-          <div className="lookSechTop">
-            <div className="lookAll">课程类型</div>
-            <div className="sechList">
-              <div>All</div>
 
-              {
-                this.state.subject.map((item: any, i) => {
-                  return <div key={item.subject_id} className={num === i ? 'subactive' : ''} onClick={() => { this.subClick(item.subject_id,i) }}>{item.subject_text}</div>
-                })
-              }
-
+          <Layout className="lookSechTop">
+            <div className="seeExam-top-top">
+              <p>课程类型：</p>
+              <ul>
+                <li>All</li>
+                {
+                  this.state.subject.map((item: any, i) => {
+                    return <li key={item.subject_id} className={num === i ? 'subactive' : ''} onClick={() => { this.subClick(item.subject_id, i) }}>{item.subject_text}</li>
+                  })
+                }
+              </ul>
             </div>
-          </div>
-          <div className="lookSechBottom">
+          </Layout>
+
+          <div className="lookSechBottom seeBottom">
             <Form layout="inline" className="formContent">
               <Form.Item label="考试类型" className="formIten">
                 <Select defaultValue="" style={{ width: 130 }} onChange={this.cSelected}>
@@ -126,16 +129,18 @@ class Look extends React.Component<Props> {
               </Form.Item>
             </Form>
           </div>
+
         </div>
+
         <div className="lkList">
           {
             this.state.list.map((item: any, i) => {
-              return <div key={i} onClick={()=>{this.clickJump(item.questions_id)}}>
+              return <div key={i} onClick={() => { this.clickJump(item.questions_id) }}>
                 <h3>{item.title}</h3>
                 <Button>{item.questions_type_text}</Button>
                 <Button>{item.subject_text}</Button>
                 <Button>{item.exam_name}</Button>
-                <a>编辑</a>
+                <a href="/home/rank">编辑</a>
                 <div className="announce">{item.user_name}发布</div>
                 <hr />
               </div>

@@ -1,3 +1,7 @@
+*{
+    box-sizing: border-box;
+    list-style: none;
+}
 .lookquersition{
     width: 100%;
     height: 100%;
@@ -7,8 +11,6 @@
     overflow: auto;
 }
 .lookseachs{
-    width: 100%;
-    height: 184px;
     border-radius: 10px;
     background: white;
     padding: 20px;
@@ -22,38 +24,42 @@
     flex-direction: column;
     padding: 0;
 }
-.lookseach{
-    display: flex;
-}
 .lookSechTop{
+    background: #fff;
+    margin-bottom: 10px;
+}
+.seeExam-top-top{
     width: 100%;
+    height:50px;
     display: flex;
+    margin-left: 20px;
 }
-.lookAll{
-    width: 8%;
-    height: 45px;
-    line-height: 45px;
-    font-size: 15px;
-}
-.sechList{
-    flex: 1;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+.seeExam-top-top ul li{
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: pointer;
     font-size: 12px;
 }
 .subactive{
+    padding: 0 7px;
+    margin-right: 8px;
+    border-radius: 2px;
     background-color: #0139FD;
     color: #fff;
 }
 .lookSechBottom{
     width: 100%;
 }
-.formContent{
-    display: flex;
+.seeBottom:after{
+    content: '';
+    height: 0;
+    display: block;
+    clear: both;
+    visibility: hidden;
 }
 .formIten{
-    flex: 3;
+    float: left;
 }
 
 .ant-form-inline .ant-form-item {

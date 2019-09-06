@@ -1,7 +1,8 @@
 import request from '../utils/requerst'
 
 // 获取试题
-export const getQuestion = (params:object)=>{
+export let getQuestion = (params:object)=>{
+    // console.log(params)
     return request.get('/exam/questions/condition',{params})
 }
 
@@ -19,8 +20,13 @@ export const getQuestionsType = ()=>{
 export let subject = ()=>{
     return request.get('/exam/subject')
 }
-// 添加试题类型
-export const addQuestions = (params:object)=>{
-    console.log(params)
-    return request.get('/exam/insertQuestionsType',{params})
+
+// 获取用户信息
+export let userInfo = ()=>{
+    return request.get('/user/userInfo')
+}
+
+// 添加试题
+export let addQuestion = (params:object)=>{
+    return request.post('/exam/questions',params)
 }
