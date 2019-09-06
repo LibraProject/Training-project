@@ -2,7 +2,6 @@ import * as React from "react";
 import "./css/classify.css";
 import { Button ,Modal,Input} from "antd";
 import { observer, inject } from "mobx-react";
-<<<<<<< HEAD
 interface Props {
   question: any;
 }
@@ -40,35 +39,6 @@ class classify extends React.Component<Props> {
     len+=1;
     this.addQuestionResult(val,len)
     this.setState({ loading: true });
-=======
-
-interface Props {
-  question: any;
-}
-@inject("question")
-@observer
-
-class Classify extends React.Component<Props> {
-  state = {
-    questiontypes: [],
-    loading: false,
-    visible: false,
-  };
-  componentDidMount() {
-    this.getQuestiontypes();
-  }
-  getQuestiontypes = async () => {
-    const questionType = await this.props.question.getQuestionsType();
-    this.setState({
-      questiontypes: questionType
-    });
-  };
-  handleOk = () => {
-    this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({ loading: false, visible: false });
-    }, 3000);
->>>>>>> dcd3847a21309ec2dbef380ef06b4f5c2031bf0a
   };
   showModal = () => {
     this.setState({
@@ -78,7 +48,6 @@ class Classify extends React.Component<Props> {
   handleCancel = () => {
     this.setState({ visible: false });
   };
-<<<<<<< HEAD
   //设置val
   setVal = (e:any)=>{
     this.setState({
@@ -90,44 +59,16 @@ class Classify extends React.Component<Props> {
   }
   render() {
     const { visible, loading,val } = this.state;
-=======
-  render() {
-    const { visible, loading } = this.state;
->>>>>>> dcd3847a21309ec2dbef380ef06b4f5c2031bf0a
     return (
       <div className="main">
 
         <h2 className="titType">试题分类</h2>
         <div className="typesContent">
           <div className="tableType">
-<<<<<<< HEAD
             <div className="btn">
               <Button type="primary" className="btns" onClick={this.showModal}>
                 +添加类型
               </Button>
-=======
-            <div className="addtype">
-              <Button type="primary" className="btns" onClick={this.showModal}>
-                +添加类型
-              </Button>
-              <div className="m-none" id="m-test">
-                <div className="tk">
-                  <h3>创建新类型</h3>
-                  <input type="text" placeholder="输入类型" name="type" />
-                  <p></p>
-                  <input
-                    type="text"
-                    placeholder="输入类型名称"
-                    name="text_type"
-                  />
-                  <p></p>
-                  <div className="bt">
-                    <Button type="primary">确定</Button>
-                    <Button>取消</Button>
-                  </div>
-                </div>
-              </div>
->>>>>>> dcd3847a21309ec2dbef380ef06b4f5c2031bf0a
             </div>
             <table className="tablelist">
               <thead>
@@ -157,10 +98,7 @@ class Classify extends React.Component<Props> {
           onCancel={this.handleCancel}
           centered={true}
           bodyStyle ={{height:200}}
-<<<<<<< HEAD
           keyboard
-=======
->>>>>>> dcd3847a21309ec2dbef380ef06b4f5c2031bf0a
           footer={[
             <Button key="back" onClick={this.handleCancel}>
               关闭
@@ -170,11 +108,7 @@ class Classify extends React.Component<Props> {
             </Button>,
           ]}
         >
-<<<<<<< HEAD
          <Input type="text"  value={val} onChange={this.setVal}/>
-=======
-         <Input type="text"/>
->>>>>>> dcd3847a21309ec2dbef380ef06b4f5c2031bf0a
         </Modal>
       </div>
       </div>
