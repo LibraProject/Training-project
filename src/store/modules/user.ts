@@ -41,7 +41,7 @@ class User {
   //  展示用户信息
   @action async getUserMsg(): Promise<any>{
       const result: any = await getUserMsg()
-      return result
+      return result.data
   }
 }
 

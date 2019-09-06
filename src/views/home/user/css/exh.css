@@ -7,6 +7,8 @@
 .exh {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .exhList {
@@ -31,4 +33,9 @@
 
 .exhList span:hover {
   color: #1890ff;
+}
+
+.exhPage {
+  flex: 1;
+  background: #ccc;
 }
