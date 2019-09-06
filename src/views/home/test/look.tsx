@@ -26,7 +26,8 @@ class Look extends React.Component<Props> {
     exam_id: '',
     questions_type_id: '',
     subject_id: '',
-    num: null
+    num: null,
+    show:false
   }
   componentDidMount() {
     this.getList()
@@ -38,12 +39,13 @@ class Look extends React.Component<Props> {
     const examtype = await this.props.question.examType()
     const questionType = await this.props.question.getQuestionsType()
     const subject = await this.props.question.subject()
-
+    
     this.setState({
       list: data,
       type: examtype,
       question: questionType,
       subject
+     
     })
   }
   //考试类型接口 获取数据
@@ -79,8 +81,15 @@ class Look extends React.Component<Props> {
     this.props.history.push(`/home/detail/${id}`)
   }
 
+  setall = ()=>{
+    const {show} = this.state
+    this.setState({
+      show:!show
+    })
+  }
+
   render() {
-    const { num } = this.state
+    const { num ,show} = this.state
     return (
       <div className="lookquersition">
         <h2>{this.props.location.state.title}</h2>
@@ -88,11 +97,11 @@ class Look extends React.Component<Props> {
           <div className="lookSechTop">
             <div className="lookAll">课程类型</div>
             <div className="sechList">
-              <div>All</div>
+              <div onClick={this.setall} className={show?'subactive' : ''}>All</div>
 
               {
                 this.state.subject.map((item: any, i) => {
-                  return <div key={item.subject_id} className={num === i ? 'subactive' : ''} onClick={() => { this.subClick(item.subject_id,i) }}>{item.subject_text}</div>
+                  return <div key={item.subject_id} className={ show ? 'subactive' :( num === i ? 'subactive' : '')} onClick={() => { this.subClick(item.subject_id,i) }}>{item.subject_text}</div>
                 })
               }
 

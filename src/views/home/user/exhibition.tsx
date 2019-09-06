@@ -1,10 +1,15 @@
 import * as React from "react";
-import {} from "antd";
+import { observer, inject } from "mobx-react";
 import "./css/exh.css";
 interface Props {
-  location: any;
+  location: any,
+  user:any
 }
+@inject('user')
 class Exhibition extends React.Component<Props> {
+  componentDidMount(){
+    console.log(this.props.user)
+  }
   public render() {
     return (
       <div className="exh">
