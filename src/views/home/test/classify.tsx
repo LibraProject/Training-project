@@ -66,7 +66,7 @@ class classify extends React.Component<Props> {
         <h2 className="titType">试题分类</h2>
         <div className="typesContent">
           <div className="tableType">
-            <div className="btn">
+            <div className="addtype">
               <Button type="primary" className="btns" onClick={this.showModal}>
                 +添加类型
               </Button>
