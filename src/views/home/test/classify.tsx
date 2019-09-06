@@ -19,7 +19,7 @@ class classify extends React.Component<Props> {
     this.getQuestiontypes();
   }
   addQuestionResult = async (text:String,sort:Number) =>{
-    const questionResult = await this.props.question.addQuestions({text,sort});
+    const questionResult = await this.props.question.addQuestion({text,sort});
     if(questionResult.code){
       this.setState({ visible: false,loading:false,val:''});
       this.getQuestiontypes();

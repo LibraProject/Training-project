@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Form, Button, Input, Select, Radio } from "antd";
 import "./css/add.css";
-interface Props {}
 const { Option } = Select;
 class Add extends React.Component {
   state = {

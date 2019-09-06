@@ -17,16 +17,16 @@ export const getQuestionsType = () => {
 };
 
 // 所有的课程获取成功
-export let subject = ()=>{
+export const subject = ()=>{
     return request.get('/exam/subject')
 }
 
 // 获取用户信息
-export let userInfo = ()=>{
+export const userInfo = ()=>{
     return request.get('/user/userInfo')
 }
 
 // 添加试题
-export let addQuestion = (params:object)=>{
-    return request.post('/exam/questions',params)
+export const addQuestion = (params:object)=>{
+    return request.get('/exam/insertQuestionsType',{params})
 }

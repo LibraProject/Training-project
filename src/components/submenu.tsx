@@ -96,9 +96,9 @@ const list = [
     ]
   }
 ];
-interface Props {}
 
-class Item extends React.Component<Props> {
+
+class Item extends React.Component {
   public render() {
     return (
       <Sider width={200}>

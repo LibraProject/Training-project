@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
-import { Form, Select, Button, Icon, Layout} from "antd";
+import { Form, Select, Button, Icon, Layout, Row, Col } from "antd";
 import './css/look.css'
 
 const { Option } = Select;
@@ -31,6 +31,7 @@ class Look extends React.Component<Props> {
   }
   componentDidMount() {
     this.getList()
+    // console.log(this.props)
   }
 
   getList = async () => {
@@ -97,10 +98,10 @@ class Look extends React.Component<Props> {
             <div className="seeExam-top-top">
               <p>课程类型：</p>
               <ul>
-                <li>All</li>
+                <li onClick={this.setall} className={show?'subactive' : ''}>All</li>
                 {
                   this.state.subject.map((item: any, i) => {
-                    return <li key={item.subject_id} className={ show ? 'subactive' :( num === i ? 'subactive' : '')} onClick={() => { this.subClick(item.subject_id, i) }}>{item.subject_text}</li>
+                    return <li key={item.subject_id} className={show ? 'subactive' :( num === i ? 'subactive' : '')} onClick={() => { this.subClick(item.subject_id, i) }}>{item.subject_text}</li>
                   })
                 }
               </ul>

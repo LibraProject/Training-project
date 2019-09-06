@@ -50,14 +50,12 @@ class Question {
     // 获取用户信息
     @action async userInfo(): Promise<any> {
         const result: any = await userInfo();
-        // console.log('question...', result);
         return result.data
     }
 
     // 添加试题
     @action async addQuestion(params: any): Promise<any> {
         const result: any = await addQuestion(params);
-        // console.log('question...', result);
         return result
     }
 }
