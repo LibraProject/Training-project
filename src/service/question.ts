@@ -1,12 +1,7 @@
 import request from '../utils/requerst'
 
 // 获取试题
-<<<<<<< HEAD
 export const getQuestion = (params:object)=>{
-=======
-export let getQuestion = (params:object)=>{
-    console.log(params)
->>>>>>> dcd3847a21309ec2dbef380ef06b4f5c2031bf0a
     return request.get('/exam/questions/condition',{params})
 }
 
