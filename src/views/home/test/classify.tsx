@@ -67,7 +67,7 @@ class classify extends React.Component<Props> {
         <div className="typesContent">
           <div className="tableType">
             <div className="addtype">
-              <Button type="primary" className="btns" onClick={this.showModal}>
+              <Button type="primary" className="btnsa" onClick={this.showModal}>
                 +添加类型
               </Button>
             </div>
