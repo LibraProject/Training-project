@@ -42,6 +42,10 @@
     align-items: center;
     font-size: 12px;
 }
+.subactive{
+    background-color: #0139FD;
+    color: #fff;
+}
 .lookSechBottom{
     width: 100%;
 }
@@ -94,4 +98,13 @@
     height: 35px;
     line-height: 35px;
     color: #0139FD;
+}
+
+hr{
+    border: .5px solid #e8e8e8;
+}
+
+.btn{
+    padding:0 40px;
+    background: linear-gradient(-90deg,#4e75ff,#0139fd)!important;
 }

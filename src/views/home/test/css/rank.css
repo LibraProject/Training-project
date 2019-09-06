@@ -39,6 +39,11 @@
   height: 40px;
 }
 
+.rankBox li:nth-of-type(2) .for-container,
+.rankBox li:nth-of-type(6) .for-container {
+  height: 200px;
+}
+
 .addBtn {
   height: 40px;
   padding: 0 40px;
