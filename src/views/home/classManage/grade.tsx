@@ -80,7 +80,7 @@ class ClassRoom extends React.Component<UserFormProps, any> {
               </thead>
               <tbody>
                 {
-                  mangerroom && mangerroom.map((el:any)=> <tr key={el.room_id}>
+                  mangerroom && mangerroom.map((el:any,i)=> <tr key={i}>
                     <td>{el.room_text}</td>
                     <td className="tabletrDelte">删除</td>
                   </tr>)

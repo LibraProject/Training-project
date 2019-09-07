@@ -6,32 +6,53 @@ import './css/student.css'
 const { Option } = Select;
 
 interface Props {
-  question: any,
+  classroom: any,
   location: any,
   exam_id: any,
-  history: any
+  history: any,
+  delete: Function
 }
 
-@inject("manger")
+@inject("classroom")
 @observer
 
 class Student extends React.Component<Props>{
   state = {
-    studentList: []
+    studentList: [],
+    arr: [],
+    room: [],
+    grade: []
   }
 
   componentDidMount() {
+    this.getStudent()
+  }
 
+  getStudent = async () => {
+    const studentList = await this.props.classroom.getMangerStudent();
+    const room = await this.props.classroom.getMangerRoom();
+    const grade = await this.props.classroom.getMangerGrade();
+
+    this.setState({ studentList, room, grade })
+
+    this.onChange(1, 20)
   }
 
   onChange = (page: any, pageSize: any) => {
-    // const { grade } = this.state
-    // const start = (page - 1) * pageSize
-    // const end = page * pageSize
-    // this.setState({ arr: grade.slice(start, end) })
+    const { studentList } = this.state
+    const start = (page - 1) * pageSize
+    const end = page * pageSize
+    this.setState({ arr: studentList.slice(start, end) })
+  }
+
+  delete = async (id: string) => {
+    const studentList = await this.props.classroom.delMangerStudent(id);
+    this.getStudent()
   }
 
   public render() {
+    const { arr, studentList, room, grade } = this.state
+    console.log(room, grade)
     return (
       <div className="studentBox">
         <h2>{this.props.location.state.title}</h2>
@@ -39,24 +60,24 @@ class Student extends React.Component<Props>{
         <div className="studentTop">
           <Form layout="inline">
             <Form.Item>
-             <Input placeholder="输入学姓名"/>
+              <Input placeholder="输入学姓名" />
             </Form.Item>
             <Form.Item label="">
               <Select defaultValue="请选择教室号" style={{ width: 180 }}>
-                {/* {
-                    this.state.type.map((item: any) => {
-                      return <Option key={item.exam_id} value={item.exam_id}>{item.exam_name}</Option>
+                {
+                    room.map((item: any) => {
+                      return <Option key={item.room_id} value={item.room_id}>{item.room_text}</Option>
                     })
-                  } */}
+                }
               </Select>
             </Form.Item>
             <Form.Item label="">
               <Select defaultValue="班级名" style={{ width: 180 }}>
-                {/* {
-                    this.state.question.map((item: any) => {
-                      return <Option key={item.questions_type_id} value={item.questions_type_id}>{item.questions_type_text}</Option>
+                {
+                    grade.map((item: any) => {
+                      return <Option key={item.grade_id} value={item.grade_id}>{item.grade_name}</Option>
                     })
-                  } */}
+                }
               </Select>
             </Form.Item>
             <Form.Item>
@@ -68,42 +89,36 @@ class Student extends React.Component<Props>{
           </Form>
         </div>
         <div>
-          
+
           <table>
-              <thead>
-                <tr className="tabletr">
-                  <th>班级名</th>
-                  <th>课程名称</th>
-                  <th>阅卷状态</th>
-                  <th>课程名称</th>
-                  <th>成材率</th>
-                  <th>操作</th>
+            <thead>
+              <tr className="tabletr">
+                <th>姓名</th>
+                <th>学号</th>
+                <th>班级</th>
+                <th>教室</th>
+                <th>密码</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              {arr.map((el: any, i) => (
+                <tr key={i}>
+                  <td>{el.student_name}</td>
+                  <td>{el.student_id}</td>
+                  <td>{el.grade_name}</td>
+                  <td>{el.room_text}</td>
+                  <td>{el.student_pwd}</td>
+                  <td onClick={() => { this.delete(el.student_id) }}>
+                    删除
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {/* {arr.map((el: any) => (
-                  <tr key={el.grade_id}>
-                    <td>{el.grade_name}</td>
-                    <td>{el.subject_text}</td>
-                    <td></td>
-                    <td>{el.room_text}</td>
-                    <td>{el.questions_type_text}</td>
-                    <td><a className="last">批卷</a></td>
-                  </tr>
-                ))} */}
-                <tr>
-                    <td>dsfsdf</td>
-                    <td>subject_text</td>
-                    <td></td>
-                    <td>room_text</td>
-                    <td>questions_type_text</td>
-                    <td><a className="last">删除</a></td>
-                </tr>
-              </tbody>
-            </table>
-                
+              ))}
+            </tbody>
+          </table>
+
           <div className="page">
-            <Pagination showQuickJumper showSizeChanger total={500} onChange={this.onChange} />
+            <Pagination showQuickJumper showSizeChanger defaultPageSize={20} total={studentList.length} onChange={this.onChange} />
           </div>
 
         </div>

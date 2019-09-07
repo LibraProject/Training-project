@@ -1,30 +1,31 @@
 import * as React from "react";
 import "./css/classify.css";
-import { Button ,Modal,Input} from "antd";
+import { Button, Modal, Input, Layout } from "antd";
 import { observer, inject } from "mobx-react";
 
 interface Props {
-  question: any;
+  question: any,
+  location: any
 }
 
 @inject("question")
 @observer
 
-class classify extends React.Component<Props> {
+class Classify extends React.Component<Props> {
   state = {
     questiontypes: [],
     loading: false,
     visible: false,
-    val:'',
-    len:0
+    val: '',
+    len: 0
   };
   componentDidMount() {
     this.getQuestiontypes();
   }
-  addQuestionResult = async (text:String,sort:Number) =>{
-    const questionResult = await this.props.question.addQuestion({text,sort});
-    if(questionResult.code){
-      this.setState({ visible: false,loading:false,val:''});
+  addQuestionResult = async (text: string, sort: number) => {
+    const questionResult = await this.props.question.addQuestion({ text, sort });
+    if (questionResult.code) {
+      this.setState({ visible: false, loading: false, val: '' });
       this.getQuestiontypes();
     }
   }
@@ -33,14 +34,14 @@ class classify extends React.Component<Props> {
     const questionType = await this.props.question.getQuestionsType();
     this.setState({
       questiontypes: questionType,
-      len:questionType.length
+      len: questionType.length
     });
   };
   handleOk = () => {
-    let {val,len} = this.state;
-    if(!val){return}
-    len+=1;
-    this.addQuestionResult(val,len)
+    let { val, len } = this.state;
+    if (!val) { return }
+    len += 1;
+    this.addQuestionResult(val, len)
     this.setState({ loading: true });
   };
   showModal = () => {
@@ -52,20 +53,19 @@ class classify extends React.Component<Props> {
     this.setState({ visible: false });
   };
   //设置val
-  setVal = (e:any)=>{
+  setVal = (e: any) => {
     this.setState({
-      val:e.target.value
+      val: e.target.value
     })
   }
-  addQuestion = ()=>{
+  addQuestion = () => {
     console.log(1)
   }
   render() {
-    const { visible, loading,val } = this.state;
+    const { visible, loading, val } = this.state;
     return (
-      <div className="main">
-
-        <h2 className="titType">试题分类</h2>
+      <Layout className="main">
+        <h2>{this.props.location.state.title}</h2>
         <div className="typesContent">
           <div className="tableType">
             <div className="addtype">
@@ -94,29 +94,29 @@ class classify extends React.Component<Props> {
           </div>
         </div>
         <div>
-        <Modal
-          visible={visible}
-          title="添加试题类型"
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-          centered={true}
-          bodyStyle ={{height:200}}
-          keyboard
-          footer={[
-            <Button key="back" onClick={this.handleCancel}>
-              关闭
+          <Modal
+            visible={visible}
+            title="添加试题类型"
+            onOk={this.handleOk}
+            onCancel={this.handleCancel}
+            centered={true}
+            bodyStyle={{ height: 200 }}
+            keyboard
+            footer={[
+              <Button key="back" onClick={this.handleCancel}>
+                关闭
             </Button>,
-            <Button key="submit" type="primary" loading={loading} onClick={this.handleOk}>
-              提交
+              <Button key="submit" type="primary" loading={loading} onClick={this.handleOk}>
+                提交
             </Button>,
-          ]}
-        >
-         <Input type="text"  value={val} onChange={this.setVal}/>
-        </Modal>
-      </div>
-      </div>
+            ]}
+          >
+            <Input type="text" value={val} onChange={this.setVal} />
+          </Modal>
+        </div>
+      </Layout>
     );
   }
 }
 
-export default classify;
+export default Classify;
