@@ -44,10 +44,19 @@
 
 .exhPage .exhPageHeader {
   width: 100%;
-  height: 45px;
+  display: flex;
+}
+
+.exhPage .exhPageHeader span {
+  flex: 1;
+  height: 75px;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+}
+
+.exhPage .exhPageHeader:hover {
+  background: #f0f2f5;
 }
 
 .exhTitle {
@@ -57,17 +66,17 @@
   text-indent: 30px;
 }
 
-.exhPageHeader {
-  width: 100%;
-  height: 60px;
-}
-
 .exhNav {
   width: 100%;
   height: 45px;
   display: flex;
   background: #333;
   color: white;
+}
+
+.exhNav span {
+  flex: 1;
+  display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
 }

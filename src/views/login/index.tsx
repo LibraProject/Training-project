@@ -39,7 +39,7 @@ class UserForm extends React.Component<UserFormProps, any>{
 
     return (
       <div className="box">
-        <div className="content">
+        <div className="contents">
           <Form onSubmit={this.handleSubmit} className="login-form">
             <Form.Item>
               {getFieldDecorator('user_name', {
