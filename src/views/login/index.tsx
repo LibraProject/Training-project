@@ -41,7 +41,7 @@ class UserForm extends React.Component<UserFormProps, any>{
     const { user_name, user_pwd } = this.props.user.account;
     
     return (
-      <div className="box" onKeyDown={this.EnterIncident}>
+      <div className="box">
         <div className="contents">
           <Form onSubmit={this.handleSubmit} className="login-form">
             <Form.Item>

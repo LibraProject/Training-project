@@ -22,7 +22,7 @@ class Exhibition extends React.Component<Props> {
     this.setState({ userData });
   };
 
-  handIndex = (ind: Number) => {
+  handIndex = (ind: number) => {
     this.setState({ currentIndex: ind });
   };
 

@@ -12,14 +12,14 @@ class Main extends React.Component {
     return (
       <Layout style={{ padding: "0 24px 24px" }}>
          <Breadcrumb style={{ margin: '16px 0' }}/>
-        <Content
-          style={{
-            margin: 0,
-            minHeight: 280
-          }}
-        >
-          {this.props.children}
-        </Content>
+          <Content
+            style={{
+              margin: 0,
+              minHeight: 280
+            }}
+          >
+            {this.props.children}
+          </Content>
       </Layout>
     );
   }

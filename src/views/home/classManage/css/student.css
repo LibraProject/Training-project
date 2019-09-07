@@ -49,10 +49,6 @@ tbody tr {
   line-height: 40px;
 }
 
-.last {
-  color: rgba(0, 0, 0, 0.65);
-}
-
 .page {
   margin: 16px 10px;
   float: right;

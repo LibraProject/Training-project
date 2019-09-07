@@ -88,7 +88,7 @@ class ClassRoom extends React.Component<UserFormProps, any> {
               </thead>
               <tbody>
               {
-                  mangergrade && mangergrade.map((el:any,index:any)=> <tr key={index}>
+                  mangergrade && mangergrade.map((el:any,i)=> <tr key={i}>
                     <td>{el.grade_name}</td>
                     <td>{el.subject_text}</td>
                     <td>{el.room_text}</td>
