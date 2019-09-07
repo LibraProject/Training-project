@@ -64,7 +64,8 @@ class Look extends React.Component<Props> {
   subClick = (id: any, i: number) => {
     this.setState({
       subject_id: id,
-      num: i
+      num: i,
+      show:false
     })
   }
   // 点击查询

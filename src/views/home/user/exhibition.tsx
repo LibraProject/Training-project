@@ -142,8 +142,6 @@ class Exhibition extends React.Component<Props> {
                 <span>{element.identity_text}</span>
               </div>
             ))}
-         
-          
         </div>
       </div>
     );
