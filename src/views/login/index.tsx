@@ -32,13 +32,16 @@ class UserForm extends React.Component<UserFormProps, any>{
       }
     });
   }
+  EnterIncident = (e:any)=>{
+    //键盘事件 待开发未完善
+  }
 
   public render() {
     const { getFieldDecorator } = this.props.form;
     const { user_name, user_pwd } = this.props.user.account;
-
+    
     return (
-      <div className="box">
+      <div className="box" onKeyDown={this.EnterIncident}>
         <div className="contents">
           <Form onSubmit={this.handleSubmit} className="login-form">
             <Form.Item>

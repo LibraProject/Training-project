@@ -1,9 +1,8 @@
 import * as React from "react";
-import { Button, Modal, Input, Form ,Select} from "antd";
+import { Button, Modal, Input, Form ,Select, message } from "antd";
 import {observer,inject} from 'mobx-react'
 import { FormComponentProps } from "antd/lib/form";
 import "./css/grade.css";
-import Item from 'src/components/submenu';
 interface UserFormProps extends FormComponentProps {
   age: number;
   name: string;
@@ -11,8 +10,9 @@ interface UserFormProps extends FormComponentProps {
   user: any;
   form: any;
   classroom:any
+  question:any
 }
-@inject('classroom')
+@inject('classroom','question')
 @observer
 class ClassRoom extends React.Component<UserFormProps, any> {
   state = {
@@ -21,22 +21,27 @@ class ClassRoom extends React.Component<UserFormProps, any> {
     visible: false,
     len: 0,
     mangergrade:[],
-    mangerroom:[]
+    mangerroom:[],
+    subject:[]
   };
   componentDidMount(){
-    this.getMangerGrades()
     this.getMangerRooms()
   }
   getMangerRooms = async () => {
     const mangerroom = await this.props.classroom.getMangerRoom();
-    console.log(mangerroom,'班级号')
-    this.setState({ mangerroom });
-  };
-  // 获取所有教室
-  getMangerGrades = async ()=>{
+    const subject = await this.props.question.subject()
     const mangergrade= await this.props.classroom.getMangerGrade();
-    this.setState({mangergrade})
+    this.setState({ mangerroom, subject, mangergrade });
+  };
+
+  // 添加班级 
+  addMangerGrade = async (str:Object)=>{
+    const mangerroom = await this.props.classroom.addMangerGrade(str);
+    message.success(mangerroom);
+    this.handleCancel()
+    this.getMangerRooms()
   }
+  
   handleOk = () => {
     this.setState({ loading: true });
   };
@@ -53,19 +58,13 @@ class ClassRoom extends React.Component<UserFormProps, any> {
     e.preventDefault();
     this.props.form.validateFields((err: any, values: any) => {
       if (!err) {
-        console.log("Received values of form: ", values);
+        this.addMangerGrade(values)
       }
     });
   };
 
-  handleSelectChange = (value: any) => {
-    console.log(value);
-    this.props.form.setFieldsValue({
-      note: `Hi, ${value === "male" ? "man" : "lady"}!`
-    });
-  };
   public render() {
-    const { visible, mangergrade, mangerroom} = this.state;
+    const { visible, mangergrade, mangerroom, subject } = this.state;
     const { getFieldDecorator } = this.props.form;
     const { Option } = Select;
     return (
@@ -89,11 +88,11 @@ class ClassRoom extends React.Component<UserFormProps, any> {
               </thead>
               <tbody>
               {
-                  mangergrade && mangergrade.map((el:any)=> <tr key={el.room_id}>
+                  mangergrade && mangergrade.map((el:any,index:any)=> <tr key={index}>
                     <td>{el.grade_name}</td>
                     <td>{el.subject_text}</td>
                     <td>{el.room_text}</td>
-                    <td className="tabletrDelte">删除|删除</td>
+                    <td className="tabletrDelte"><span className="tabBtn">修改</span> | <span className="tabBtn">删除</span></td>
                   </tr>)
                 }
               </tbody>
@@ -103,28 +102,27 @@ class ClassRoom extends React.Component<UserFormProps, any> {
         <Modal visible={visible} title="添加班级" onCancel={this.handleCancel} centered={true} destroyOnClose={true} keyboard footer={null}>
           <Form labelCol={{ span: 5 }} wrapperCol={{ span: 12 }} onSubmit={this.handleSubmit}>
             <Form.Item label="班级名">
-              {getFieldDecorator("classNames", {
+              {getFieldDecorator("grade_name", {
                 rules: [{ required: true, message: "请输入班级名！" }]
               })(<Input placeholder="班级名" />)}
             </Form.Item>
 
             <Form.Item label="教室号">
-              {getFieldDecorator("classRoom", {
+              {getFieldDecorator("room_id", {
                 rules: [{ required: true, message: "请选择教室号！" }]
               })(
-                <Select placeholder="请选择教室号"onChange={this.handleSelectChange}>
-                  {mangerroom.map((Item:any)=><Option key={Item.room_id} value={Item.room_text}>{Item.room_text}</Option>)}
+                <Select placeholder="请选择教室号">
+                  {mangerroom.map((Item:any)=><Option key={Item.room_id} value={Item.room_id}>{Item.room_text}</Option>)}
                 </Select>
               )}
             </Form.Item>
 
             <Form.Item label="课程名">
-              {getFieldDecorator("courseName", {
+              {getFieldDecorator("subject_id", {
                 rules: [{ required: true, message: "请选择课程名!" }]
               })(
-                <Select placeholder="选择课程名" onChange={this.handleSelectChange}>
-                  <Option value="课程1">课程1</Option>
-                  <Option value="课程2">课程2</Option>
+                <Select placeholder="选择课程名">
+                  {subject.map((Item:any)=><Option key={Item.subject_id} value={Item.subject_id}>{Item.subject_text}</Option>)}
                 </Select>
               )}
             </Form.Item>

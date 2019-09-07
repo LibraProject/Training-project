@@ -14,6 +14,12 @@ export const getMangerGrade = () => {
 export const addMangerRoom = (params:any) => {
   return requerst.post("/manger/room",params);
 };
+
+// 添加班级
+export const addMangerGrade = (params:any) => {
+  return requerst.post("/manger/grade",params);
+};
+
 //  删除借口
 export const DelteMangerRoom = (params:any) => {
   return requerst.delete('/manger/room/delete',{data:params});

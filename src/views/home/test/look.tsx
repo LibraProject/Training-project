@@ -31,7 +31,6 @@ class Look extends React.Component<Props> {
   }
   componentDidMount() {
     this.getList()
-    // console.log(this.props)
   }
 
   getList = async () => {

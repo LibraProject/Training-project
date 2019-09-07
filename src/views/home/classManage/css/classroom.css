@@ -138,3 +138,6 @@ tbody tr {
 .tabletrDelte:hover{
   cursor: pointer;
 }
+.tabletrDelte .tabBtn:hover{
+  color: red;
+}
