@@ -3,6 +3,7 @@ import { Button, Modal, Input, Form ,Select} from "antd";
 import {observer,inject} from 'mobx-react'
 import { FormComponentProps } from "antd/lib/form";
 import "./css/grade.css";
+import Item from 'src/components/submenu';
 interface UserFormProps extends FormComponentProps {
   age: number;
   name: string;
@@ -19,21 +20,23 @@ class ClassRoom extends React.Component<UserFormProps, any> {
     loading: false,
     visible: false,
     len: 0,
-    mangergrade:[]
+    mangergrade:[],
+    mangerroom:[]
   };
   componentDidMount(){
     this.getMangerGrades()
-    //getMangerGrade
+    this.getMangerRooms()
   }
-
+  getMangerRooms = async () => {
+    const mangerroom = await this.props.classroom.getMangerRoom();
+    console.log(mangerroom,'班级号')
+    this.setState({ mangerroom });
+  };
   // 获取所有教室
   getMangerGrades = async ()=>{
     const mangergrade= await this.props.classroom.getMangerGrade();
-    console.log(mangergrade)
     this.setState({mangergrade})
   }
-
-
   handleOk = () => {
     this.setState({ loading: true });
   };
@@ -45,6 +48,7 @@ class ClassRoom extends React.Component<UserFormProps, any> {
   handleCancel = () => {
     this.setState({ visible: false });
   };
+
   handleSubmit = (e: any) => {
     e.preventDefault();
     this.props.form.validateFields((err: any, values: any) => {
@@ -61,7 +65,7 @@ class ClassRoom extends React.Component<UserFormProps, any> {
     });
   };
   public render() {
-    const { visible ,mangergrade} = this.state;
+    const { visible, mangergrade, mangerroom} = this.state;
     const { getFieldDecorator } = this.props.form;
     const { Option } = Select;
     return (
@@ -96,25 +100,8 @@ class ClassRoom extends React.Component<UserFormProps, any> {
             </table>
           </div>
         </div>
-
-        
-      
-        
-        <Modal
-          visible={visible}
-          title="添加班级"
-          
-          onCancel={this.handleCancel}
-          centered={true}
-          destroyOnClose={true}
-          keyboard
-          footer={null}
-        >
-          <Form
-            labelCol={{ span: 5 }}
-            wrapperCol={{ span: 12 }}
-            onSubmit={this.handleSubmit}
-          >
+        <Modal visible={visible} title="添加班级" onCancel={this.handleCancel} centered={true} destroyOnClose={true} keyboard footer={null}>
+          <Form labelCol={{ span: 5 }} wrapperCol={{ span: 12 }} onSubmit={this.handleSubmit}>
             <Form.Item label="班级名">
               {getFieldDecorator("classNames", {
                 rules: [{ required: true, message: "请输入班级名！" }]
@@ -125,12 +112,8 @@ class ClassRoom extends React.Component<UserFormProps, any> {
               {getFieldDecorator("classRoom", {
                 rules: [{ required: true, message: "请选择教室号！" }]
               })(
-                <Select
-                  placeholder="请选择教室号"
-                  onChange={this.handleSelectChange}
-                >
-                  <Option value="教室1">教室1</Option>
-                  <Option value="教室2">教室2</Option>
+                <Select placeholder="请选择教室号"onChange={this.handleSelectChange}>
+                  {mangerroom.map((Item:any)=><Option key={Item.room_id} value={Item.room_text}>{Item.room_text}</Option>)}
                 </Select>
               )}
             </Form.Item>
@@ -139,10 +122,7 @@ class ClassRoom extends React.Component<UserFormProps, any> {
               {getFieldDecorator("courseName", {
                 rules: [{ required: true, message: "请选择课程名!" }]
               })(
-                <Select
-                  placeholder="选择课程名"
-                  onChange={this.handleSelectChange}
-                >
+                <Select placeholder="选择课程名" onChange={this.handleSelectChange}>
                   <Option value="课程1">课程1</Option>
                   <Option value="课程2">课程2</Option>
                 </Select>
@@ -155,9 +135,6 @@ class ClassRoom extends React.Component<UserFormProps, any> {
             </Form.Item>
           </Form>
         </Modal>
-        
-        
-
       </div>
     );
   }
