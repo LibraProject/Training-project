@@ -2,11 +2,14 @@ import * as React from "react";
 import "./css/classify.css";
 import { Button ,Modal,Input} from "antd";
 import { observer, inject } from "mobx-react";
+
 interface Props {
   question: any;
 }
+
 @inject("question")
 @observer
+
 class classify extends React.Component<Props> {
   state = {
     questiontypes: [],
@@ -24,7 +27,6 @@ class classify extends React.Component<Props> {
       this.setState({ visible: false,loading:false,val:''});
       this.getQuestiontypes();
     }
-
   }
 
   getQuestiontypes = async () => {
