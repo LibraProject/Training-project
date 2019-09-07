@@ -26,7 +26,7 @@ export const userInfo = ()=>{
     return request.get('/user/userInfo')
 }
 
-// 添加试题
+// 添加试题类型
 export const addQuestion = (params:object)=>{
     return request.get('/exam/insertQuestionsType',{params})
 }
