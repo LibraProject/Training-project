@@ -26,7 +26,7 @@ export let userInfo = ()=>{
     return request.get('/user/userInfo')
 }
 
-// 添加试题
+// 添加试题类型
 export let addQuestion = (params:object)=>{
-    return request.post('/exam/questions',params)
+    return request.get('/exam/insertQuestionsType',{params})
 }

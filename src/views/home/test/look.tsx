@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
-import { Form, Select, Button, Icon, Layout, Row, Col } from "antd";
+import { Form, Select, Button, Icon, Layout } from "antd";
 import './css/look.css'
 
 const { Option } = Select;

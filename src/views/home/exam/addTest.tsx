@@ -60,7 +60,7 @@ class AddTest extends React.Component<Props> {
   }
 
   render() {
-    console.log(this.state.question)
+    // console.log(this.state.question)
     return (
       <Layout className="addquersition">
         <h2>{this.props.location.state.title}</h2>
