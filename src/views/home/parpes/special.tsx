@@ -4,7 +4,8 @@ import { Pagination } from 'antd';
 import "./css/special.css";
 
 interface Props {
-  manger: any;
+  manger: any,
+  location:any
 }
 
 @inject("manger")
@@ -39,8 +40,7 @@ class Special extends React.Component<Props> {
     const { grade, arr } = this.state
     return (
       <div className="main">
-
-        <h2 className="titType">试题分类</h2>
+        <h2 className="titType">{this.props.location.state.title}</h2>
         <div className="typesContent">
           <div className="tableType">
             <table>
