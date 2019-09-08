@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./css/classify.css";
-import { Button, Modal, Input, Layout } from "antd";
+import { Button, Modal, Input, Layout, message} from "antd";
 import { observer, inject } from "mobx-react";
 
 interface Props {
@@ -22,10 +22,11 @@ class Classify extends React.Component<Props> {
   componentDidMount() {
     this.getQuestiontypes();
   }
-  addQuestionResult = async (text: string, sort: number) => {
-    const questionResult = await this.props.question.addQuestion({ text, sort });
-    if (questionResult.code) {
-      this.setState({ visible: false, loading: false, val: '' });
+  addQuestionResult = async (text:String,sort:Number) =>{
+    const questionResult = await this.props.question.addQuestion({text,sort});
+    message.success(questionResult.msg)
+    if(questionResult.code){
+      this.setState({ visible: false,loading:false,val:''});
       this.getQuestiontypes();
     }
   }
@@ -38,10 +39,10 @@ class Classify extends React.Component<Props> {
     });
   };
   handleOk = () => {
-    let { val, len } = this.state;
-    if (!val) { return }
-    len += 1;
-    this.addQuestionResult(val, len)
+    let {val,len} = this.state;
+    if(!val){alert('内容不能为空');return}
+    len+=1;
+    this.addQuestionResult(val,len)
     this.setState({ loading: true });
   };
   showModal = () => {
@@ -50,7 +51,7 @@ class Classify extends React.Component<Props> {
     });
   };
   handleCancel = () => {
-    this.setState({ visible: false });
+    this.setState({ visible: false, loading: false  });
   };
   //设置val
   setVal = (e: any) => {
@@ -58,9 +59,7 @@ class Classify extends React.Component<Props> {
       val: e.target.value
     })
   }
-  addQuestion = () => {
-    console.log(1)
-  }
+ 
   render() {
     const { visible, loading, val } = this.state;
     return (

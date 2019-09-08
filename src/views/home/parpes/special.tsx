@@ -40,7 +40,7 @@ class Special extends React.Component<Props> {
     return (
       <div className="main">
 
-        <h2 className="titType">试题分类</h2>
+        <h2 className="titType">阅卷管理</h2>
         <div className="typesContent">
           <div className="tableType">
             <table>

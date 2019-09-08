@@ -1,5 +1,5 @@
 import { action } from "mobx";
-import {  getMangerRoom,  getMangerGrade,  addMangerRoom,  DelteMangerRoom,  addMangerGrade,getMangerStudent,delMangerStudent } from "../../service/index";
+import {  getMangerRoom,  getMangerGrade,  addMangerRoom,  DelteMangerRoom,  addMangerGrade,getMangerStudent,delMangerStudent ,DelteMangerGrade, UpdateMangerGrade} from "../../service/index";
 
 class Classroom {
   //  获取教室接口
@@ -40,6 +40,17 @@ class Classroom {
   @action async delMangerStudent(params: any): Promise<any> {
       const result: any = await delMangerStudent(params);
       return result
+  }
+  // 删除班级
+  @action async DelteMangerGrade(params: any): Promise<any> {
+    const result: any = await DelteMangerGrade(params);
+    return result.msg;
+  }
+
+   // 更新班级信息接口
+   @action async UpdateMangerGrade(params: any): Promise<any> {
+    const result: any = await UpdateMangerGrade(params);
+    return result.msg;
   }
 }
 
