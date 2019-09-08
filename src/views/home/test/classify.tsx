@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./css/classify.css";
-import { Button ,Modal,Input} from "antd";
+import { Button ,Modal, Input ,message} from "antd";
 import { observer, inject } from "mobx-react";
 
 interface Props {
@@ -23,6 +23,7 @@ class classify extends React.Component<Props> {
   }
   addQuestionResult = async (text:String,sort:Number) =>{
     const questionResult = await this.props.question.addQuestion({text,sort});
+    message.success(questionResult.msg)
     if(questionResult.code){
       this.setState({ visible: false,loading:false,val:''});
       this.getQuestiontypes();
@@ -38,7 +39,7 @@ class classify extends React.Component<Props> {
   };
   handleOk = () => {
     let {val,len} = this.state;
-    if(!val){return}
+    if(!val){alert('内容不能为空');return}
     len+=1;
     this.addQuestionResult(val,len)
     this.setState({ loading: true });
@@ -49,16 +50,13 @@ class classify extends React.Component<Props> {
     });
   };
   handleCancel = () => {
-    this.setState({ visible: false });
+    this.setState({ visible: false, loading: false  });
   };
   //设置val
   setVal = (e:any)=>{
     this.setState({
       val:e.target.value
     })
-  }
-  addQuestion = ()=>{
-    console.log(1)
   }
   render() {
     const { visible, loading,val } = this.state;

@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Button, Modal, Input, Form ,Select, message } from "antd";
-import {observer,inject} from 'mobx-react'
+import { Button, Modal, Input, Form, Select, message } from "antd";
+import { observer, inject } from 'mobx-react'
 import { FormComponentProps } from "antd/lib/form";
+import IsAffirm from '../../../components/dloag'
 import "./css/grade.css";
 interface UserFormProps extends FormComponentProps {
   age: number;
@@ -9,10 +10,10 @@ interface UserFormProps extends FormComponentProps {
   history: any;
   user: any;
   form: any;
-  classroom:any
-  question:any
+  classroom: any
+  question: any
 }
-@inject('classroom','question')
+@inject('classroom', 'question')
 @observer
 class ClassRoom extends React.Component<UserFormProps, any> {
   state = {
@@ -20,51 +21,102 @@ class ClassRoom extends React.Component<UserFormProps, any> {
     loading: false,
     visible: false,
     len: 0,
-    mangergrade:[],
-    mangerroom:[],
-    subject:[]
+    mangergrade: [],
+    mangerroom: [],
+    subject: [],
+    roomTitle: "添加班级",
+    disableFlag: false,
+    grade_name: '',
+    room_text: '',
+    subject_text: '',
+    type:1
   };
-  componentDidMount(){
+  componentDidMount() {
+    console.log(this.props)
     this.getMangerRooms()
   }
   getMangerRooms = async () => {
     const mangerroom = await this.props.classroom.getMangerRoom();
     const subject = await this.props.question.subject()
-    const mangergrade= await this.props.classroom.getMangerGrade();
+    const mangergrade = await this.props.classroom.getMangerGrade();
     this.setState({ mangerroom, subject, mangergrade });
   };
 
   // 添加班级 
-  addMangerGrade = async (str:Object)=>{
+  addMangerGrade = async (str: Object) => {
     const mangerroom = await this.props.classroom.addMangerGrade(str);
     mangerroom == "创建班级成功" ? message.success(mangerroom) : message.warning(mangerroom);
     this.handleCancel()
     this.getMangerRooms()
   }
-  
+
   handleOk = () => {
     this.setState({ loading: true });
   };
+
+  // 显示 弹框
   showModal = () => {
     this.setState({
-      visible: true
+      visible: true,
+      roomTitle: "添加班级",
+      disableFlag: false,
+      grade_name: '',
+      room_text: '',
+      subject_text:'',
+      type:1
     });
   };
   handleCancel = () => {
     this.setState({ visible: false });
   };
 
+  UpdateMangerGrade = async ()=>{
+    const Updatemangergrade = await this.props.classroom.UpdateMangerGrade();
+  } 
+
   handleSubmit = (e: any) => {
+    const {type} = this.state
     e.preventDefault();
     this.props.form.validateFields((err: any, values: any) => {
       if (!err) {
+        console.log(values)
+        // UpdateMangerGrade
         this.addMangerGrade(values)
+        // type===1 ? this.addMangerGrade(values) : this.UpdateMangerGrade()
+        
       }
     });
   };
 
+  //  删除功能 
+  DelteMangerGrade = async (id: String) => {
+    const result = await this.props.classroom.DelteMangerGrade({ grade_id: id })
+    message.success(result)
+    this.getMangerRooms()
+  }
+  // 确认删除
+  removeRoom = (id: String) => {
+    IsAffirm(this.DelteMangerGrade, id)
+  }
+
+  // 修改
+  ChangeRoom = (item: any) => {
+    console.log(item)
+    this.setState({
+      visible: true,
+      roomTitle: "修改班级",
+      disableFlag: true,
+      grade_name: item.grade_name,
+      room_text: item.room_text,
+      subject_text: item.subject_text,
+      type:2
+    })
+  }
+
+
+
   public render() {
-    const { visible, mangergrade, mangerroom, subject } = this.state;
+    const { visible, mangergrade, mangerroom, subject, roomTitle, disableFlag, grade_name, room_text, subject_text } = this.state;
     const { getFieldDecorator } = this.props.form;
     const { Option } = Select;
     return (
@@ -87,42 +139,47 @@ class ClassRoom extends React.Component<UserFormProps, any> {
                 </tr>
               </thead>
               <tbody>
-              {
-                  mangergrade && mangergrade.map((el:any,index:any)=> <tr key={index}>
+                {
+                  mangergrade && mangergrade.map((el: any, index: any) => <tr key={index}>
                     <td>{el.grade_name}</td>
                     <td>{el.subject_text}</td>
                     <td>{el.room_text}</td>
-                    <td className="tabletrDelte"><span className="tabBtn">修改</span> | <span className="tabBtn">删除</span></td>
+                    <td className="tabletrDelte">
+                      <span className="tabBtn" onClick={() => { this.ChangeRoom(el) }}>修改</span> | <span className="tabBtn" onClick={() => { this.removeRoom(el.grade_id) }}>删除</span>
+                    </td>
                   </tr>)
                 }
               </tbody>
             </table>
           </div>
         </div>
-        <Modal visible={visible} title="添加班级" onCancel={this.handleCancel} centered={true} destroyOnClose={true} keyboard footer={null}>
+        <Modal visible={visible} title={roomTitle} onCancel={this.handleCancel} centered={true} destroyOnClose={true} keyboard footer={null}>
           <Form labelCol={{ span: 5 }} wrapperCol={{ span: 12 }} onSubmit={this.handleSubmit}>
             <Form.Item label="班级名">
-              {getFieldDecorator("grade_name", {
+              {getFieldDecorator('grade_name', {
+                initialValue: `${grade_name}`,
                 rules: [{ required: true, message: "请输入班级名！" }]
-              })(<Input placeholder="班级名" />)}
+              })(<Input placeholder="班级名" disabled={disableFlag} />)}
             </Form.Item>
 
             <Form.Item label="教室号">
               {getFieldDecorator("room_id", {
+                initialValue: `${room_text}`,
                 rules: [{ required: true, message: "请选择教室号！" }]
               })(
-                <Select placeholder="请选择教室号">
-                  {mangerroom.map((Item:any)=><Option key={Item.room_id} value={Item.room_id}>{Item.room_text}</Option>)}
+                <Select placeholder="请选择教室号" >
+                  {mangerroom.map((Item: any) => <Option key={Item.room_id} value={Item.room_id}>{Item.room_text}</Option>)}
                 </Select>
               )}
             </Form.Item>
 
             <Form.Item label="课程名">
               {getFieldDecorator("subject_id", {
+                initialValue: `${subject_text}`,
                 rules: [{ required: true, message: "请选择课程名!" }]
               })(
                 <Select placeholder="选择课程名">
-                  {subject.map((Item:any)=><Option key={Item.subject_id} value={Item.subject_id}>{Item.subject_text}</Option>)}
+                  {subject.map((Item: any) => <Option key={Item.subject_id} value={Item.subject_id}>{Item.subject_text}</Option>)}
                 </Select>
               )}
             </Form.Item>

@@ -20,8 +20,19 @@ export const addMangerGrade = (params:any) => {
   return requerst.post("/manger/grade",params);
 };
 
-//  删除借口
+//  删除教室接口
 export const DelteMangerRoom = (params:any) => {
   return requerst.delete('/manger/room/delete',{data:params});
 };
+
+//  删除班级接口
+export const DelteMangerGrade = (params:any) => {
+  return requerst.delete('/manger/grade/delete',{data:params});
+};
+
+//  更新班级信息接口
+export const UpdateMangerGrade = (params:any) => {
+  return requerst.put('/manger/grade/update',{data:params});
+};
+
 
