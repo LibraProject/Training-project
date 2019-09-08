@@ -37,7 +37,7 @@ class ClassRoom extends React.Component<UserFormProps, any> {
   // 添加班级 
   addMangerGrade = async (str:Object)=>{
     const mangerroom = await this.props.classroom.addMangerGrade(str);
-    message.success(mangerroom);
+    mangerroom == "创建班级成功" ? message.success(mangerroom) : message.warning(mangerroom);
     this.handleCancel()
     this.getMangerRooms()
   }
