@@ -29,10 +29,10 @@ class ClassRoom extends React.Component<UserFormProps, any> {
     grade_name: '',
     room_text: '',
     subject_text: '',
-    type:1
+    type:1,
+    obj:{}
   };
   componentDidMount() {
-    console.log(this.props)
     this.getMangerRooms()
   }
   getMangerRooms = async () => {
@@ -63,27 +63,34 @@ class ClassRoom extends React.Component<UserFormProps, any> {
       grade_name: '',
       room_text: '',
       subject_text:'',
-      type:1
+      type:1,
     });
   };
   handleCancel = () => {
     this.setState({ visible: false });
   };
 
-  UpdateMangerGrade = async ()=>{
-    const Updatemangergrade = await this.props.classroom.UpdateMangerGrade();
+  UpdateMangerGrade = async (str:Object)=>{
+    const Updatemangergrade = await this.props.classroom.UpdateMangerGrade(str);
+    message.success(Updatemangergrade)
+    this.handleCancel()
+    this.getMangerRooms()
   } 
 
   handleSubmit = (e: any) => {
-    const {type} = this.state
+    const {type,obj} = this.state
     e.preventDefault();
     this.props.form.validateFields((err: any, values: any) => {
       if (!err) {
-        console.log(values)
-        // UpdateMangerGrade
-        this.addMangerGrade(values)
-        // type===1 ? this.addMangerGrade(values) : this.UpdateMangerGrade()
-        
+        console.log(values,'当前修改值')
+        if(type==1){
+          this.addMangerGrade(values) 
+        }else{
+          const newval = Object.assign(obj,values)
+          delete (newval.room_text)
+          delete (newval.subject_text)
+          this.UpdateMangerGrade(newval)
+        }
       }
     });
   };
@@ -101,7 +108,7 @@ class ClassRoom extends React.Component<UserFormProps, any> {
 
   // 修改
   ChangeRoom = (item: any) => {
-    console.log(item)
+    console.log(item,'当前')
     this.setState({
       visible: true,
       roomTitle: "修改班级",
@@ -109,7 +116,8 @@ class ClassRoom extends React.Component<UserFormProps, any> {
       grade_name: item.grade_name,
       room_text: item.room_text,
       subject_text: item.subject_text,
-      type:2
+      type:2,
+      obj:item
     })
   }
 
