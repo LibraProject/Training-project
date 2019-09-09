@@ -52,8 +52,8 @@ class ClassRoom extends React.Component<UserFormProps, any> {
   // 添加教室
   addManger = async (str: string) => {
     const msg = await this.props.classroom.addMangerRoom({ room_text: str });
-    message.success(msg);
-    this.setState({ visible: false });
+    msg == '教室创建成功' ? message.success(msg) : message.warning(msg);
+    this.setState({ visible: false }); 
     this.getMangerRooms();
   };
 

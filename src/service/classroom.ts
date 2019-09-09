@@ -41,7 +41,8 @@ export const DelteMangerGrade = (params:any) => {
 
 //  更新班级信息接口
 export const UpdateMangerGrade = (params:any) => {
-  return requerst.put('/manger/grade/update',{data:params});
+  console.log(params)
+  return requerst.put('/manger/grade/update',params);
 };
 
 

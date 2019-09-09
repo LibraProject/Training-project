@@ -30,84 +30,11 @@ class Exhibition extends React.Component<Props> {
     const { currentIndex, userData } = this.state;
     console.log(userData);
     const exhLists = [
-      {
-        title: "用户数据",
-        children: [
-          {
-            title: "用户名"
-          },
-          {
-            title: "密码"
-          },
-          {
-            title: "身份"
-          }
-        ]
-      },
-      {
-        title: "身份数据",
-        children: [
-          {
-            title: "身份名称"
-          }
-        ]
-      },
-      {
-        title: "api接口权限",
-        children: [
-          {
-            title: "api权限名称"
-          },
-          {
-            title: "api权限url"
-          },
-          {
-            title: "api权限方法"
-          }
-        ]
-      },
-      {
-        title: "身份和api接口关系",
-        children: [
-          {
-            title: "身份名称"
-          },
-          {
-            title: "api权限名称"
-          },
-          {
-            title: "api权限url"
-          },
-          {
-            title: "api权限方法"
-          }
-        ]
-      },
-      {
-        title: "视图接口权限",
-        children: [
-          {
-            title: "视图权限名称"
-          },
-          {
-            title: "视图id"
-          }
-        ]
-      },
-      {
-        title: "身份和视图权限关系",
-        children: [
-          {
-            title: "身份"
-          },
-          {
-            title: "视图名称"
-          },
-          {
-            title: "视图id"
-          }
-        ]
-      }
+      { url:'/user/user',title: "用户数据", children: [{ title: "用户名" }, { title: "密码" }, { title: "身份" }] }, { title: "身份数据", children: [{ title: "身份名称" }] },
+      { url:'/user/',title: "api接口权限", children: [{ title: "api权限名称" }, { title: "api权限url" }, { title: "api权限方法" }] },
+      { url:'/user',title: "身份和api接口关系", children: [{ title: "身份名称" }, { title: "api权限名称" }, { title: "api权限url" }, { title: "api权限方法" }] },
+      { url:'/user',title: "视图接口权限", children: [{ title: "视图权限名称" }, { title: "视图id" }] },
+      { url:'/user',title: "身份和视图权限关系", children: [{ title: "身份" }, { title: "视图名称" }, { title: "视图id" }] }
     ];
     return (
       <div className="exh">
@@ -127,13 +54,13 @@ class Exhibition extends React.Component<Props> {
         </div>
         <h4 className="exhTitle">{exhLists[currentIndex].title}</h4>
         <div className="exhPage">
-        <div className="exhHead">
-          <div className="exhNav">
-            {exhLists[currentIndex].children.map((el, i) => (
-              <span key={i}>{el.title}</span>
-            ))}
+          <div className="exhHead">
+            <div className="exhNav">
+              {exhLists[currentIndex].children.map((el, i) => (
+                <span key={i}>{el.title}</span>
+              ))}
+            </div>
           </div>
-        </div>
           {userData &&
             userData.map((element: any, index) => (
               <div className="exhPageHeader" key={index}>

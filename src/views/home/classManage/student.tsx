@@ -11,7 +11,9 @@ interface Props {
   location: any,
   exam_id: any,
   history: any,
-  delete: Function
+  delete: Function,
+  student_name: never,
+  key: any
 }
 
 @inject("classroom")
@@ -43,11 +45,8 @@ class Student extends React.Component<Props>{
     const studentList = await this.props.classroom.getMangerStudent();
     const room = await this.props.classroom.getMangerRoom();
     const grade = await this.props.classroom.getMangerGrade();
-
-    this.setState({ studentList, room, grade })
-
+    this.setState({ studentList, room, grade, arr: studentList })
     this.serach()
-
     this.onChange(1, 20)
   }
 
@@ -69,7 +68,7 @@ class Student extends React.Component<Props>{
         that.getStudent()
       },
       onCancel() {
-        console.log('Cancel');
+        // console.log('Cancel');
       },
     });
   }
@@ -116,6 +115,7 @@ class Student extends React.Component<Props>{
       this.setState({ list: arr })
     })
 
+
   }
 
   // 重置
@@ -123,9 +123,8 @@ class Student extends React.Component<Props>{
     this.setState({ student_name: '', room_text: '请选择班级号', grade_name: '班级名' })
   }
 
-  render() {
+  public render() {
     const { arr, list, room, grade, student_name, room_text, grade_name } = this.state
-    console.log(student_name,grade_name)
     return (
       <div className="studentBox">
         <h2>{this.props.location.state.title}</h2>
