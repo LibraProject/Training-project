@@ -16,22 +16,7 @@ interface UserFormProps extends FormComponentProps {
 @inject('classroom', 'question')
 @observer
 class ClassRoom extends React.Component<UserFormProps, any> {
-  state = {
-    questiontypes: [],
-    loading: false,
-    visible: false,
-    len: 0,
-    mangergrade: [],
-    mangerroom: [],
-    subject: [],
-    roomTitle: "添加班级",
-    disableFlag: false,
-    grade_name: '',
-    room_text: '',
-    subject_text: '',
-    type:1,
-    obj:{}
-  };
+  state = {questiontypes: [],loading: false,visible: false,len: 0,mangergrade: [],mangerroom: [],subject: [],roomTitle: "添加班级",disableFlag: false,grade_name: '',room_text: '',subject_text: '',type: 1,obj: {}  };
   componentDidMount() {
     this.getMangerRooms()
   }
@@ -56,39 +41,31 @@ class ClassRoom extends React.Component<UserFormProps, any> {
 
   // 显示 弹框
   showModal = () => {
-    this.setState({
-      visible: true,
-      roomTitle: "添加班级",
-      disableFlag: false,
-      grade_name: '',
-      room_text: '',
-      subject_text:'',
-      type:1,
-    });
+    this.setState({ visible: true, roomTitle: "添加班级", disableFlag: false, grade_name: '', room_text: '', subject_text: '', type: 1, });
   };
   handleCancel = () => {
     this.setState({ visible: false });
   };
 
-  UpdateMangerGrade = async (str:Object)=>{
+  UpdateMangerGrade = async (str: Object) => {
     const Updatemangergrade = await this.props.classroom.UpdateMangerGrade(str);
     message.success(Updatemangergrade)
     this.handleCancel()
     this.getMangerRooms()
-  } 
+  }
 
+  // 添加 && 修改提交
   handleSubmit = (e: any) => {
-    const {type,obj} = this.state
+    const { type, obj } = this.state
     e.preventDefault();
     this.props.form.validateFields((err: any, values: any) => {
       if (!err) {
-        console.log(values,'当前修改值')
-        if(type==1){
-          this.addMangerGrade(values) 
-        }else{
-          const newval = Object.assign(obj,values)
-          delete (newval.room_text)
-          delete (newval.subject_text)
+        if (type == 1) {
+          this.addMangerGrade(values)
+        } else {
+          const newval = Object.assign(obj, values)
+          // delete (newval.room_text)
+          // delete (newval.subject_text)
           this.UpdateMangerGrade(newval)
         }
       }
@@ -108,20 +85,8 @@ class ClassRoom extends React.Component<UserFormProps, any> {
 
   // 修改
   ChangeRoom = (item: any) => {
-    console.log(item,'当前')
-    this.setState({
-      visible: true,
-      roomTitle: "修改班级",
-      disableFlag: true,
-      grade_name: item.grade_name,
-      room_text: item.room_text,
-      subject_text: item.subject_text,
-      type:2,
-      obj:item
-    })
+    this.setState({ visible: true, roomTitle: "修改班级", disableFlag: true, grade_name: item.grade_name, room_text: item.room_text, subject_text: item.subject_text, type: 2, obj: item })
   }
-
-
 
   public render() {
     const { visible, mangergrade, mangerroom, subject, roomTitle, disableFlag, grade_name, room_text, subject_text } = this.state;
@@ -149,7 +114,6 @@ class ClassRoom extends React.Component<UserFormProps, any> {
               <tbody>
                 {
                   mangergrade && mangergrade.map((el: any, index: any) => <tr key={index}>
-
                     <td>{el.grade_name}</td>
                     <td>{el.subject_text}</td>
                     <td>{el.room_text}</td>

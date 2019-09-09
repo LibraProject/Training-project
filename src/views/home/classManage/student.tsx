@@ -11,7 +11,9 @@ interface Props {
   location: any,
   exam_id: any,
   history: any,
-  delete: Function
+  delete: Function,
+  student_name: never,
+  key: any
 }
 
 @inject("classroom")
@@ -25,7 +27,13 @@ class Student extends React.Component<Props>{
     grade: [],
     student_name: '',
     room_text: '',
-    grade_name: ''
+    grade_name: '',
+    sechList: {
+      student_name: '',
+      room_text: '',
+      grade_name: ''
+    },
+    list: []
   }
 
   componentDidMount() {
@@ -37,18 +45,17 @@ class Student extends React.Component<Props>{
     const studentList = await this.props.classroom.getMangerStudent();
     const room = await this.props.classroom.getMangerRoom();
     const grade = await this.props.classroom.getMangerGrade();
-
-    this.setState({ studentList, room, grade })
-
+    this.setState({ studentList, room, grade, arr: studentList })
+    this.serach()
     this.onChange(1, 20)
   }
 
   // 分页
   onChange = (page: any, pageSize: any) => {
-    const { studentList } = this.state
+    const { list } = this.state
     const start = (page - 1) * pageSize
     const end = page * pageSize
-    this.setState({ arr: studentList.slice(start, end) })
+    this.setState({ arr: list.slice(start, end) })
   }
 
   // 是否删除
@@ -61,61 +68,64 @@ class Student extends React.Component<Props>{
         that.getStudent()
       },
       onCancel() {
-        console.log('Cancel');
+        // console.log('Cancel');
       },
     });
   }
 
   // 学生姓名
   changeVal = (e: any) => {
-    this.setState({ student_name: e.target.value })
-    // console.log(e.target.value)
+    const { sechList } = this.state
+    sechList.student_name = e.target.value
+    this.setState({ student_name: e.target.value, sechList })
   };
 
   // 教室号
   chooesRoom = (value: string) => {
-    this.setState({ room_text: value })
-    // console.log(value)
+    const { sechList } = this.state
+    sechList.room_text = value
+    this.setState({ room_text: value, sechList })
   }
 
   // 班级名
   chooesClass = (value: string) => {
-    this.setState({ grade_name: value })
-    // console.log(value)
+    this.setState({ grade_name: value },()=>{
+      let {grade_name,sechList} = this.state
+      sechList.grade_name = grade_name
+      this.setState({sechList})
+    })
   }
 
 
   serach = () => {
-    const { student_name, room_text, grade_name, arr } = this.state
-    if (student_name && room_text && grade_name) {
-      const result = arr.filter((item: any) => item.student_name === student_name && item.room_text === room_text && item.grade_name === grade_name)
-      this.setState({ arr: result, studentList: result })
-    } else if (student_name && room_text) {
-      const result = arr.filter((item: any) => item.student_name === student_name && item.room_text === room_text)
-      this.setState({ arr: result, studentList: result })
-    }else if(student_name && grade_name){
-      const result = arr.filter((item: any) => item.student_name === student_name && item.grade_name === grade_name)
-      this.setState({ arr: result, studentList: result })
-    }else if(room_text && grade_name){
-      const result = arr.filter((item: any) => item.room_text === room_text && item.grade_name === grade_name)
-      this.setState({ arr: result, studentList: result })
-    }else if(student_name){
-      const result = arr.filter((item: any) => item.student_name === student_name)
-      this.setState({ arr: result, studentList: result })
-    }else if(room_text){
-      const result = arr.filter((item: any) => item.room_text === room_text)
-      this.setState({ arr: result, studentList: result })
-    }else if(grade_name){
-      const result = arr.filter((item: any) => item.grade_name === grade_name)
-      this.setState({ arr: result, studentList: result })
-    }else{
-      message.error('没有数据！');
-    }
-  } 
+    const { sechList, studentList } = this.state;
+    let result = studentList.filter((item: any) => {
+      let flag = true;
+      for (let key in sechList) {
+        if (sechList[key]) {
+          flag = item[key] == sechList[key] && flag;
+        }
+      }
+      return flag
+    })
+    this.setState({ arr: result }, () => {
+      let { arr } = this.state
+      this.setState({ list: arr })
+    })
+  }
+
+  // 重置
+  setrest = ()=>{
+    let {sechList} = this.state
+    sechList.student_name= ''
+    sechList.room_text = ''
+    sechList.grade_name = ''
+    this.setState({student_name:'',room_text:'',grade_name:'',sechList})
+    
+  }
 
   public render() {
-    const { arr, studentList, room, grade } = this.state
-    // console.log(arr)
+    const { arr, list, room, grade ,student_name} = this.state
     return (
       <div className="studentBox">
         <h2>{this.props.location.state.title}</h2>
@@ -123,7 +133,7 @@ class Student extends React.Component<Props>{
         <div className="studentTop">
           <Form layout="inline">
             <Form.Item>
-              <Input placeholder="输入学姓名" onChange={this.changeVal} />
+              <Input placeholder="输入学姓名" value={student_name} onChange={this.changeVal} />
             </Form.Item>
             <Form.Item label="">
               <Select defaultValue="请选择教室号" style={{ width: 180 }} onChange={this.chooesRoom}>
@@ -147,7 +157,7 @@ class Student extends React.Component<Props>{
               <Button type="primary" htmlType="submit" className="btn" onClick={this.serach}>搜索</Button>
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit" className="btn">重置</Button>
+              <Button type="primary"  className="btn" onClick={this.setrest}>重置</Button>
             </Form.Item>
           </Form>
         </div>
@@ -181,7 +191,7 @@ class Student extends React.Component<Props>{
           </table>
 
           <div className="page">
-            <Pagination showQuickJumper showSizeChanger defaultPageSize={20} total={studentList.length} onChange={this.onChange} />
+            <Pagination showQuickJumper showSizeChanger defaultPageSize={20} total={list.length} onChange={this.onChange} />
           </div>
 
         </div>
