@@ -24,8 +24,14 @@ class Student extends React.Component<Props>{
     room: [],
     grade: [],
     student_name: '',
-    room_text: '',
-    grade_name: ''
+    room_text: '请选择班级号',
+    grade_name: '班级名',
+    sechList: {
+      student_name: '',
+      room_text: '',
+      grade_name: ''
+    },
+    list: []
   }
 
   componentDidMount() {
@@ -40,15 +46,17 @@ class Student extends React.Component<Props>{
 
     this.setState({ studentList, room, grade })
 
+    this.serach()
+
     this.onChange(1, 20)
   }
 
   // 分页
   onChange = (page: any, pageSize: any) => {
-    const { studentList } = this.state
+    const { list } = this.state
     const start = (page - 1) * pageSize
     const end = page * pageSize
-    this.setState({ arr: studentList.slice(start, end) })
+    this.setState({ arr: list.slice(start, end) })
   }
 
   // 是否删除
@@ -68,54 +76,56 @@ class Student extends React.Component<Props>{
 
   // 学生姓名
   changeVal = (e: any) => {
-    this.setState({ student_name: e.target.value })
-    // console.log(e.target.value)
+    const { sechList } = this.state
+    sechList.student_name = e.target.value
+    this.setState({ student_name: e.target.value, sechList})
+
   };
 
   // 教室号
   chooesRoom = (value: string) => {
-    this.setState({ room_text: value })
-    // console.log(value)
+    const result: any = this.state.room.filter((item: any) => item.room_id === value)
+    const { sechList } = this.state
+    sechList.room_text = result[0].room_text
+    this.setState({ room_text: result[0].room_text, sechList })
+    
   }
 
   // 班级名
   chooesClass = (value: string) => {
-    this.setState({ grade_name: value })
-    // console.log(value)
+    const result: any = this.state.grade.filter((item: any) => item.grade_id === value)
+    const { sechList } = this.state
+    sechList.grade_name = result[0].room_text
+    this.setState({ grade_name: result[0].grade_name, sechList })
   }
 
-
+  // 搜索
   serach = () => {
-    const { student_name, room_text, grade_name, arr } = this.state
-    if (student_name && room_text && grade_name) {
-      const result = arr.filter((item: any) => item.student_name === student_name && item.room_text === room_text && item.grade_name === grade_name)
-      this.setState({ arr: result, studentList: result })
-    } else if (student_name && room_text) {
-      const result = arr.filter((item: any) => item.student_name === student_name && item.room_text === room_text)
-      this.setState({ arr: result, studentList: result })
-    }else if(student_name && grade_name){
-      const result = arr.filter((item: any) => item.student_name === student_name && item.grade_name === grade_name)
-      this.setState({ arr: result, studentList: result })
-    }else if(room_text && grade_name){
-      const result = arr.filter((item: any) => item.room_text === room_text && item.grade_name === grade_name)
-      this.setState({ arr: result, studentList: result })
-    }else if(student_name){
-      const result = arr.filter((item: any) => item.student_name === student_name)
-      this.setState({ arr: result, studentList: result })
-    }else if(room_text){
-      const result = arr.filter((item: any) => item.room_text === room_text)
-      this.setState({ arr: result, studentList: result })
-    }else if(grade_name){
-      const result = arr.filter((item: any) => item.grade_name === grade_name)
-      this.setState({ arr: result, studentList: result })
-    }else{
-      message.error('没有数据！');
-    }
-  } 
+    const { sechList, studentList } = this.state;
+    let result = studentList.filter((item: any) => {
+      let flag = true;
+      for (let key in sechList) {
+        if (sechList[key]) {
+          flag = item[key] == sechList[key] && flag;
+        }
+      }
+      return flag
+    })
+    this.setState({ arr: result }, () => {
+      let { arr } = this.state
+      this.setState({ list: arr })
+    })
 
-  public render() {
-    const { arr, studentList, room, grade } = this.state
-    // console.log(arr)
+  }
+
+  // 重置
+  reset = () => {
+    this.setState({ student_name: '', room_text: '请选择班级号', grade_name: '班级名' })
+  }
+
+  render() {
+    const { arr, list, room, grade, student_name, room_text, grade_name } = this.state
+    console.log(student_name,grade_name)
     return (
       <div className="studentBox">
         <h2>{this.props.location.state.title}</h2>
@@ -123,22 +133,22 @@ class Student extends React.Component<Props>{
         <div className="studentTop">
           <Form layout="inline">
             <Form.Item>
-              <Input placeholder="输入学姓名" onChange={this.changeVal} />
+              <Input placeholder="输入学姓名" value={student_name} onChange={this.changeVal} />
             </Form.Item>
             <Form.Item label="">
-              <Select defaultValue="请选择教室号" style={{ width: 180 }} onChange={this.chooesRoom}>
+              <Select value={room_text} style={{ width: 180 }} onChange={this.chooesRoom}>
                 {
-                  room.map((item: any) => {
-                    return <Option key={item.room_id} value={item.room_text}>{item.room_text}</Option>
+                  room.map((item: any, i) => {
+                    return <Option key={item.room_id}>{item.room_text}</Option>
                   })
                 }
               </Select>
             </Form.Item>
             <Form.Item label="">
-              <Select defaultValue="班级名" style={{ width: 180 }} onChange={this.chooesClass}>
+              <Select value={grade_name} style={{ width: 180 }} onChange={this.chooesClass}>
                 {
                   grade.map((item: any) => {
-                    return <Option key={item.grade_id} value={item.grade_name}>{item.grade_name}</Option>
+                    return <Option key={item.grade_id}>{item.grade_name}</Option>
                   })
                 }
               </Select>
@@ -147,7 +157,7 @@ class Student extends React.Component<Props>{
               <Button type="primary" htmlType="submit" className="btn" onClick={this.serach}>搜索</Button>
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit" className="btn">重置</Button>
+              <Button type="primary" htmlType="submit" className="btn" onClick={this.reset}>重置</Button>
             </Form.Item>
           </Form>
         </div>
@@ -181,7 +191,7 @@ class Student extends React.Component<Props>{
           </table>
 
           <div className="page">
-            <Pagination showQuickJumper showSizeChanger defaultPageSize={20} total={studentList.length} onChange={this.onChange} />
+            <Pagination showQuickJumper showSizeChanger defaultPageSize={20} total={list.length} onChange={this.onChange} />
           </div>
 
         </div>

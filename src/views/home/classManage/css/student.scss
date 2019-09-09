@@ -51,6 +51,10 @@ tbody tr {
   line-height: 40px;
 }
 
+tbody tr td{
+    cursor: pointer;
+}
+
 .page{
     margin: 16px 10px;
     float: right;

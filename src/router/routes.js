@@ -12,8 +12,12 @@ let Add=Loadable({
 
 let AddTest=Loadable({
     loader:()=>import('../views/home/exam/addTest.tsx'),
-    loading:Loading
-    
+    loading:Loading 
+})
+
+let AddQuestion=Loadable({
+    loader:()=>import('../views/home/test/addQuestion'),
+    loading:Loading 
 })
 
 let ClassRoom=Loadable({
@@ -89,6 +93,9 @@ const routes=[{
     },{
         component:AddTest,
         path:'/home/addTest'
+    },{
+        component:AddQuestion,
+        path:'/home/addQuestion/:id'
     },{
         component:ClassRoom,
         path:'/home/classRoom'

@@ -2,6 +2,8 @@ import * as React from 'react';
 import { observer, inject } from 'mobx-react';
 import './css/detail.css'
 
+const ReactMarkdown = require('react-markdown') 
+
 interface Props {
   question: any,
   match: any
@@ -46,15 +48,13 @@ class Detail extends React.Component<Props>{
                   </div>
                   <h4>{list[0]&&list[0].title}</h4>
                   <div>
-                    <div>
-                      <p>{list[0]&&list[0].questions_stem}</p>
-                    </div>
+                      <ReactMarkdown source={list[0]&&list[0].questions_stem}/>
                   </div>
               </div>
               <div className="right">
                 <h3>答案信息</h3>
                 <div>
-                  <p>{list[0]&&list[0].questions_answer}</p>
+                    <ReactMarkdown source={list[0]&&list[0].questions_answer}/>
                 </div>
               </div>
           </div>

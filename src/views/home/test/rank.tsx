@@ -101,6 +101,7 @@ class Rank extends React.Component<Props> {
 
   render() {
     const { questions_stem, questions_answer } = this.state
+    // console.log(this.props)
     return (
       <Layout className="rankquersition" >
         <h2>{this.props.location.state.title}</h2>
@@ -115,7 +116,7 @@ class Rank extends React.Component<Props> {
           </li>
           <li>
             <p>题目主题</p>
-            <div className="editorBox">
+            <div>
               <Editor value={questions_stem} onChange={this.handleChange.bind(this)} />
             </div>
           </li>
@@ -152,7 +153,7 @@ class Rank extends React.Component<Props> {
           <li>
             <p>答案信息</p>
 
-            <div className="editorBox">
+            <div>
               <Editor value={questions_answer} onChange={this.handleChangeQuestion.bind(this)} />
             </div>
           </li>

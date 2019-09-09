@@ -27,7 +27,7 @@ class Look extends React.Component<Props> {
     questions_type_id: '',
     subject_id: '',
     num: null,
-    show:false
+    show: false
   }
   componentDidMount() {
     this.getList()
@@ -38,13 +38,13 @@ class Look extends React.Component<Props> {
     const examtype = await this.props.question.examType()
     const questionType = await this.props.question.getQuestionsType()
     const subject = await this.props.question.subject()
-    
+
     this.setState({
       list: data,
       type: examtype,
       question: questionType,
       subject
-     
+
     })
   }
   //考试类型接口 获取数据
@@ -64,7 +64,7 @@ class Look extends React.Component<Props> {
     this.setState({
       subject_id: id,
       num: i,
-      show:false
+      show: false
     })
   }
   // 点击查询
@@ -81,15 +81,15 @@ class Look extends React.Component<Props> {
     this.props.history.push(`/home/detail/${id}`)
   }
 
-  setall = ()=>{
-    const {show} = this.state
+  setall = () => {
+    const { show } = this.state
     this.setState({
-      show:!show
+      show: !show
     })
   }
 
   render() {
-    const { num ,show} = this.state
+    const { num, show } = this.state
     return (
       <div className="lookquersition">
         <h2>{this.props.location.state.title}</h2>
@@ -98,10 +98,10 @@ class Look extends React.Component<Props> {
             <div className="seeExam-top-top">
               <p>课程类型：</p>
               <ul>
-                <li onClick={this.setall} className={show?'subactive' : ''}>All</li>
+                <li onClick={this.setall} className={show ? 'subactive' : ''}>All</li>
                 {
                   this.state.subject.map((item: any, i) => {
-                    return <li key={item.subject_id} className={show ? 'subactive' :( num === i ? 'subactive' : '')} onClick={() => { this.subClick(item.subject_id, i) }}>{item.subject_text}</li>
+                    return <li key={item.subject_id} className={show ? 'subactive' : (num === i ? 'subactive' : '')} onClick={() => { this.subClick(item.subject_id, i) }}>{item.subject_text}</li>
                   })
                 }
               </ul>
@@ -142,17 +142,22 @@ class Look extends React.Component<Props> {
         <div className="lkList">
           {
             this.state.list.map((item: any, i) => {
-              return <div key={i} onClick={() => { this.clickJump(item.questions_id) }}>
-                <h3>{item.title}</h3>
-                <Button>{item.questions_type_text}</Button>
-                <Button>{item.subject_text}</Button>
-                <Button>{item.exam_name}</Button>
-                <a href="/home/rank">编辑</a>
-                <div className="announce">{item.user_name}发布</div>
+              return <div key={i}>
+                <li onClick={() => { this.clickJump(item.questions_id) }}>
+                  <h3>{item.title}</h3>
+                  <Button>{item.questions_type_text}</Button>
+                  <Button>{item.subject_text}</Button>
+                  <Button>{item.exam_name}</Button>
+                  <div className="announce">{item.user_name}发布</div>
+                </li>
+                <li>
+                   <a onClick={()=>{this.props.history.replace(`/home/addQuestion/${item.questions_id}`)}}>编辑</a>
+                </li>
                 <hr />
               </div>
             })
           }
+
         </div>
       </div>
     );
