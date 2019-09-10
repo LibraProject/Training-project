@@ -100,15 +100,18 @@ const routes=[{
         path:'/home/addTest'
     },{
         component:AddQuestion,
+        // view_id: "63no9p-8y0k4",
         path:'/home/addQuestion/:id'
     },{
         component:ClassRoom,
+        // view_id: "63no9p-8y0k4",
         path:'/home/classRoom'
     },{
         component:Classify,
         path:'/home/classify'
     },{
         component:Detail,
+        // view_id: "63no9p-8y0k4",
         path:'/home/detail/:id'
     },{
         component:Edit,

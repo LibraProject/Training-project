@@ -10,6 +10,16 @@ export const getUserMsg = () => {
   return requerst.get("/user/user");
 };
 
+// 获取用户权限
+export let getViewAuthority = ()=>{
+  return requerst.get('/user/view_authority');
+}
+
+// 获取用户信息
+export let getUserInfo = ()=>{
+  return requerst.get('/user/userInfo');
+}
+
 // 展示用户信息 身份数据
 export const getUserIdentity = () => {
   return requerst.get("/user/identity");

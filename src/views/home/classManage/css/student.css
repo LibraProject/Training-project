@@ -57,3 +57,8 @@ tbody tr td {
   margin: 16px 10px;
   float: right;
 }
+
+.removeStudent:hover {
+  cursor: pointer;
+  color: red;
+}

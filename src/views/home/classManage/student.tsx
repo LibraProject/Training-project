@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
-import { Form, Select, Button, Pagination, Input, Modal, message } from "antd";
+import { Form, Select, Button, Pagination, Input, message } from "antd";
 import { FormComponentProps } from "antd/lib/form";
+import Isremove from '../../../components/dloag'
 import './css/student.css'
 const { Option } = Select;
-const { confirm } = Modal;
 interface UserFormProps extends FormComponentProps {
   classroom: any,
   location: any,
@@ -41,6 +41,7 @@ class Student extends React.Component<UserFormProps, any>{
 
   componentDidMount() {
     this.getStudent()
+
   }
 
   // 获取数据
@@ -55,24 +56,19 @@ class Student extends React.Component<UserFormProps, any>{
 
   // 分页
   onChange = (page: any, pageSize: any) => {
-    const { list } = this.state;
+    const {list}  = this.state;
+    console.log(this.state.arr)
+    console.log(this.state.list)
     let start = (page - 1) * pageSize, end = page * pageSize;
-    this.setState({ arr: list.slice(start, end) })
+    this.setState({ arr: list.slice(start, end)})
   }
 
-  // 是否删除
-  showConfirm = (id: string) => {
-    let that = this
-    confirm({
-      title: '你确定要删除这一项吗?',
-      async onOk() {
-        const studentList = await that.props.classroom.delMangerStudent(id);
-        that.getStudent()
-      },
-      onCancel() {
-        // console.log('Cancel');
-      },
-    });
+ 
+  // 删除功能
+  delMangerStudent = async (id:String)=>{
+    const studentList = await this.props.classroom.delMangerStudent(id);
+    message.success(studentList.msg)
+    this.getStudent()
   }
 
   //搜索功能
@@ -86,24 +82,26 @@ class Student extends React.Component<UserFormProps, any>{
   // 搜索模块返回搜索结果
   serach = (str: any) => {
     const { studentList } = this.state;
-
-    let result = studentList.filter((item: any) => {
-      let flag = true;
-      for (let key in str) {
-        if (str[key]) {
-          flag = item[key] == str[key] && flag;
+      let result = studentList.filter((item: any) => {
+        let flag = true;
+        for (let key in str) {
+          if (str[key]) {
+            flag = item[key] == str[key] && flag;
+          }
         }
-      }
-      return flag
-    })
-    this.setState({ arr: result, list: result })
+        return flag
+      })
+      this.setState({ arr: result, list: result })
+  }
+
+  removeStudent = (id:any)=>{
+    Isremove(this.delMangerStudent,id)
   }
 
   // 重置
   handleReset = () => {
     this.props.form.resetFields();
-  }
-
+  };
   public render() {
     const { getFieldDecorator } = this.props.form;
     const { room, grade, arr, list } = this.state
@@ -165,7 +163,7 @@ class Student extends React.Component<UserFormProps, any>{
                   <td>{el.grade_name}</td>
                   <td>{el.room_text}</td>
                   <td>{el.student_pwd}</td>
-                  <td>删除</td>
+                  <td className="removeStudent" onClick={()=>{this.removeStudent(el.student_id)}}>删除</td>
                 </tr>)
               }
 
@@ -173,7 +171,7 @@ class Student extends React.Component<UserFormProps, any>{
           </table>
 
           <div className="page">
-            <Pagination showQuickJumper showSizeChanger defaultPageSize={20} total={list.length} onChange={this.onChange} />
+            <Pagination showQuickJumper showSizeChanger defaultPageSize={15} total={list.length} onChange={this.onChange} />
           </div>
 
         </div>
