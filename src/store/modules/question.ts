@@ -1,5 +1,5 @@
 import { observable, action } from 'mobx'
-import { getQuestion, examType, getQuestionsType, subject, userInfo, addQuestion } from '../../service/index'
+import { getQuestion, examType, getQuestionsType, subject, userInfo, addQuestion, updateQuestion, addExam } from '../../service/index'
 
 class Question {
 
@@ -9,7 +9,7 @@ class Question {
         let exam_id = null,
             questions_type_id = null,
             subject_id = null,
-            questions_id=null
+            questions_id = null
         if (params !== undefined) {
             if (params.exam_id) {
                 exam_id = params.exam_id
@@ -24,7 +24,7 @@ class Question {
                 questions_id = params.questions_id
             }
         }
-        
+
         const result: any = await getQuestion({ exam_id, questions_type_id, subject_id, questions_id });
         // console.log('question...', result);
         return result.data
@@ -53,9 +53,22 @@ class Question {
         return result.data
     }
 
-    // 添加试题
+    // 添加试题分类
     @action async addQuestion(params: any): Promise<any> {
         const result: any = await addQuestion(params);
+        return result
+    }
+
+    // 更新试题
+    @action async updateQuestion(params: any): Promise<any> {
+        const result: any = await updateQuestion(params);
+        return result
+    }
+
+    
+    // 添加试题类型
+    @action async addExam (params: any): Promise<any> {
+        const result: any = await addExam (params);
         return result
     }
 }

@@ -22,15 +22,15 @@
     padding: 24px;
     margin: 0px 0px 20px;
     border-radius: 10px;
-    li{
-        height: 80px;
-        margin-bottom: 24px;
+    .time{
+        display: flex;
     }
     .span{
         display: inline-block;
         width: 24px;
         text-align: center;
-
+        margin-top: 38px;
+        font-size: 20px;
     }
 }
 

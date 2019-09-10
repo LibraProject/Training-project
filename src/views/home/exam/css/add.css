@@ -25,15 +25,16 @@
   border-radius: 10px;
 }
 
-.addBox li {
-  height: 80px;
-  margin-bottom: 24px;
+.addBox .time {
+  display: flex;
 }
 
 .addBox .span {
   display: inline-block;
   width: 24px;
   text-align: center;
+  margin-top: 38px;
+  font-size: 20px;
 }
 
 .opItem {

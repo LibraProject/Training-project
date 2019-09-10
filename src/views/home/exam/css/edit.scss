@@ -1,0 +1,27 @@
+*{
+    box-sizing: border-box;
+    list-style: none;
+}
+
+.editBox{
+    padding: 24px;
+    margin: 0px 0px 20px;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.content{
+    padding: 40px;
+    text-align: center;
+    .everyItem{
+        text-align: left;
+        border: 1px solid #ccc;
+        padding: 20px;
+        margin-bottom: 20px;
+        a{
+            float: right;
+        }
+        
+    }
+}
+

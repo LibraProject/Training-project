@@ -9,7 +9,8 @@ const { Option } = Select;
 
 interface Props {
   question: any,
-  location: any
+  location: any,
+  history:any
 }
 
 @inject('question')
@@ -89,10 +90,14 @@ class Rank extends React.Component<Props> {
   // 提交试题
   submitClick = async () => {
     const { title, questions_stem, questions_type_id, exam_id, subject_id, questions_answer, user_id } = this.state
-    const add = await this.props.question.addQuestion({ title, questions_stem, questions_type_id, exam_id, subject_id, questions_answer, user_id })
-    // console.log(add)
+    const add = await this.props.question.addExam({ title, questions_stem, questions_type_id, exam_id, subject_id, questions_answer, user_id })
+
     if (add.code === 1) {
       message.success(add.msg);
+      this.props.history.push({
+        pathname:'/home/look',
+        state:{title:'查看试题'}
+      })
     } else {
       message.error(add.msg);
     }
@@ -101,7 +106,6 @@ class Rank extends React.Component<Props> {
 
   render() {
     const { questions_stem, questions_answer } = this.state
-    // console.log(this.props)
     return (
       <Layout className="rankquersition" >
         <h2>{this.props.location.state.title}</h2>

@@ -35,6 +35,11 @@ let Detail=Loadable({
     loading:Loading
 })
 
+let Edit=Loadable({
+    loader:()=>import('../views/home/exam/edit.tsx'),
+    loading:Loading
+})
+
 let Exhibition=Loadable({
     loader:()=>import('../views/home/user/exhibition.tsx'),
     loading:Loading
@@ -105,6 +110,9 @@ const routes=[{
     },{
         component:Detail,
         path:'/home/detail/:id'
+    },{
+        component:Edit,
+        path:'/home/edit'
     },{
         component:Exhibition,
         path:'/home/exh'

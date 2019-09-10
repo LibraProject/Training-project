@@ -26,7 +26,18 @@ export const userInfo = ()=>{
     return request.get('/user/userInfo')
 }
 
-// 添加试题类型
+// 添加试题分类
 export const addQuestion = (params:object)=>{
     return request.get('/exam/insertQuestionsType',{params})
 }
+
+// 更新试题
+export const updateQuestion= (params:object)=>{
+  return request.put('/exam/questions/update',params)
+}
+
+// 添加试题类型
+export const addExam = (params:object)=>{
+  return request.post('/exam/questions',params)
+}
+
