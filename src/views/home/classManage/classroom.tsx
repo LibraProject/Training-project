@@ -145,7 +145,6 @@ class ClassRoom extends React.Component<UserFormProps, any> {
                 </Select>
               )}
             </Form.Item>
-
             <Form.Item label="课程名">
               {getFieldDecorator("subject_id", {
                 initialValue: `${subject_text}`,

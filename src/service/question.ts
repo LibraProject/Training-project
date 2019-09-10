@@ -5,7 +5,6 @@ export const getQuestion = (params: object) => {
   return request.get("/exam/questions/condition", { params });
 };
 
-
 // 考试类型获取成功
 export const examType = () => {
   return request.get("/exam/examType");

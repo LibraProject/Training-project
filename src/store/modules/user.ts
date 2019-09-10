@@ -1,5 +1,5 @@
 import { observable, action } from "mobx";
-import { login, getUserMsg } from "../../service/index";
+import { login, getUserInfo, getViewAuthority ,getUserMsg} from "../../service/index";
 import { setToken, removeToken } from "../../utils/index";
 // import {HttpInfo,HttpType,LoginForm} from '../../types/index'
 
@@ -13,10 +13,13 @@ if (window.localStorage.getItem("account")) {
 class User {
   @observable isLogin: boolean = false;
   @observable account: any = account;
+  // 声明用户信息
+  @observable userInfo: any = {};
 
+  // 用户视图权限
+  @observable viewAuthority: object[] = [];
   @action async login(form: any): Promise<any> {
     const result: any = await login(form);
-    // console.log('result...', result)
     if (result.code === 1) {
       // 判断用户名和密码
       if (form.remember) {
@@ -38,11 +41,26 @@ class User {
     removeToken();
   }
 
-  //  展示用户信息
-  @action async getUserMsg(): Promise<any>{
-      const result: any = await getUserMsg()
-      return result.data
+  // 获取用户信息
+  @action async getUserInfo(): Promise<any> {
+    let userInfo: any = await getUserInfo();
+    console.log('userInfo...', userInfo);
+    this.userInfo = userInfo.data;
+    this.getViewAuthority();
   }
+
+  //  展示用户信息
+  @action async getUserMsg(): Promise<any> {
+    const result: any = await getUserMsg()
+    return result.data
+  }
+  // 获取用户权限
+  @action async getViewAuthority(): Promise<any> {
+    let viewAuthority: any = await getViewAuthority();
+    console.log('viewAuthority...', viewAuthority);
+    this.viewAuthority = viewAuthority.data;
+  }
+
 }
 
 export default User;

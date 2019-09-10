@@ -1,13 +1,25 @@
 import React, { Component } from 'react'
-import RouteMap from './map'
+import RouterView from './map'
 import routes from './routes'
-import { BrowserRouter } from 'react-router-dom'
+// import {getToken} from './index'
+import store from '../store/index';
+// 引入导航守卫
+import guardInit,{filterView} from '../utils/permission';
+// history 路由
+import { createBrowserHistory } from "history";
+// 创建一个browser router
+import { Router } from "react-router";
 
+const history = createBrowserHistory()
+const myRoutes = filterView(routes, store.user.viewAuthority);
+// console.log(routes, store.user.viewAuthority)
+console.log('myRoutes...', myRoutes, routes);
+guardInit(history);
 class RouteView extends Component{
     render(){
-        return  <BrowserRouter>
-                <RouteMap routes={routes}/>
-        </BrowserRouter>
+        return   <Router history={history}>
+        <RouterView routes={myRoutes}/>
+      </Router>
     }
 }
 
