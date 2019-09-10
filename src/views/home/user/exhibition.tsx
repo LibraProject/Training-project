@@ -18,7 +18,7 @@ class Exhibition extends React.Component<Props> {
 
   getUserMsgs = async () => {
     const userData = await this.props.user.getUserMsg();
-    console.log(userData);
+    // console.log(userData);
     this.setState({ userData });
   };
 
@@ -28,7 +28,7 @@ class Exhibition extends React.Component<Props> {
 
   public render() {
     const { currentIndex, userData } = this.state;
-    console.log(userData);
+    // console.log(userData);
     const exhLists = [
       {
         title: "用户数据",

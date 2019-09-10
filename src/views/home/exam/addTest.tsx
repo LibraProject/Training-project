@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
-import { Form, Input, Select,DatePicker , Button, InputNumber, Layout } from "antd";
+import { Form, Input, Select, DatePicker, Button, InputNumber, Layout } from "antd";
 import { WrappedFormUtils } from 'antd/lib/form/Form'
 import './css/add.css'
 
@@ -13,10 +13,10 @@ interface Props {
   form: WrappedFormUtils
 }
 
-@inject('question')
+@inject('question', 'examMsg')
 @observer
 
-class AddTest extends React.Component<Props> {
+class AddTest extends React.Component<any> {
   constructor(props: Props) {
     super(props)
   }
@@ -32,7 +32,7 @@ class AddTest extends React.Component<Props> {
   getList = async () => {
     const data = await this.props.question.getQuestion();
     const examtype = await this.props.question.examType()
-    const subject=await this.props.question.subject()
+    const subject = await this.props.question.subject()
 
     this.setState({
       list: data,
@@ -41,71 +41,112 @@ class AddTest extends React.Component<Props> {
     })
   }
 
-  onChange=(value: any)=> {
-    console.log('changed', value);
-  }
-  startChange=(value: any, dateString: any)=> {
-    console.log('Selected Time: ', value);
-    console.log('Formatted Selected Time: ', dateString);
-  }
-  startOk=(value: any)=> {
-    console.log('onOk: ', value);
-  }
-  endChange=(value: any, dateString: any)=> {
-    console.log('Selected Time: ', value);
-    console.log('Formatted Selected Time: ', dateString);
-  }
-  endOk=(value: any)=> {
-    console.log('onOk: ', value);
+  handleSubmit = (e: any) => {
+    e.preventDefault();
+    this.props.form.validateFieldsAndScroll(async (err:any, values:any) => {
+      if (!err) {
+        const { start_time, end_time } = values
+        values.start_time = new Date(start_time._d).getTime()
+        values.end_time = new Date(end_time._d).getTime()
+        const add=await this.props.examMsg.foundExam(values)
+        this.props.history.push({pathname:'/home/edit',query:add})
+        console.log(add)
+      }
+    });
   }
 
   render() {
-    // console.log(this.state.question)
+    const { getFieldDecorator } = this.props.form;
     return (
       <Layout className="addquersition">
         <h2>{this.props.location.state.title}</h2>
 
-        <ul className="addBox">
-          <li>
-              <p className="opItem"><b>＊</b>试卷名称</p>
-              <p>
-                <Input className="ipt"/>
-              </p>
-          </li>
-          <li>
-              <p className="opItem"><b>＊</b>选择考试类型</p>
-              <Select defaultValue="" style={{ width: 130 }}>
+        <Form onSubmit={this.handleSubmit} className="addBox">
+          <Form.Item label="试卷名称">
+            {getFieldDecorator('title', {
+              rules: [
                 {
-                  this.state.type.map((item:any)=>{
-                    return <Option key={item.exam_id} value={item.exam_name}>{item.exam_name}</Option>
-                  })
+                  required: true,
+                  message: '请输入试卷名称！',
                 }
-              </Select>
-          </li>
-          <li>
-              <p className="opItem"><b>＊</b>选择课程</p>
-              <Select defaultValue="" style={{ width: 130 }}>
+              ],
+            })(<Input className="ipt" />)}
+          </Form.Item>
+
+          <Form.Item label="选择考试类型">
+            {getFieldDecorator('exam_id', {
+              rules: [
                 {
-                  this.state.question.map((item:any)=>{
-                    return <Option key={item.subject_id} value={item.subject_text}>{item.subject_text}</Option>
-                  })
+                  required: true,
+                  message: '请选择考试类型！',
                 }
-              </Select>
-          </li>
-          <li>
-              <p className="opItem"><b>＊</b>选择课程</p>
-              <InputNumber min={3} max={10}  onChange={this.onChange} />
-          </li>
-          <li>
-              <p className="opItem"><b>＊</b>考试时间</p>
-              <DatePicker showTime placeholder="开始时间" onChange={this.startChange} onOk={this.startOk} />
+              ],
+            })(<Select style={{ width: 130 }}>
+              {
+                this.state.type.map((item: any) => {
+                  return <Option key={item.exam_id}>{item.exam_name}</Option>
+                })
+              }
+            </Select>)}
+          </Form.Item>
+
+          <Form.Item label="选择课程">
+            {getFieldDecorator('subject_id', {
+              rules: [
+                {
+                  required: true,
+                  message: '请选择课程！',
+                }
+              ],
+            })(<Select style={{ width: 130 }}>
+              {
+                this.state.question.map((item: any) => {
+                  return <Option key={item.subject_id}>{item.subject_text}</Option>
+                })
+              }
+            </Select>)}
+          </Form.Item>
+
+          <Form.Item label="设置题量">
+            {getFieldDecorator('number', {
+              rules: [
+                {
+                  required: true,
+                  message: '请设置题量！',
+                }
+              ],
+            })(<InputNumber min={3} max={10} />)}
+          </Form.Item>
+          <div className="time">
+            <Form.Item label="考试时间">
+              {getFieldDecorator('start_time', {
+                rules: [
+                  {
+                    required: true,
+                    message: '请选择考试时间！',
+                  }
+                ],
+              })(<DatePicker showTime placeholder="开始时间" />)}
+            </Form.Item>
+            <Form.Item>
               <span className="span">-</span>
-              <DatePicker showTime placeholder="结束时间" onChange={this.endChange} onOk={this.endOk} />
-          </li>
-          <li>
-              <Button type="primary" className="addBtn">创建试卷</Button>
-          </li>
-        </ul>
+            </Form.Item>
+            <Form.Item label="考试时间">
+              {getFieldDecorator('end_time', {
+                rules: [
+                  {
+                    required: true,
+                    message: '请选择考试时间！',
+                  }
+                ],
+              })(<DatePicker showTime placeholder="结束时间" />)}
+            </Form.Item>
+          </div>
+
+          <Form.Item>
+            <Button type="primary" htmlType="submit" className="addBtn">创建试卷</Button>
+          </Form.Item>
+        </Form>
 
       </Layout>
     );
@@ -113,4 +154,4 @@ class AddTest extends React.Component<Props> {
 
 }
 
-export default AddTest;
+export default Form.create()(AddTest);
