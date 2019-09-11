@@ -33,6 +33,7 @@
 }
 
 .exhList span:hover {
+  cursor: pointer;
   color: #1890ff;
 }
 

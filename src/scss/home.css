@@ -25,4 +25,14 @@
 .logo img{
   height: 32px;
 }
+.showUser{
+  width:64px;
+  height: 64px;
+  overflow: hidden;
+}
+.showUser .usePrice{
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+}
 

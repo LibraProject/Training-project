@@ -13,7 +13,7 @@ import { Router } from "react-router";
 const history = createBrowserHistory()
 const myRoutes = filterView(routes, store.user.viewAuthority);
 // console.log(routes, store.user.viewAuthority)
-console.log('myRoutes...', myRoutes, routes);
+// console.log('myRoutes...', myRoutes, routes);
 guardInit(history);
 class RouteView extends Component{
     render(){

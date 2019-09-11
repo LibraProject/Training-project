@@ -1,5 +1,5 @@
 import { observable, action } from "mobx";
-import { login, getUserInfo, getViewAuthority ,getUserMsg} from "../../service/index";
+import { login, getUserInfo, getViewAuthority, getUserMsg ,getAllUser} from "../../service/index";
 import { setToken, removeToken } from "../../utils/index";
 // import {HttpInfo,HttpType,LoginForm} from '../../types/index'
 
@@ -44,7 +44,7 @@ class User {
   // 获取用户信息
   @action async getUserInfo(): Promise<any> {
     let userInfo: any = await getUserInfo();
-    console.log('userInfo...', userInfo);
+    // console.log('userInfo...', userInfo);
     this.userInfo = userInfo.data;
     this.getViewAuthority();
   }
@@ -57,8 +57,15 @@ class User {
   // 获取用户权限
   @action async getViewAuthority(): Promise<any> {
     let viewAuthority: any = await getViewAuthority();
-    console.log('viewAuthority...', viewAuthority);
+    // console.log('viewAuthority...', viewAuthority);
     this.viewAuthority = viewAuthority.data;
+  }
+
+  // 获取用户权限
+  @action async getAllUser(params:string): Promise<any> {
+    let result: any = await getAllUser(params);
+    console.log(result)
+    return result.data
   }
 
 }
