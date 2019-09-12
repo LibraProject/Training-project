@@ -11,7 +11,7 @@ class Exhibition extends React.Component<Props> {
   state = {
     userData: [],
     currentIndex: 0,
-    path: '/user/user'
+    path:'/user/user'
   };
   componentDidMount() {
     // console.log(this.props)
@@ -19,13 +19,12 @@ class Exhibition extends React.Component<Props> {
   }
 
   // 获取所有用户信息
-  getUserMsgs = async (str: string) => {
+  getUserMsgs = async (str:string) => {
     const userData = await this.props.user.getAllUser(str);
-    console.log(userData)
     this.setState({ userData });
   };
 
-  handIndex = (ind: number, str: string) => {
+  handIndex = (ind: number,str:string) => {
     this.setState({ currentIndex: ind });
     this.getUserMsgs(str)
   };
@@ -33,28 +32,20 @@ class Exhibition extends React.Component<Props> {
   public render() {
     const { currentIndex, userData } = this.state;
     const exhLists = [
-      {type:0,tabTitle:"用户数据",children:[{title:'用户名',dataIndex:"user_name",key:"user_name"},{title:'密码',dataIndex:"user_pwd",key:"user_pwd"},{title:'身份',dataIndex:"identity_text",key:"identity_text"}],url:"/user/user"},
-      {type:1,tabTitle:"身份数据",children:[{title:'身份名称',dataIndex:"identity_text",key:"identity_text"}],url:"/user/identity"},
-      {type:2,tabTitle:"API接口权限",children:[{title:'api权限名称',dataIndex:"api_authority_text",key:"api_authority_text"},
-      {title:'api权限url',dataIndex:"api_authority_url",key:"api_authority_url"},
-      {title:'api权限方法',dataIndex:"api_authority_method",key:"api_authority_method"}],url:"/user/api_authority"},
-      {type:3,tabTitle:"身份和api接口关系",children:[{title:'身份名称',dataIndex:"identity_text",key:"identity_text"},
-      {title:'api权限名称',dataIndex:"api_authority_text",key:"api_authority_text"},
-      {title:'api权限url',dataIndex:"api_authority_url",key:"api_authority_url"},
-      {title:'api权限方法',dataIndex:"api_authority_method",key:"api_authority_method"}],url:'/user/identity_api_authority_relation'},
-      {type:4,tabTitle:"视图接口权限",children:[{title:'视图权限名称',dataIndex:"view_authority_text",key:"view_authority_text"},
-      {title:'视图id',dataIndex:"view_id",key:"view_id"}],url:'/user/view_authority'},
-      {type:5,tabTitle:"身份和视图权限关系",children:[{title:'身份',dataIndex:"identity_text",key:"identity_text"},
-      {title:'视图名称',dataIndex:"view_authority_text",key:"view_authority_text"},
-      {title:'视图id',dataIndex:"view_id",key:"view_id"}],url:"/user/identity_view_authority_relation"}
+      { url: '/user/user', title: "用户数据", children: [{ title: "用户名" }, { title: "密码" }, { title: "身份" }] }, 
+      { url: '/user/identity', title: '身份数据', children: [{ title: '身份名称' }] },
+      { url: '/user/api_authority', title: "api接口权限", children: [{ title: "api权限名称" }, { title: "api权限url" }, { title: "api权限方法" }] },
+      { url: '/user/identity_api_authority_relation', title: "身份和api接口关系", children: [{ title: "身份名称" }, { title: "api权限名称" }, { title: "api权限url" }, { title: "api权限方法" }] },
+      { url: '/user/view_authority', title: "视图接口权限", children: [{ title: "视图权限名称" }, { title: "视图id" }] },
+      { url: '/user/identity_view_authority_relation', title: "身份和视图权限关系", children: [{ title: "身份" }, { title: "视图名称" }, { title: "视图id" }] }
     ];
     return (
       <div className="exh">
         <h2>{this.props.location.state.title}</h2>
         <div className="exhList">
-          {exhLists.map((ele, ind) => (<span key={ind} className={ind === currentIndex ? "exhListActive" : ""} onClick={() => { this.handIndex(ind, ele.url); }}>{ele.tabTitle}</span>))}
+          {exhLists.map((ele, ind) => (<span key={ind} className={ind === currentIndex ? "exhListActive" : ""} onClick={() => { this.handIndex(ind,ele.url); }}>{ele.title}</span>))}
         </div>
-        <h4 className="exhTitle">{exhLists[currentIndex].tabTitle}</h4>
+        <h4 className="exhTitle">{exhLists[currentIndex].title}</h4>
         <div className="exhPage">
           <div className="exhHead">
             <div className="exhNav">
