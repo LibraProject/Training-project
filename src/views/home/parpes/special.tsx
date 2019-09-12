@@ -5,7 +5,8 @@ import "./css/special.css";
 
 interface Props {
   manger: any,
-  location:any
+  location:any,
+  history:any
 }
 
 @inject("manger")
@@ -64,7 +65,9 @@ class Special extends React.Component<Props> {
                     <td></td>
                     <td>{el.room_text}</td>
                     <td>{el.questions_type_text}</td>
-                    <td><a className="last">批卷</a></td>
+                    <td><a className="last" onClick={()=>{
+                      this.props.history.replace({pathname:'/home/correct',state:{id:el.grade_id}})
+                    }}>批卷</a></td>
                   </tr>
                 ))}
               </tbody>

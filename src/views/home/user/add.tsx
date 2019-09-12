@@ -1,15 +1,23 @@
 import * as React from "react";
 import { Form, Button, Input, Select, Radio } from "antd";
 import "./css/add.css";
+
 const { Option } = Select;
+
 class Add extends React.Component {
   state = {
     size: "large"
   };
+
   handleSizeChange = (e: any) => {
     this.setState({ size: e.target.value });
   };
-  public render() {
+
+  addUser = (value: any) => {
+    console.log(value)
+  }
+
+  render() {
     const { size } = this.state;
     return (
       <div className="add">
@@ -23,7 +31,7 @@ class Add extends React.Component {
                   <Radio.Button value="default">更新用户</Radio.Button>
                 </Radio.Group>
               </div>
-              <div className={size==="large" ? 'show':'hide'}>
+              <div className={size === "large" ? 'show' : 'hide'}>
                 <div>
                   <Input placeholder="请输入用户名" />
                   <Input placeholder="请输入密码" />
@@ -41,9 +49,9 @@ class Add extends React.Component {
                 </div>
               </div>
 
-              <div className={size==="default" ? 'show':'hide'}>
+              <div className={size === "default" ? 'show' : 'hide'}>
                 <div>
-                  
+
                   <Select placeholder="请选择身份id" style={{ width: 180 }}>
                     <Option value="zhaoxiaoru">zhaoxiaoru</Option>
                     <Option value="liuyu">liuyu</Option>

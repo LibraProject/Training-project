@@ -1,5 +1,5 @@
 import { observable, action } from 'mobx'
-import { approval } from '../../service/index'
+import { approval,student } from '../../service/index'
 
 class Manger {
 
@@ -8,6 +8,13 @@ class Manger {
         const result: any = await approval();
         // console.log(result)
         return result.data
+    }
+
+    // 获取学生试卷列表
+    @action async student(params:any): Promise<any> {
+        const result: any = await student(params);
+        // console.log(result)
+        return result
     }
 
 }
