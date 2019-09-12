@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
-import { Form, Select, Button, Icon, Layout } from "antd";
+import { Form, Select, Button, Icon, Layout, Empty } from "antd";
 import './css/look.css'
 
 const { Option } = Select;
@@ -89,7 +89,8 @@ class Look extends React.Component<Props> {
   }
 
   render() {
-    const { num, show } = this.state
+    const { num, show, list } = this.state
+  
     return (
       <div className="lookquersition">
         <h2>{this.props.location.state.title}</h2>
@@ -141,7 +142,7 @@ class Look extends React.Component<Props> {
 
         <div className="lkList">
           {
-            this.state.list.map((item: any, i) => {
+            list.length===0?<Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>:list.map((item: any, i) => {
               return <div key={i}>
                 <li onClick={() => { this.clickJump(item.questions_id) }}>
                   <h3>{item.title}</h3>
@@ -151,7 +152,7 @@ class Look extends React.Component<Props> {
                   <div className="announce">{item.user_name}发布</div>
                 </li>
                 <li>
-                   <a onClick={()=>{this.props.history.replace(`/home/addQuestion/${item.questions_id}`)}}>编辑</a>
+                  <a onClick={() => { this.props.history.replace(`/home/addQuestion/${item.questions_id}`) }}>编辑</a>
                 </li>
                 <hr />
               </div>

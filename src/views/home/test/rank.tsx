@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
 import { Input, Select, Button, Layout, message } from "antd";
-// import { WrappedFormUtils } from 'antd/lib/form/Form'
 import Editor from 'for-editor'
 import './css/rank.css'
 

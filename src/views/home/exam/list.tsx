@@ -13,39 +13,6 @@ interface Props {
   history: any
 }
 
-const columns = [
-  {
-    title: '试卷信息',
-    dataIndex: 'title',
-    key: 'title',
-  },
-  {
-    title: '班级',
-    dataIndex: 'grade_name',
-    key: 'grade_name',
-  },
-  {
-    title: '创始人',
-    dataIndex: 'user_name',
-    key: 'user_name',
-  },
-  {
-    title: '开始时间',
-    dataIndex: 'start_time',
-    key: 'start_time',
-  },
-  {
-    title: '结束时间',
-    dataIndex: 'end_time',
-    key: 'end_time',
-  },
-  {
-    title: '操作',
-    dataIndex: 'detail',
-    key: 'detail',
-  }
-];
-
 @inject('question', 'examMsg')
 @observer
 
@@ -59,7 +26,47 @@ class List extends React.Component<Props>{
     subject: [],
     arr: ['全部', '进行中', '已结束'],
     num: 0,
-    examList: []
+    examList: [],
+    columns:[
+      {
+        title: '试卷信息',
+        dataIndex: 'title',
+        key: 'title',
+      },
+      {
+        title: '班级',
+        dataIndex: 'grade_name',
+        key: 'grade_name',
+      },
+      {
+        title: '创始人',
+        dataIndex: 'user_name',
+        key: 'user_name',
+      },
+      {
+        title: '开始时间',
+        dataIndex: 'start_time',
+        key: 'start_time',
+      },
+      {
+        title: '结束时间',
+        dataIndex: 'end_time',
+        key: 'end_time',
+      },
+      {
+        title: '操作',
+        dataIndex: 'detail',
+        key: 'detail',
+      render: (text:any,record:any) => {
+          return<a onClick={()=>{this.clickDetail(text,record)}}>{text}</a>
+      },
+      }
+    ]
+  }
+
+  clickDetail=(text: any,record: any)=>{
+    console.log(text,record)
+    this.props.history.push({pathname:`/home/detail/${record.exam_exam_id}`,state:{title:'试卷详情'}})
   }
 
   componentDidMount() {
@@ -90,8 +97,10 @@ class List extends React.Component<Props>{
     this.setState({ num: i })
   }
 
-  public render() {
-    const { num, arr, type, subject, examList } = this.state
+  render() {
+    
+
+    const { num, arr, type, subject, examList,columns } = this.state
     return (
       <div>
         <h2>{this.props.location.state.title}</h2>
@@ -116,7 +125,7 @@ class List extends React.Component<Props>{
               </Select>
             </Form.Item>
             <Form.Item className="formIten">
-              <Button type="primary" htmlType="submit" className="btn">
+              <Button type="primary" htmlType="submit" className="btn"> 
                 <Icon type="search" />
                 查询
                 </Button>
