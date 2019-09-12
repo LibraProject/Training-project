@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
-import { Form, Select, Button, Pagination, Input, message } from "antd";
+import { Form, Select, Button, Pagination, Input, message, Empty } from "antd";
 import { FormComponentProps } from "antd/lib/form";
 import Isremove from '../../../components/dloag'
 import './css/student.css'
@@ -57,8 +57,6 @@ class Student extends React.Component<UserFormProps, any>{
   // 分页
   onChange = (page: any, pageSize: any) => {
     const {list}  = this.state;
-    console.log(this.state.arr)
-    console.log(this.state.list)
     let start = (page - 1) * pageSize, end = page * pageSize;
     this.setState({ arr: list.slice(start, end)})
   }
@@ -142,6 +140,9 @@ class Student extends React.Component<UserFormProps, any>{
 
           </Form>
         </div>
+
+        {
+            arr.length===0?<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} style={{backgroundColor:'#fff',height:'200px',lineHeight:'200px'}}/>:        
         <div>
 
           <table>
@@ -171,10 +172,12 @@ class Student extends React.Component<UserFormProps, any>{
           </table>
 
           <div className="page">
-            <Pagination showQuickJumper showSizeChanger defaultPageSize={15} total={list.length} onChange={this.onChange} />
+            <Pagination showQuickJumper showSizeChanger defaultPageSize={20} total={list.length} onChange={this.onChange} />
           </div>
 
         </div>
+        }
+
       </div>
     );
   }

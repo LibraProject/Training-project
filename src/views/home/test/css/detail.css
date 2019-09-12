@@ -53,9 +53,22 @@
   word-wrap: break-word;
 }
 
+.left-item {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
 .right {
   width: 45%;
   height: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 24px;
+}
+
+.right-list {
+  width: 45%;
   background-color: #fff;
   border-radius: 10px;
   padding: 24px;

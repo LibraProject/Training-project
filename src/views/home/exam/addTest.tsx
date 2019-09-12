@@ -4,7 +4,6 @@ import { Form, Input, Select, DatePicker, Button, InputNumber, Layout } from "an
 import { WrappedFormUtils } from 'antd/lib/form/Form'
 import './css/add.css'
 
-const { RangePicker } = DatePicker;
 const { Option } = Select;
 
 interface Props {
@@ -26,6 +25,7 @@ class AddTest extends React.Component<any> {
     question: []
   }
   componentDidMount() {
+    console.log(this.props)
     this.getList()
   }
 
@@ -49,8 +49,7 @@ class AddTest extends React.Component<any> {
         values.start_time = new Date(start_time._d).getTime()
         values.end_time = new Date(end_time._d).getTime()
         const add=await this.props.examMsg.foundExam(values)
-        this.props.history.push({pathname:'/home/edit',query:add})
-        console.log(add)
+        this.props.history.push({pathname:'/home/edit',state:add})
       }
     });
   }
