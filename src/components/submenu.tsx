@@ -1,8 +1,15 @@
 import * as React from "react";
 import { Icon, Layout, Menu } from "antd";
 import { NavLink } from "react-router-dom";
+import {injectIntl} from 'react-intl'
+
 const { SubMenu } = Menu;
 const { Sider } = Layout;
+
+interface Props{
+  user?: any,
+  intl?: any
+}
 
 const list = [
   {
@@ -98,8 +105,8 @@ const list = [
 ];
 
 
-class Item extends React.Component {
-  public render() {
+class Item extends React.Component<Props> {
+  render() {
     return (
       <Sider width={200}>
         <Menu
@@ -143,4 +150,5 @@ class Item extends React.Component {
   }
 }
 
+// export default injectIntl(Item);
 export default Item;

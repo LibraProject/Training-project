@@ -6,3 +6,8 @@ export let approval = ()=>{
 }
 
 
+// 获取学生试卷列表
+export let student = (params:any)=>{
+    console.log(params)
+    return request.get('/exam/student',{params})
+}

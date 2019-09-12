@@ -30,6 +30,11 @@ let Classify=Loadable({
     loading:Loading
 })
 
+let Correct=Loadable({
+    loader:()=>import('../views/home/parpes/correctExam.tsx'),
+    loading:Loading
+})
+
 let Detail=Loadable({
     loader:()=>import('../views/home/test/detial.tsx'),
     loading:Loading
@@ -109,6 +114,9 @@ const routes=[{
     },{
         component:Classify,
         path:'/home/classify'
+    },{
+        component:Correct,
+        path:'/home/correct'
     },{
         component:Detail,
         // view_id: "63no9p-8y0k4",
