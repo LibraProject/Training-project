@@ -26,13 +26,52 @@
   height: 32px;
 }
 .showUser{
-  width:64px;
+  display: flex;
+  align-items: center;
   height: 64px;
-  overflow: hidden;
+  position: relative;
+  right: 100px;
 }
 .showUser .usePrice{
-  width: 80%;
-  height: 80%;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
+  margin-right: 20px;
 }
+.posuser{
+  position: absolute;
+  top:67px;
+  left: -4px;
+  width: 141px;
+  background:#ffffff;
+  display: none;
+  position: absolute;
+  top: 65px;
+  z-index: 90;
+  border-radius: 5px;
+}
+.showUser:hover .posuser{
+  display: block;
+}
+.showUser .posuser p{
+  height: 35px;
+ line-height: 35px;
+  font-size: 12px;
+  text-indent: 15px;
+  margin: 0;
+  padding: 0;
+}
+.hr{
+  height: 0.5px;
+  width: 80%;
+  border: 0.5px solid #ccc;
+  margin: 3px  auto;
+}
+
+.showUser .posuser p:hover{
+  background: #f0f2f5;
+  cursor: pointer;
+  color: #ccc;
+}
+
 
