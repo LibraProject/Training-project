@@ -1,5 +1,5 @@
 import { observable, action } from "mobx";
-import { login, getUserInfo, getViewAuthority, getUserMsg ,getAllUser} from "../../service/index";
+import { login, getUserInfo, getViewAuthority, getUserMsg, getAllUser } from "../../service/index";
 import { setToken, removeToken } from "../../utils/index";
 // import {HttpInfo,HttpType,LoginForm} from '../../types/index'
 
@@ -15,7 +15,8 @@ class User {
   @observable account: any = account;
   // 声明用户信息
   @observable userInfo: any = {};
-
+  // 用户头像地址
+  @observable avatar: string = '';
   // 用户视图权限
   @observable viewAuthority: object[] = [];
   @action async login(form: any): Promise<any> {
@@ -27,7 +28,6 @@ class User {
       } else {
         window.localStorage.removeItem("account");
       }
-
       // 判断七天免登陆
       if (form.autoLogin) {
         setToken(result.token);
@@ -62,10 +62,15 @@ class User {
   }
 
   // 获取用户权限
-  @action async getAllUser(params:string): Promise<any> {
+  @action async getAllUser(params: string): Promise<any> {
     let result: any = await getAllUser(params);
     console.log(result)
     return result.data
+  }
+
+  // 修改用户头像
+  @action changeAvatar(avatar: string): void {
+    this.avatar = avatar;
   }
 
 }

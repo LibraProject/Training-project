@@ -136,6 +136,7 @@ class List extends React.Component<Props>{
         <Layout className="listFoot">
           <div className="bom-head">
             <h4>试卷列表</h4>
+            {console.log(examList)}
             <div className="btn-right">
               {
                 arr.map((item, i) => {

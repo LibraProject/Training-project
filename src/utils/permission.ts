@@ -18,6 +18,7 @@ function beforeEach(history: any){
         // 转换 useInfo判断是否登录
         if(!Object.keys(userInfo).length){
             store.user.getUserInfo();
+            history.replace('/home');
         }
     }else{
          // 去登陆页面
