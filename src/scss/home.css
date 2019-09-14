@@ -73,5 +73,26 @@
   cursor: pointer;
   color: #ccc;
 }
-
-
+.ant-modal-body{
+  position: relative;
+}
+.schedule{
+  position: absolute;
+  left: 25px;
+  top: 10px;
+  width: 102px;
+  height: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+.schedule_child{
+  width: 0px;
+  height: 8px;
+  border-radius: 10px;
+  background: #1ce49a
+}
+.schedPos{
+  position: absolute;
+  left: 105px;
+  top: -6px;
+}

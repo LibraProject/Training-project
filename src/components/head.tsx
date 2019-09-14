@@ -2,7 +2,9 @@ import * as React from 'react';
 import { Layout, Modal, Form, Icon, Input, Button, Upload, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form'
 interface UserFormProps extends FormComponentProps {
-
+  schedullen:any,
+  style:any
+  len:any
 }
 function getBase64(img: any, callback: any) {
   const reader = new FileReader();
@@ -23,7 +25,7 @@ function beforeUpload(file: any) {
 }
 const { Header } = Layout;
 class Head extends React.Component<UserFormProps, any> {
-  state = { visible: false, loading: false, imageUrl: '' };
+  state = { visible: false, loading: false, imageUrl: '',len:0,schedule:false};
 
   showModal = () => {
     this.setState({
@@ -48,21 +50,24 @@ class Head extends React.Component<UserFormProps, any> {
   };
 
   handleChange = (info: any) => {
-    console.log(info.file.percent)
-    // if (info.file.status === 'uploading') {
-    //   this.setState({ loading: true });
-    //   return;
-    // }
-    // if (info.file.status === 'done') {
-    //   // Get this url from response in real world.
-    //   getBase64(info.file.originFileObj, (imageUrl: any) =>
-    //     this.setState({
-    //       imageUrl,
-    //       loading: false,
+    this.setState({schedule:true})
+    this.setState({len:info.file.percent})
+    console.log(info)
+    if (info.file.status === 'uploading') {
+      this.setState({ loading: true });
+      return;
+    }
+    if (info.file.status === 'done') {
+      this.setState({schedule:false})
+      getBase64(info.file.originFileObj, (imageUrl: any) =>
+    
+        this.setState({
+          imageUrl,
+          loading: false,
 
-    //     }),
-    //   );
-    // }
+        }),
+      );
+    }
   };
 
   handleSubmit = (e: any) => {
@@ -129,6 +134,11 @@ class Head extends React.Component<UserFormProps, any> {
                   />,
                 )}
               </Form.Item>
+              {this.state.schedule && <div className="schedule">
+                <span className="schedPos">{this.state.len && Math.floor(this.state.len)+"%"}</span>
+                  <div className="schedule_child" style={{width:this.state.len+'%'}}>
+                  </div>
+              </div>}
               <Form.Item>
                 {getFieldDecorator('password', {
                   rules: [{ required: true, message: 'Please input your Password!' }],
