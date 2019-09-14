@@ -1,14 +1,16 @@
 import * as React from "react";
 import { Icon, Layout, Menu } from "antd";
 import { NavLink } from "react-router-dom";
+
 import {injectIntl} from 'react-intl'
+import routes from '../router/routes'
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 
 interface Props{
   user?: any,
-  intl?: any
+  intl?: any,
 }
 
 const list = [
@@ -107,6 +109,10 @@ const list = [
 
 class Item extends React.Component<Props> {
   render() {
+    // let {formatMessage} = this.props.intl;
+    // let {children}=routes[1]
+    // const route=children&&children.filter((item,i)=>item.index===i)
+    // console.log(routes,route)
     return (
       <Sider width={200}>
         <Menu
@@ -116,7 +122,7 @@ class Item extends React.Component<Props> {
           defaultOpenKeys={["sub1"]}
           style={{ height: "100%", borderRight: 0 }}
         >
-          {list.map((item, i) => {
+          {list.map((item) => {
             return (
               <SubMenu
                 key={item.id}
@@ -127,16 +133,17 @@ class Item extends React.Component<Props> {
                   </span>
                 }
               >
-                {item.children.map(item => {
+                {item.children.map((value,i) => {
                   return (
-                    <Menu.Item key={item.id}>
+                    <Menu.Item key={i}>
                       <NavLink
                         to={{
-                          pathname: item.path,
-                          state: { title: item.title }
+                          pathname: value.path,
+                          state: { title: value.title }
                         }}
                       >
-                        {item.title}
+                        {value.title}
+                        {/* {value.title?formatMessage({id:value.title}):value.path} */}
                       </NavLink>
                     </Menu.Item>
                   );

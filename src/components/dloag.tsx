@@ -4,7 +4,6 @@
  * 此函数仅删除使用
 **/
 
-import * as React from "react";
 import { Modal } from 'antd';
 const { confirm } = Modal;
 function showDeleteConfirm(fn:any,id:any) {

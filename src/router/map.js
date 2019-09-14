@@ -12,11 +12,9 @@ const RouterView = ({ routes }) => {
 						</item.component>
 						: <item.component {...props}></item.component>
 				}}></Route>
-				: <Redirect key={item.from} {...item}></Redirect>
+				: <Redirect key={item.from} from={item.from} to={item.to}></Redirect>
 		})}
 	</Switch>
-
-
 }
 
 export default RouterView

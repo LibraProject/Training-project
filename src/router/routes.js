@@ -99,52 +99,67 @@ const routes=[{
 },{
     children:[{
         component:Add,
-        path:'/home/add'
+        path:'/home/add',
+        title:'addUser'
     },{
         component:AddTest,
-        path:'/home/addTest'
+        path:'/home/addTest',
+        title:'addTest'
     },{
         component:AddQuestion,
         // view_id: "63no9p-8y0k4",
-        path:'/home/addQuestion/:id'
+        path:'/home/addQuestion/:id',
+        title:'detail'
     },{
         component:ClassRoom,
         // view_id: "63no9p-8y0k4",
-        path:'/home/classRoom'
+        path:'/home/classRoom',
+        title:'classRoom'
     },{
         component:Classify,
-        path:'/home/classify'
+        path:'/home/classify',
+        title:'classify'
     },{
         component:Correct,
-        path:'/home/correct'
+        path:'/home/correct',
+        title:'correct'    
     },{
         component:Detail,
         // view_id: "63no9p-8y0k4",
-        path:'/home/detail/:id'
+        path:'/home/detail/:id',
+        title:'detail'  
     },{
         component:Edit,
-        path:'/home/edit'
+        path:'/home/edit',
+        title:'detail'   
     },{
         component:Exhibition,
-        path:'/home/exh'
+        path:'/home/exh',
+        title:'exhibition'
     },{
         component:Grade,
-        path:'/home/grade'
+        path:'/home/grade',
+        title:'grade'
     },{
         component:List,
-        path:'/home/list'
+        path:'/home/list',
+        title:'list'
     },{
         component:Look,
-        path:'/home/look'
+        path:'/home/look',
+        title:'look'
     },{
         component:Rank,
-        path:'/home/rank'
+        path:'/home/rank',
+        title:'rank'
     },{
         component:Student,
-        path:'/home/student'
+        path:'/home/student',
+        title:'student'
     },{
         component:Special,
-        path:'/home/special'
+        path:'/home/special',
+        title:'special'
     }],
     component:Home,
     path:'/home'
@@ -154,4 +169,113 @@ const routes=[{
     to:'/login'
 }]
 
+const list = [
+    {
+        component:Login,
+        path:'/login'
+        
+    },
+    {
+        component:Home,
+        path:'/home',
+        children:[
+            {
+                id: "sub1",
+                icon: "sliders",
+                title: "试题管理",
+                children: [
+                  {
+                      component:Rank,
+                      path:'/home/rank',
+                      title:'rank'
+                  },
+                  {
+                    component:Classify,
+                    path:'/home/classify',
+                    title:'classify'
+                  },
+                  {
+                      component:Look,
+                      path:'/home/look',
+                      title:'look'
+                  }
+                ]
+              },
+              {
+                id: "sub2",
+                icon: "user",
+                title: "用户管理",
+                children: [
+                  {
+                    component:Add,
+                    path:'/home/add',
+                    title:'addUser'
+                  },
+                  {
+                    component:Exhibition,
+                    path:'/home/exh',
+                    title:'exhibition'
+                  }
+                ]
+              },
+              {
+                id: "sub3",
+                icon: "schedule",
+                title: "考试管理",
+                children: [
+                  {
+                    component:AddTest,
+                    path:'/home/addTest',
+                    title:'addTest'
+                  },
+                  {
+                    component:List,
+                    path:'/home/list',
+                    title:'list'
+                  }
+                ]
+              },
+              {
+                id: "sub4",
+                icon: "project",
+                title: "班级管理",
+                children: [
+                  {
+                    component:ClassRoom,
+                    // view_id: "63no9p-8y0k4",
+                    path:'/home/classRoom',
+                    title:'classRoom'
+                  },
+                  {
+                    component:Grade,
+                    path:'/home/grade',
+                    title:'grade'
+                  },
+                  {
+                    component:Student,
+                    path:'/home/student',
+                    title:'student'
+                  }
+                ]
+              },
+              {
+                id: "sub5",
+                icon: "project",
+                title: "阅卷管理",
+                children: [
+                  {
+                    component:Special,
+                    path:'/home/special',
+                    title:'special'
+                  }
+                ]
+              }
+        ]
+    },{
+        from:'/',
+        to:'/login'
+    }
+  ];
+
 export default routes
+// export default list
