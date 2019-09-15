@@ -1,5 +1,0 @@
-export * from './user'
-export * from './question'
-export * from './classroom'
-export * from './exam'
-export * from './manger'
