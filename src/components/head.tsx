@@ -12,17 +12,7 @@ function getBase64(img: any, callback: any) {
   reader.readAsDataURL(img);
 }
 
-function beforeUpload(file: any) {
-  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-  if (!isJpgOrPng) {
-    message.error('You can only upload JPG/PNG file!');
-  }
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    message.error('Image must smaller than 2MB!');
-  }
-  return isJpgOrPng && isLt2M;
-}
+
 const { Header } = Layout;
 class Head extends React.Component<UserFormProps, any> {
   state = { visible: false, loading: false, imageUrl: '',len:0,schedule:false};
@@ -50,7 +40,8 @@ class Head extends React.Component<UserFormProps, any> {
   };
 
   handleChange = (info: any) => {
-    this.setState({schedule:true})
+    console.log(new Date(),'43行')
+    
     this.setState({len:info.file.percent})
     console.log(info)
     if (info.file.status === 'uploading') {
@@ -78,6 +69,22 @@ class Head extends React.Component<UserFormProps, any> {
       }
     });
   };
+
+   beforeUpload = (file: any)=> {
+    this.setState({schedule:true})
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    if (!isJpgOrPng) {
+      this.setState({schedule:false})
+      message.error('仅支持上传 JPG/PNG 文件!');
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      this.setState({schedule:false})
+      console.log(new Date(),'79行')
+      message.error('图片大小不能超过2MB!');
+    }
+    return isJpgOrPng && isLt2M;
+  }
   public render() {
     const { imageUrl } = this.state;
     const { getFieldDecorator } = this.props.form;
@@ -118,7 +125,7 @@ class Head extends React.Component<UserFormProps, any> {
                     className="avatar-uploader"
                     showUploadList={false}
                     action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                    beforeUpload={beforeUpload}
+                    beforeUpload={this.beforeUpload}
                     onChange={this.handleChange}
                   >
                     {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
