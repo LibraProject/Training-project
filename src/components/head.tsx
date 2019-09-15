@@ -40,10 +40,7 @@ class Head extends React.Component<UserFormProps, any> {
   };
 
   handleChange = (info: any) => {
-    console.log(new Date(),'43行')
-    
     this.setState({len:info.file.percent})
-    console.log(info)
     if (info.file.status === 'uploading') {
       this.setState({ loading: true });
       return;
@@ -51,11 +48,9 @@ class Head extends React.Component<UserFormProps, any> {
     if (info.file.status === 'done') {
       this.setState({schedule:false})
       getBase64(info.file.originFileObj, (imageUrl: any) =>
-    
         this.setState({
           imageUrl,
           loading: false,
-
         }),
       );
     }
@@ -80,7 +75,6 @@ class Head extends React.Component<UserFormProps, any> {
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
       this.setState({schedule:false})
-      console.log(new Date(),'79行')
       message.error('图片大小不能超过2MB!');
     }
     return isJpgOrPng && isLt2M;
