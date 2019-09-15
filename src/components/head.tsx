@@ -105,7 +105,7 @@ class Head extends React.Component<UserFormProps, any> {
           <div className="showUser">
             <img className="usePrice" src="/19825.jpg" alt="" />
             <span>用户名称</span>
-            <button style={{marginLeft:'20px'}} onClick={() => this.props.global.changeLocale(locale === 'zh' ? 'en' : 'zh')}>{locale === 'zh' ? '英文' : '中文'}</button>
+            {/* <button style={{marginLeft:'20px'}} onClick={() => this.props.global.changeLocale(locale === 'zh' ? 'en' : 'zh')}>{locale === 'zh' ? '英文' : '中文'}</button> */}
             <div className="posuser">
               <p>个人中心</p>
               <p>我的班级</p>
