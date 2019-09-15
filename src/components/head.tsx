@@ -75,7 +75,7 @@ class Head extends React.Component<UserFormProps, any> {
   // 更新用户信息 
   UpdataUser = async (obj:any)=>{
     let result = await this.props.user.UpdataUser(obj)
-    message.success(result)
+    message.success(result+'刷新页面即可!')
     this.setState({visible:false})
     this.props.form.resetFields();
   }
