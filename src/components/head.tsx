@@ -1,22 +1,23 @@
 import * as React from 'react';
+import { observer, inject } from 'mobx-react';
 import { Layout, Modal, Form, Icon, Input, Button, Upload, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form'
 interface UserFormProps extends FormComponentProps {
   schedullen:any,
   style:any
   len:any
+  global:any
 }
 function getBase64(img: any, callback: any) {
   const reader = new FileReader();
   reader.addEventListener('load', () => callback(reader.result));
   reader.readAsDataURL(img);
 }
-
-
 const { Header } = Layout;
+@inject('global', 'user')
+@observer
 class Head extends React.Component<UserFormProps, any> {
   state = { visible: false, loading: false, imageUrl: '',len:0,schedule:false};
-
   showModal = () => {
     this.setState({
       visible: true,
@@ -58,7 +59,7 @@ class Head extends React.Component<UserFormProps, any> {
 
   handleSubmit = (e: any) => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields((err:any, values:any) => {
       if (!err) {
         console.log('Received values of form: ', values);
       }
@@ -82,6 +83,7 @@ class Head extends React.Component<UserFormProps, any> {
   public render() {
     const { imageUrl } = this.state;
     const { getFieldDecorator } = this.props.form;
+    const { locale } = this.props.global;
     const uploadButton = (
       <div>
         <Icon type={this.state.loading ? 'loading' : 'plus'} />
@@ -92,11 +94,12 @@ class Head extends React.Component<UserFormProps, any> {
       <React.Fragment>
         <Header className="header">
           <div className="logo">
-            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551624718911&di=4a7004f8d71bd8da84d4eadf1b59e689&imgtype=0&src=http%3A%2F%2Fimg105.job1001.com%2Fupload%2Falbum%2F2014-10-15%2F1413365052_95IE3msH.jpg" className="imgage" alt="" />
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551624718911&di=4a7004f8d71bd8da84d4eadf1b59e689&imgtype=0&src=http%3A%2F%2Fimg105.job1001.com%2Fupload%2Falbum%2F2014-10-15%2F1413365052_95IE3msH.jpg" className="imgage" alt="" /> 
           </div>
           <div className="showUser">
             <img className="usePrice" src="/19825.jpg" alt="" />
             <span>用户名称</span>
+            {/* <button style={{marginLeft:'20px'}} onClick={() => this.props.global.changeLocale(locale === 'zh' ? 'en' : 'zh')}>{locale === 'zh' ? '英文' : '中文'}</button> */}
             <div className="posuser">
               <p>个人中心</p>
               <p>我的班级</p>

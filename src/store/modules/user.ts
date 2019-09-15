@@ -18,6 +18,7 @@ class User {
 
   // 用户视图权限
   @observable viewAuthority: object[] = [];
+  
   @action async login(form: any): Promise<any> {
     const result: any = await login(form);
     if (result.code === 1) {
