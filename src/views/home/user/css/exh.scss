@@ -1,0 +1,71 @@
+.ant-layout-content{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.exh{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    border-radius: 15px;
+    flex-direction: column;
+}
+.exhList{
+    width: 100%;
+    height: 55px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    padding: 8px  20px;
+    display: flex;
+    align-items: center;
+    span{
+        padding: 5px 10px;
+        color: #ccc;
+    }
+    .exhListActive{
+        color: #1890ff;
+        box-shadow: #1890ff
+    }
+    span:hover{
+        cursor: pointer;
+        color: #1890ff;
+    }
+}
+.exhPage{
+    flex: 1;
+    background: white;
+    .exhPageHeader{
+        width: 100%;
+        display: flex;
+       span{
+        flex: 1;
+        height: 75px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+       }
+    }
+    .exhPageHeader:hover{
+        background: #f0f2f5;
+    }
+}
+.exhTitle{
+    color: black;
+    line-height: 50px;
+    height: 50px;
+    text-indent: 30px;
+}
+
+.exhNav{
+    width: 100%;
+    height: 45px;
+    display: flex;
+    background: #333;
+    color: white;
+    span{
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

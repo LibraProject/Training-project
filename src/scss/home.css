@@ -1,0 +1,98 @@
+#components-layout-demo-top-side .logo {
+    width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px 28px 16px 0;
+    float: left;
+}
+.image{
+  width: 120px;
+  height: 40px;
+}
+.ant-layout{
+  width: 100%;
+  height: 100%;
+  background: #f0f2f5;
+}
+ .ant-layout-header{
+   display: flex;
+   background: white;
+   justify-content: space-between;
+ }
+.logo{
+  height: 45px;
+}
+.logo img{
+  height: 32px;
+}
+.showUser{
+  display: flex;
+  align-items: center;
+  height: 64px;
+  position: relative;
+  right: 100px;
+}
+.showUser .usePrice{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+.posuser{
+  position: absolute;
+  top:67px;
+  left: -4px;
+  width: 141px;
+  background:#ffffff;
+  display: none;
+  position: absolute;
+  top: 65px;
+  z-index: 90;
+  border-radius: 5px;
+}
+.showUser:hover .posuser{
+  display: block;
+}
+.showUser .posuser p{
+  height: 35px;
+ line-height: 35px;
+  font-size: 12px;
+  text-indent: 15px;
+  margin: 0;
+  padding: 0;
+}
+.hr{
+  height: 0.5px;
+  width: 80%;
+  border: 0.5px solid #ccc;
+  margin: 3px  auto;
+}
+
+.showUser .posuser p:hover{
+  background: #f0f2f5;
+  cursor: pointer;
+  color: #ccc;
+}
+.ant-modal-body{
+  position: relative;
+}
+.schedule{
+  position: absolute;
+  left: 25px;
+  top: 10px;
+  width: 102px;
+  height: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+.schedule_child{
+  width: 0px;
+  height: 8px;
+  border-radius: 10px;
+  background: #1ce49a
+}
+.schedPos{
+  position: absolute;
+  left: 105px;
+  top: -6px;
+}
