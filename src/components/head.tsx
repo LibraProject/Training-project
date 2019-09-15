@@ -41,10 +41,10 @@ class Head extends React.Component<UserFormProps, any> {
   };
 
   handleChange = (info: any) => {
-    console.log(new Date(),'43行')
+    // console.log(new Date(),'43行')
     
     this.setState({len:info.file.percent})
-    console.log(info)
+    // console.log(info)
     if (info.file.status === 'uploading') {
       this.setState({ loading: true });
       return;

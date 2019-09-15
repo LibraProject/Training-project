@@ -4,7 +4,11 @@ import "./css/add.css";
 
 const { Option } = Select;
 
-class Add extends React.Component {
+interface Props {
+  size:any
+}
+
+class Add extends React.Component<Props>{
   state = {
     size: "large"
   };
@@ -16,6 +20,7 @@ class Add extends React.Component {
   addUser = (value: any) => {
     console.log(value)
   }
+  formRef: any;
 
   render() {
     const { size } = this.state;
