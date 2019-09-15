@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
-import { Layout, Modal, Form, Icon, Input, Button, Upload, message } from 'antd';
+import { Layout, Modal, Form, Icon, Button, Upload, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form'
 interface UserFormProps extends FormComponentProps {
   schedullen:any,
   style:any
   len:any
   global:any
+  user:any
 }
 function getBase64(img: any, callback: any) {
   const reader = new FileReader();
@@ -23,7 +24,6 @@ class Head extends React.Component<UserFormProps, any> {
       visible: true,
     });
   };
-
   // 按下确定
   handleOk = (e: any) => {
     console.log(e);
@@ -38,6 +38,7 @@ class Head extends React.Component<UserFormProps, any> {
     this.setState({
       visible: false,
     });
+    this.props.form.resetFields();
   };
 
   handleChange = (info: any) => {
@@ -58,14 +59,26 @@ class Head extends React.Component<UserFormProps, any> {
   };
 
   handleSubmit = (e: any) => {
+    const {userInfo} = this.props.user
     e.preventDefault();
     this.props.form.validateFields((err:any, values:any) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        let obj = {
+          user_id:userInfo.user_id,
+          avatar:values.url.file.response.data[0].path
+        }
+        this.UpdataUser(obj)
       }
     });
   };
 
+  // 更新用户信息 
+  UpdataUser = async (obj:any)=>{
+    let result = await this.props.user.UpdataUser(obj)
+    message.success(result)
+    this.setState({visible:false})
+    this.props.form.resetFields();
+  }
    beforeUpload = (file: any)=> {
     this.setState({schedule:true})
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
@@ -84,6 +97,7 @@ class Head extends React.Component<UserFormProps, any> {
     const { imageUrl } = this.state;
     const { getFieldDecorator } = this.props.form;
     const { locale } = this.props.global;
+    const {userInfo} = this.props.user
     const uploadButton = (
       <div>
         <Icon type={this.state.loading ? 'loading' : 'plus'} />
@@ -97,8 +111,8 @@ class Head extends React.Component<UserFormProps, any> {
             <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551624718911&di=4a7004f8d71bd8da84d4eadf1b59e689&imgtype=0&src=http%3A%2F%2Fimg105.job1001.com%2Fupload%2Falbum%2F2014-10-15%2F1413365052_95IE3msH.jpg" className="imgage" alt="" /> 
           </div>
           <div className="showUser">
-            <img className="usePrice" src="/19825.jpg" alt="" />
-            <span>用户名称</span>
+            <img className="usePrice" src={userInfo.avatar?userInfo.avatar:'/default.jpg'} alt="" />
+            <span>{userInfo.user_name}</span>
             {/* <button style={{marginLeft:'20px'}} onClick={() => this.props.global.changeLocale(locale === 'zh' ? 'en' : 'zh')}>{locale === 'zh' ? '英文' : '中文'}</button> */}
             <div className="posuser">
               <p>个人中心</p>
@@ -114,28 +128,19 @@ class Head extends React.Component<UserFormProps, any> {
             <Form onSubmit={this.handleSubmit} className="login-form">
               <Form.Item>
                 {getFieldDecorator('url', {
-                  rules: [{ required: true, message: 'Please input your Password!' }],
+                  rules: [{ required: true, message: '请选择一张图片' }],
                 })(
                   <Upload
                     name="avatar"
                     listType="picture-card"
                     className="avatar-uploader"
                     showUploadList={false}
-                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                    action="http://123.206.55.50:11000/upload"
                     beforeUpload={this.beforeUpload}
                     onChange={this.handleChange}
                   >
                     {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
                   </Upload>,
-                )}
-
-                {getFieldDecorator('username', {
-                  rules: [{ required: true, message: 'Please input your username!' }],
-                })(
-                  <Input
-                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                    placeholder="Username"
-                  />,
                 )}
               </Form.Item>
               {this.state.schedule && <div className="schedule">
@@ -143,17 +148,6 @@ class Head extends React.Component<UserFormProps, any> {
                   <div className="schedule_child" style={{width:this.state.len+'%'}}>
                   </div>
               </div>}
-              <Form.Item>
-                {getFieldDecorator('password', {
-                  rules: [{ required: true, message: 'Please input your Password!' }],
-                })(
-                  <Input
-                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                    type="password"
-                    placeholder="Password"
-                  />,
-                )}
-              </Form.Item>
               <Button type="primary" htmlType="submit" className="login-form-button">
                 提交
           </Button>

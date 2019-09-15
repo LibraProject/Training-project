@@ -15,6 +15,7 @@ function beforeEach(history: any){
     //判断用户是否登录
     if(getToken()){
         const userInfo:any = store.user.userInfo;
+        console.log(Object.keys(userInfo).length)
         // 转换 useInfo判断是否登录
         if(!Object.keys(userInfo).length){
             store.user.getUserInfo();
