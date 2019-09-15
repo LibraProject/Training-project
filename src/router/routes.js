@@ -6,7 +6,8 @@ function Loading(){
 }
 
 let Add=Loadable({
-    loader:()=>import('../views/home/user/add.tsx'),
+    // loader:()=>import('../views/home/user/add.tsx'),
+    loader:()=>import('../views/home/user/index.tsx'),
     loading:Loading
 })
 
