@@ -190,23 +190,23 @@
     to-fast-properties "^2.0.0"
 
 "@formatjs/intl-relativetimeformat@^3.0.2":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl-relativetimeformat/-/intl-relativetimeformat-3.1.0.tgz#a657d67e8e26a5985d72a80699be874c9bc470d3"
-  integrity sha512-xSW9RMJtZZTGAlT7qCom+0INLYgshowpBN0Xf+j4kME+U/g/ogTVRFeGvCZX3nDQ21vdTHAabR3AIGQRX7NU1g==
-  dependencies:
-    "@formatjs/intl-utils" "^1.1.0"
-
-"@formatjs/intl-unified-numberformat@^0.4.9":
-  version "0.4.9"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl-unified-numberformat/-/intl-unified-numberformat-0.4.9.tgz#343ce36d8c95bd5529ce80120a4abbf933cae69e"
-  integrity sha512-llHvEZTaMEStXK7mFjUMcsS3Qtxd3csdgyo2j/fvjk+NdEBjGYrEO7gdLhGAjh6sDeRGFzMze91ScrwLK3ukqw==
+  version "3.0.2"
+  resolved "http://r.cnpmjs.org/@formatjs/intl-relativetimeformat/download/@formatjs/intl-relativetimeformat-3.0.2.tgz#09943f6e008aba611f973edab284e1051d977951"
+  integrity sha1-CZQ/bgCKumEflz7asoThBR2XeVE=
   dependencies:
     "@formatjs/intl-utils" "^1.0.1"
 
-"@formatjs/intl-utils@^1.0.1", "@formatjs/intl-utils@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl-utils/-/intl-utils-1.1.0.tgz#9e13ad748e56ca935863235fd911e8e933886616"
-  integrity sha512-x8zpQKbvdsziv+TGM+hvioXpFon7g/29xsMa3f0pWo07+wLdixUjTXxbTAp5Fg+6yUbH2QnIv7rt7ZtIlfPByA==
+"@formatjs/intl-unified-numberformat@^0.4.9":
+  version "0.4.9"
+  resolved "http://r.cnpmjs.org/@formatjs/intl-unified-numberformat/download/@formatjs/intl-unified-numberformat-0.4.9.tgz#343ce36d8c95bd5529ce80120a4abbf933cae69e"
+  integrity sha1-NDzjbYyVvVUpzoASCkq7+TPK5p4=
+  dependencies:
+    "@formatjs/intl-utils" "^1.0.1"
+
+"@formatjs/intl-utils@^1.0.1":
+  version "1.0.1"
+  resolved "http://r.cnpmjs.org/@formatjs/intl-utils/download/@formatjs/intl-utils-1.0.1.tgz#cc24ffbf36c05793ab9cd1eceee12ca95b1d7e08"
+  integrity sha1-zCT/vzbAV5OrnNHs7uEsqVsdfgg=
 
 "@types/history@*":
   version "4.7.3"
@@ -215,16 +215,16 @@
 
 "@types/hoist-non-react-statics@^3.3.1":
   version "3.3.1"
-  resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"
-  integrity sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==
+  resolved "http://r.cnpmjs.org/@types/hoist-non-react-statics/download/@types/hoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"
+  integrity sha1-ESSq/lEYy1kZd66xzqrtEHDrA58=
   dependencies:
     "@types/react" "*"
     hoist-non-react-statics "^3.3.0"
 
 "@types/invariant@^2.2.30":
   version "2.2.30"
-  resolved "https://registry.yarnpkg.com/@types/invariant/-/invariant-2.2.30.tgz#20efa342807606ada5483731a8137cb1561e5fe9"
-  integrity sha512-98fB+yo7imSD2F7PF7GIpELNgtLNgo5wjivu0W5V4jx+KVVJxo6p/qN4zdzSTBWy4/sN3pPyXwnhRSD28QX+ag==
+  resolved "http://r.cnpmjs.org/@types/invariant/download/@types/invariant-2.2.30.tgz#20efa342807606ada5483731a8137cb1561e5fe9"
+  integrity sha1-IO+jQoB2Bq2lSDcxqBN8sVYeX+k=
 
 "@types/jest-diff@*":
   version "20.0.1"
@@ -4456,6 +4456,7 @@ interpret@^1.0.0:
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.2.0.tgz#d5061a6224be58e8083985f5014d844359576296"
   integrity sha512-mT34yGKMNceBQUoVn7iCDKDntA7SC6gycMAWzGx1z/CMCTV7b2AAtXlo3nRyHZ1FelRkQbQjprHSYGwzLtkVbw==
 
+<<<<<<< HEAD
 intl-format-cache@^4.1.19, intl-format-cache@^4.1.20:
   version "4.1.20"
   resolved "https://registry.yarnpkg.com/intl-format-cache/-/intl-format-cache-4.1.20.tgz#6907b9f1da47b222bac316fe093a28e9a7bd551a"
@@ -4478,11 +4479,35 @@ intl-messageformat@^7.2.0:
   dependencies:
     intl-format-cache "^4.1.20"
     intl-messageformat-parser "^3.1.1"
+=======
+intl-format-cache@^4.1.19:
+  version "4.1.19"
+  resolved "http://r.cnpmjs.org/intl-format-cache/download/intl-format-cache-4.1.19.tgz#43da8f621693dbd770683caacdae049ff3e6f31a"
+  integrity sha1-Q9qPYhaT29dwaDyqza4En/Pm8xo=
+
+intl-locales-supported@^1.4.5:
+  version "1.4.7"
+  resolved "http://r.cnpmjs.org/intl-locales-supported/download/intl-locales-supported-1.4.7.tgz#24acc88e1337429dbf1926463e6234c1325bbe6d"
+  integrity sha1-JKzIjhM3Qp2/GSZGPmI0wTJbvm0=
+
+intl-messageformat-parser@^3.1.0:
+  version "3.1.0"
+  resolved "http://r.cnpmjs.org/intl-messageformat-parser/download/intl-messageformat-parser-3.1.0.tgz#747e3dbafaf1c1fd07dffa6e4f54ed60e0336ca7"
+  integrity sha1-dH49uvrxwf0H3/puT1TtYOAzbKc=
+
+intl-messageformat@^7.2.0:
+  version "7.2.1"
+  resolved "http://r.cnpmjs.org/intl-messageformat/download/intl-messageformat-7.2.1.tgz#f65a327a62dd3f5e2477afe03dd61586c4242906"
+  integrity sha1-9loyemLdP14kd6/gPdYVhsQkKQY=
+  dependencies:
+    intl-format-cache "^4.1.19"
+    intl-messageformat-parser "^3.1.0"
+>>>>>>> cyz
 
 invariant@^2.1.1, invariant@^2.2.2:
   version "2.2.4"
-  resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
-  integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
+  resolved "http://r.cnpmjs.org/invariant/download/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
+  integrity sha1-YQ88ksk1nOHbYW5TgAjSP/NRWOY=
   dependencies:
     loose-envify "^1.0.0"
 
@@ -7905,8 +7930,13 @@ react-error-overlay@^4.0.1:
 
 react-intl@^3.2.1:
   version "3.2.1"
+<<<<<<< HEAD
   resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-3.2.1.tgz#3563d10b4116d61eb3234137f23d71a99d8d68af"
   integrity sha512-iFxPFsvgGoh94YQbc5H4VDCO7d16c78QXTUfJE4BlKFhuIejL0t+iC5n44529kJCihxGvyJy1HIqPZpIjhprGQ==
+=======
+  resolved "http://r.cnpmjs.org/react-intl/download/react-intl-3.2.1.tgz#3563d10b4116d61eb3234137f23d71a99d8d68af"
+  integrity sha1-NWPRC0EW1h6zI0E38j1xqZ2NaK8=
+>>>>>>> cyz
   dependencies:
     "@formatjs/intl-relativetimeformat" "^3.0.2"
     "@formatjs/intl-unified-numberformat" "^0.4.9"
