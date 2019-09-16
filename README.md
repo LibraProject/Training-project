@@ -6,7 +6,7 @@
   命令
 
 ```js
-create-react-app.cm exam-cms --scripts-version=react-script-ts
+create-react-app.cm exam-cms --scripts-version=react-scripts-ts
 ```
 ##启动服务
 ```js
