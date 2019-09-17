@@ -3,12 +3,24 @@ import { AxiosResponse } from 'axios/index'
 import { message } from 'antd'
 import { getToken } from './index'
 
+const Url={
+  '123.206.55.50':"//exam.jasonandjay.com",
+  'jasonandjay.com':'//exam.jasonandjay.com',
+  '127.0.0.1:3000':'//169.254.198.188:7001'
+}
+
 const instance = axios.create({
-    // 后台主路径
-    baseURL:'http://169.254.198.188:7001',
-    timeout:1000,
-    headers: { 'authorization': getToken() }
-})
+    baseURL: Url[window.location.host],
+    timeout: 1000,
+    headers: {'authorization': getToken()}
+});
+
+// const instance = axios.create({
+//     // 后台主路径
+//     baseURL:'http://169.254.198.188:7001',
+//     timeout:1000,
+//     headers: { 'authorization': getToken() }
+// })
 
 // 请求拦截器
 instance.interceptors.request.use((config) =>{
