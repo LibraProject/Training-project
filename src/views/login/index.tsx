@@ -19,9 +19,9 @@ class UserForm extends React.Component<UserFormProps, any>{
     e.preventDefault();
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        // console.log('Received values of form: ', values);
+        const res = await this.props.user.login(values);
         const { code, msg } = await this.props.user.login(values);
-        
         if (code === 1) {
           // 跳转路由
           this.props.history.push('/home')
@@ -32,9 +32,7 @@ class UserForm extends React.Component<UserFormProps, any>{
       }
     });
   }
-  EnterIncident = (e:any)=>{
-    //键盘事件 待开发未完善
-  }
+
 
   public render() {
     const { getFieldDecorator } = this.props.form;

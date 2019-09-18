@@ -26,29 +26,7 @@ export const getAllUser = (path:string)=>{
   return requerst.get(path);
 }
 
-
-
-// // 展示用户信息 身份数据
-// export const getUserIdentity = () => {
-//   return requerst.get("/user/identity");
-// };
-
-// // 展示用户信息 api接口权限
-// export const getUserAuthority = () => {
-//   return requerst.get("/user/api_authority");
-// };
-
-// // 展示用户信息 身份和api接口关系
-// export const getUserAuthorityRelation = () => {
-//   return requerst.get("/user/identity_api_authority_relation");
-// };
-
-// // 展示用户信息 视图接口权限
-// export const getUserViewAuthority = () => {
-//   return requerst.get("/user/view_authority");
-// };
-
-// // 展示用户信息 身份和视图权限关系
-// export const getUserRelation = () => {
-//   return requerst.get("/user/identity_view_authority_relation");
-// };
+// 更新用户信息
+export const UpdataUser = (obj:any)=>{
+  return requerst.put('/user/user',obj);
+}

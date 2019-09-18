@@ -1,5 +1,5 @@
 import { observable, action } from "mobx";
-import { login, getUserInfo, getViewAuthority, getUserMsg ,getAllUser} from "../../service/index";
+import { login, getUserInfo, getViewAuthority, getUserMsg, getAllUser, UpdataUser } from "../../service/index";
 import { setToken, removeToken } from "../../utils/index";
 // import {HttpInfo,HttpType,LoginForm} from '../../types/index'
 
@@ -18,7 +18,7 @@ class User {
 
   // 用户视图权限
   @observable viewAuthority: object[] = [];
-  
+
   @action async login(form: any): Promise<any> {
     const result: any = await login(form);
     if (result.code === 1) {
@@ -63,10 +63,16 @@ class User {
   }
 
   // 获取用户权限
-  @action async getAllUser(params:string): Promise<any> {
+  @action async getAllUser(params: string): Promise<any> {
     let result: any = await getAllUser(params);
-    console.log(result)
+    // console.log('result...',result)
     return result.data
+  }
+
+  // 更新用户信息
+  @action async UpdataUser(obj:any): Promise<any> {
+      let result: any  = await UpdataUser(obj)
+      return result.msg
   }
 
 }
